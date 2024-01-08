@@ -48,7 +48,11 @@ ALLOWED_HOSTS = [ 'project.onrender.com',
 
 # Application definition
 INSTALLED_APPS = [
-    # Build-in apps
+    # Build-in app
+    # -------------
+    # https://django-jazzmin.readthedocs.io/installation/
+    # Add jazzmin to your INSTALLED_APPS before django.contrib.admin
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

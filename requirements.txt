@@ -1,0 +1,11 @@
+asgiref==3.7.2
+Django==5.0.1
+django-jazzmin==2.6.0
+django-phonenumber-field==7.3.0
+phonenumbers==8.13.27
+pillow==10.2.0
+psycopg2==2.9.9
+python-dotenv==1.0.0
+shortuuid==1.0.11
+sqlparse==0.4.4
+tzdata==2023.4
