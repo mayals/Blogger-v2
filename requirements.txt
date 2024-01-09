@@ -9,3 +9,4 @@ python-dotenv==1.0.0
 shortuuid==1.0.11
 sqlparse==0.4.4
 tzdata==2023.4
+fontawesomefree==6.5.1

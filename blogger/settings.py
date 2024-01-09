@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     # -------------
     # https://django-jazzmin.readthedocs.io/installation/
     # Add jazzmin to your INSTALLED_APPS before django.contrib.admin
-    'jazzmin',
+    #'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,7 +68,10 @@ INSTALLED_APPS = [
    #-----------------
    # https://django-phonenumber-field.readthedocs.io/en/latest/
     "phonenumber_field",
-    
+   # https://fontawesome.com/docs/web/use-with/python-django#add-the-font-awesome-free-requirement-and-app
+   'fontawesomefree',
+    # 
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +89,7 @@ ROOT_URLCONF = 'blogger.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ os.path.join(BASE_DIR, 'templates') ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,6 +144,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [ BASE_DIR / "static"]  #for static folder than put in main project root(near mnage.py file),which contain static belong to all project
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # for collectstatic for deployment
+
 
 
 # Media
