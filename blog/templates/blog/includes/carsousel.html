@@ -1,0 +1,32 @@
+{% load static %}
+
+<section>
+    <div class="row">
+
+<!--   Autoplaying carousels -->
+<!--https://getbootstrap.com/docs/5.3/components/carousel/#autoplaying-carousels -->
+
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'blog/img/carousel_1.png' %}" class="d-block w-100" style="height:470px!important;"  alt="carousel_1">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'blog/img/carousel_2.png' %}" class="d-block w-100" style="height:470px!important;" alt="carousel_1">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'blog/img/carousel_3.png' %}" class="d-block w-100" style="height:470px!important;" alt="carousel_1">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+</div>
+</section>

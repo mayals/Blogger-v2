@@ -12,7 +12,7 @@ from shortuuid.django_fields import ShortUUIDField
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=120, blank=True, null=True)
-    icon = models.ImageField(verbose_name='Category Icon', default="category/default_image.jpg", upload_to="categories/icon-image/%Y/%m/%d/", blank=True, null=True)
+    icon = models.ImageField(verbose_name='Category Icon', default="blog/img/cat_default.png", upload_to="blog/cat_img/%Y/%m/%d/", blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -34,7 +34,7 @@ class Post(models.Model):
     title        = models.CharField(max_length=200)
     slug         = models.SlugField(max_length=120, blank=True, null=True)
     content      = models.TextField()
-    photo        = models.ImageField(verbose_name='Post Image', default="posts/default_image.jpg", upload_to='posts/post-image/%Y/%m/%d/', null=True, blank=True)
+    photo        = models.ImageField(verbose_name='Post Image', default="blog/img/post_default.png", upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
     author       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_author')
     category     = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts_category')
     tags         = models.ManyToManyField(Tag)

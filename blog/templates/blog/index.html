@@ -1,20 +1,47 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load static %}
 
-{% for post in posts %}
-<div class="border p-3 mb-3">
-    <img class="img-fluid rounded-circle border m-2" style="width: 70px; height:70px;"
-        src="{{post.author.profile.image.url}}" alt="Author image">
-    <span class="text-secondary">published at{{post.created_at|date:'d-m-Y'}}</span>
-    <h3><a class="myback text-dark" href="#">{{post.title}}</a></h3>
-    <p>{{post.content}}</p>
-</div>
-{% empty %}
-<div class="border p-3 mb-3">
-    <h3>No Post!<a href="#">login</a></h3> 
+{% block category %}
+    <br>
+        <div class="row m-3  d-flex justify-content-between">
+            {% for cat in categories %}
+                <div class='col-lg-2 col-md-3 col-sm-6 shadow-lg p-2 bg-body-tertiary rounded d-flex justify-content-center'>
+                   {% if cat.icon %}
+                       <img src="{{ cat.icon.url }}" class="rounded img-fluid" style="width:12rem; hight:12rem;" alt="{{cat.name}}">
+                   {% else %}
+                       <img src="{% static 'blog/img/cat_default.png' %}" class="rounded img-fluid" style="width:12rem; hight:12rem;" alt="{{cat.name}}">
+                   {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    <br>    
+{% endblock category %}
 
-</div>
-{% endfor %}
 
 
-{% endblock content %}
+   
+
+
+
+{% block postscontent %}
+    {% for post in posts %}
+    <div class="card mb-3">
+        {% if post.photo %}
+            <img class="card-img-top" src="{{post.photo.url}}" alt="{{post.title}}">
+        {% else %}
+            <img class="card-img-top" src="{% static 'blog/img/post_default.png' %}" alt="{{post.title}}">
+        {% endif %}    
+        <div class="card-body">
+            <h5 class="card-title">{{post.title}}</h5>
+            <p class="card-text">{{post.content}}</p>
+            <p class="card-text"><small class="text-muted">published at{{post.created_at|date:'d-m-Y'}}</small></p>
+        </div>
+    </div>
+    {% empty %}
+    <div class="border p-3 mb-3">
+        <h3>No Post!<a href="#">login</a></h3> 
+    </div>
+    {% endfor %}
+
+
+{% endblock postscontent %}

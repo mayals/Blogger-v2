@@ -70,8 +70,11 @@ INSTALLED_APPS = [
     "phonenumber_field",
    # https://fontawesome.com/docs/web/use-with/python-django#add-the-font-awesome-free-requirement-and-app
    'fontawesomefree',
-    # 
+
+    # https://pypi.org/project/django-bootstrap-v5/
     'bootstrap5',
+    
+   
 ]
 
 MIDDLEWARE = [
@@ -89,7 +92,7 @@ ROOT_URLCONF = 'blogger.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ os.path.join(BASE_DIR, 'templates') ],
+        'DIRS': [ os.path.join(BASE_DIR, 'templates') ],       # or you can write only    'DIRS':[BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

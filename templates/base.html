@@ -1,9 +1,17 @@
-{% load static %}
+
+
+<!-- https://pypi.org/project/django-bootstrap-v5/ -->
+<!-- https://www.w3schools.com/django/django_add_bootstrap5.php -->
+ {% load bootstrap5 %}
+ {% bootstrap_css %}
+ {% bootstrap_javascript %}
+ {% load static %}   
 
 <!DOCTYPE html>
 
 <html lang="en">
 
+<!--Start Head-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,13 +22,6 @@
     <title>Bloger</title>
     {% endif %}
   
-    
-    <!-- https://www.w3schools.com/django/django_add_bootstrap5.php -->
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-        
-
     <!--   https://fontawesome.com/docs/web/use-with/python-django#add-the-font-awesome-free-requirement-and-app    -->
     <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
@@ -29,15 +30,18 @@
 
     <link href="{% static 'blog/css/blogstyle.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'blog/css/userstyle.css' %}" rel="stylesheet" type="text/css">
-
 </head>
+<!--End Head-->
 
+<!--Start Body-->
 <body>
     <header>
         <!--Start Navbar-->
-        <nav class="navbar navbar-expand-lg  bg-dark text-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
+              <a class="navbar-brand" href="#">
+                <img src="{% static 'img/logo.png' %}" alt="logo"  width="30" height="30"> Coding Lovers
+              </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -66,7 +70,7 @@
                 </ul>
                 <form class="d-flex" role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
+                  <button class="btn btn-outline-primary" type="submit">Search</button>
                 </form>
               </div>
             </div>
@@ -74,30 +78,36 @@
         <!--End Navbar-->
     </header>
 
-    <img src="{% static 'img/logo.png' %}" alt="My image">
-    
-    <section>
-        <div class="container">
+    <!--Start Carousel-->
+        {% include 'blog/includes/carsousel.html' %}
+    <!--End Carousel-->
+
+
+<!-- Strart Dynamic content -->
+    <!--Start Category-->
+        {% block category %}
+
+        {% endblock category %}
+    <!--End Category-->
+
+
+
+    <section>      
             <div class="row mt-4">
                 <div class="col-md-8">
-                    {% block content %}
+                    {% block postscontent %}
 
-                    {% endblock content %}
+                    {% endblock postscontent %}
                 </div>
                 <div class="col-md-4">
-                    <div class="card mb-3">
-                        <h3 class="text-center bg-secondary text-light p-2">Last Post</h3>
-                        latest_posts 
-
-                    </div>
-                    <div class="card mb-3">
-                        <h3 class="text-center bg-secondary text-light p-2">Last Comments</h3>
-                        latest_comments
-                    </div>
+                    
                 </div>
             </div>
         </div>
     </section>
+ <!--  End Dynamic content -->
+
+
 
     <footer class="bg-secondary">
         <div class="container-fluid">
