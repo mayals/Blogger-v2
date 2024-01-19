@@ -2,19 +2,29 @@
 {% load static %}
 
 {% block category %}
-    <br>
-        <div class="row m-3  d-flex justify-content-between">
-            {% for cat in categories %}
-                <div class='col-lg-2 col-md-3 col-sm-6 shadow-lg p-2 bg-body-tertiary rounded d-flex justify-content-center'>
-                   {% if cat.icon %}
-                       <img src="{{ cat.icon.url }}" class="rounded img-fluid" style="width:12rem; hight:12rem;" alt="{{cat.name}}">
-                   {% else %}
-                       <img src="{% static 'blog/img/cat_default.png' %}" class="rounded img-fluid" style="width:12rem; hight:12rem;" alt="{{cat.name}}">
-                   {% endif %}
+    <div class="container-fluid">
+        <div class="card text-dark bg-light mb-3 mt-3">
+            <div class="card-header text-center">Ctegories</div>
+                <div class="row card-body justify-content-between m-1">
+                        {% for cat in categories %}
+                            <div class='col-lg-2 col-sm-6 col-xs-6  rounded d-flex justify-content-center'>
+                            {% if cat.icon %}
+                                <figure class="figure">
+                                <img src="{{ cat.icon.url }}" class="rounded" style="width:12rem; hight:12rem;" alt="{{cat.name}}">
+                                <figcaption class="figure-caption">{{ cat.name }}</figcaption>
+                                {% else %}
+                                <img src="{% static 'blog/img/cat_default.png' %}" class="rounded img-fluid" style="width:12rem; hight:12rem;" alt="{{cat.name}}">
+                            {% endif %}
+                            </div>
+                        {% empty %}
+                            <div class="border p-3 mb-3">
+                                <h3>No Category!</h3> 
+                            </div>    
+                        {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
         </div>
-    <br>    
+    </div>        
 {% endblock category %}
 
 
@@ -23,25 +33,75 @@
 
 
 
-{% block postscontent %}
-    {% for post in posts %}
-    <div class="card mb-3">
-        {% if post.photo %}
-            <img class="card-img-top" src="{{post.photo.url}}" alt="{{post.title}}">
-        {% else %}
-            <img class="card-img-top" src="{% static 'blog/img/post_default.png' %}" alt="{{post.title}}">
-        {% endif %}    
-        <div class="card-body">
-            <h5 class="card-title">{{post.title}}</h5>
-            <p class="card-text">{{post.content}}</p>
-            <p class="card-text"><small class="text-muted">published at{{post.created_at|date:'d-m-Y'}}</small></p>
+{% block main %}
+<section>      
+    <div class="row mt-4 container-fluid">
+        <!-- Start posts-->
+        <div class="col-md-8">
+            {% for post in posts %}
+            <div class="card mb-3">
+                {% if post.photo %}
+                    <img class="card-img-top" src="{{post.photo.url}}" alt="{{post.title}}">
+                {% else %}
+                    <img class="card-img-top" src="{% static 'blog/img/post_default.png' %}" alt="{{post.title}}">
+                {% endif %}    
+                <div class="card-body">
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <p class="card-text">{{post.content}}</p>
+                    <p class="card-text"><small class="text-muted">published at{{post.created_at|date:'d-m-Y'}}</small></p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="border p-3 mb-3">
+                <h3>No Post!</h3> 
+            </div>
+            {% endfor %}
         </div>
-    </div>
-    {% empty %}
-    <div class="border p-3 mb-3">
-        <h3>No Post!<a href="#">login</a></h3> 
-    </div>
-    {% endfor %}
+        <!-- End posts-->
+
+        
+        <div class="col-md-4">
+                <!--Start tags-->
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-header text-center">Tags</div>
+                    <div class="card-body">
+                        {% for tag in tags %}
+                        <button type="button" class="btn btn-secondary m-1">
+                            {{ tag.name }} <span class="badge bg-warning">5</span>
+                        </button>
+                        {% empty %}
+                        <div class="border p-3 mb-3">
+                            <h3>No Tag!</h3> 
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- End tags-->
 
 
-{% endblock postscontent %}
+                    <br>
+                    <br>
+             
+
+
+                <!--Start category names -->
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-header text-center">Categories</div>
+                    <div class="card-body">
+                        {% for cat in categories %}
+                        <button type="button" class="btn btn-info m-1">
+                            {{ cat.name }} <span class="badge bg-warning">5</span>
+                        </button>
+                        {% empty %}
+                        <div class="border p-3 mb-3">
+                            <h3>No Category!</h3> 
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- End category names-->
+        </div>
+        
+    </div>
+</section>
+{% endblock main %}
