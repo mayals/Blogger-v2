@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from .models import Post, Category,Tag
+from .forms import PostForm
 
-
-def posts_view(request):
+def home_view(request):
     categories = Category.objects.all()
     tags = Tag.objects.all()
     posts = Post.objects.all()
@@ -12,4 +12,13 @@ def posts_view(request):
         'tags'       : tags,
         'posts'      : posts,    
     }
-    return render(request,'blog/index.html', context)
+    return render(request,'blog/home.html', context)
+
+
+
+def create_post(request):
+    form = PostForm(request.POST)
+    context:{
+        'form':form,
+    }
+    return render(request,'blog/create_post.html',context)

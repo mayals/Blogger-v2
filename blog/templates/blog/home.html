@@ -10,15 +10,15 @@
                             <div class='col-lg-2 col-sm-6 col-xs-6  rounded d-flex justify-content-center'>
                             {% if cat.icon %}
                                 <figure class="figure">
-                                <img src="{{ cat.icon.url }}" class="rounded" style="width:12rem; hight:12rem;" alt="{{cat.name}}">
+                                <img src="{{ cat.icon.url }}" class="rounded"  width="150" height="150" alt="{{cat.name}}">
                                 <figcaption class="figure-caption">{{ cat.name }}</figcaption>
                                 {% else %}
-                                <img src="{% static 'blog/img/cat_default.png' %}" class="rounded img-fluid" style="width:12rem; hight:12rem;" alt="{{cat.name}}">
+                                <img src="{% static 'img/blog/cat_default.png' %}" width="150" height="150" alt="{{cat.name}}">
                             {% endif %}
                             </div>
                         {% empty %}
                             <div class="border p-3 mb-3">
-                                <h3>No Category!</h3> 
+                                <p>No Category!</p> 
                             </div>    
                         {% endfor %}
                 </div>
@@ -34,26 +34,27 @@
 
 
 {% block main %}
-<section>      
+<section>
+    <h1 class="screen-reader-only">Posts List for web development applications Skills</h1>      
     <div class="row mt-4 container-fluid">
         <!-- Start posts-->
         <div class="col-md-8">
             {% for post in posts %}
             <div class="card mb-3">
                 {% if post.photo %}
-                    <img class="card-img-top" src="{{post.photo.url}}" alt="{{post.title}}">
+                    <img class="card-img-top img-fluid" src="{{post.photo.url}}" width="150" height="250" alt="{{post.title}}">
                 {% else %}
-                    <img class="card-img-top" src="{% static 'blog/img/post_default.png' %}" alt="{{post.title}}">
+                    <img class="card-img-top img-fluid" src="{% static 'img/blog/post_default.png' %}"  width="150" height="250" alt="{{post.title}}">
                 {% endif %}    
                 <div class="card-body">
-                    <h5 class="card-title">{{post.title}}</h5>
+                    <h2 class="card-title">{{post.title}}</h2>
                     <p class="card-text">{{post.content}}</p>
                     <p class="card-text"><small class="text-muted">published at{{post.created_at|date:'d-m-Y'}}</small></p>
                 </div>
             </div>
             {% empty %}
             <div class="border p-3 mb-3">
-                <h3>No Post!</h3> 
+                <p>No Post!</p> 
             </div>
             {% endfor %}
         </div>
@@ -71,7 +72,7 @@
                         </button>
                         {% empty %}
                         <div class="border p-3 mb-3">
-                            <h3>No Tag!</h3> 
+                            <p>No Tag!</p> 
                         </div>
                         {% endfor %}
                     </div>
@@ -94,7 +95,7 @@
                         </button>
                         {% empty %}
                         <div class="border p-3 mb-3">
-                            <h3>No Category!</h3> 
+                            <p>No Category!</p> 
                         </div>
                         {% endfor %}
                     </div>

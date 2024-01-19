@@ -1,21 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
 
+
+{% load static %}
 
 <!-- https://pypi.org/project/django-bootstrap-v5/ -->
 <!-- https://www.w3schools.com/django/django_add_bootstrap5.php -->
  {% load bootstrap5 %}
  {% bootstrap_css %}
  {% bootstrap_javascript %}
- {% load static %}   
 
-<!DOCTYPE html>
-
-<html lang="en">
 
 <!--Start Head-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <meta name="description" content="home page that display all posts"/>
     {% if title %}
     <title>Bloger | {{title}}</title>
     {% else %}
@@ -28,9 +28,13 @@
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 
-    <link href="{% static 'blog/css/blogstyle.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'blog/css/userstyle.css' %}" rel="stylesheet" type="text/css">
-</head>
+    <link href="{% static 'css/blog/blogstyle.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/userstyle.css' %}" rel="stylesheet" type="text/css">
+    
+    <!--https://ahrefs.com/blog/canonical-tags/-->
+    <link rel="canonical" href=“https://codingloversblog.blogspot.com/” />
+
+  </head>
 <!--End Head-->
 
 <!--Start Body-->
@@ -40,7 +44,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">
-                <img src="{% static 'img/logo.png' %}" alt="logo"  width="30" height="30"> Coding Lovers
+                <img src="{% static 'img/logo.png' %}" alt="logo"  width="30" height="30"> Codes City
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -110,7 +114,7 @@
                            
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img src="{% static 'img/logo.png' %}" alt="logo" width="100px">
+                                    <img src="{% static 'img/logo.png' %}"  width="150" height="150" alt="logo">
                                 </div>
                                 <p>
                                    lab lab laa 
@@ -119,7 +123,7 @@
                             </div>
                         </div>
                         <div class="card m-3">
-                            <h3 class="card-title text-center border-bottom p-2 m-3">Reverences</h3>
+                            <p class="card-title text-center border-bottom p-2 m-3">Reverences</p>
                             <div class="card-body">
                                 <ul>
                                     <li><a class="text-dark" href="https://www.python.org/doc/">python</a></li>
@@ -129,15 +133,17 @@
                             </div>
                         </div>
                         <div class="card m-3">
-                            <h3 class="card-title text-center border-bottom p-2 m-3">Social Media</h3>
-                            <h4 class="card-body text-center">
+                            <p class="card-title text-center border-bottom p-2 m-3">Social Media</p>
+                            <p class="card-body text-center">
+                              <!--Social Media 
                                 <a class="text-secondary" href="#"><i class="fab fa-facebook"></i></a>
                                 <a class="text-secondary" href="#"><i class="fab fa-twitter"></i></a>
                                 <a class="text-secondary" href="#"><i class="fab fa-instagram"></i></a>
                                 <a class="text-secondary" href="#"><i class="fab fa-youtube"></i></a>
                                 <a class="text-secondary" href="#"><i class="fab fa-telegram"></i></a>
                                 <a class="text-secondary" href="#"><i class="fab fa-linkedin"></i></a>
-                            </h4>
+                                 -->
+                            </p>
                         </div>
                     </div>
                 </div>
