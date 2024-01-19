@@ -37,6 +37,8 @@
   </head>
 <!--End Head-->
 
+
+
 <!--Start Body-->
 <body>
     <header>
@@ -82,10 +84,10 @@
         <!--End Navbar-->
     </header>
 
-    <!--Start Carousel-->
-        {% include 'blog/includes/carsousel.html' %}
-    <!--End Carousel-->
+   
+    {% block createpost %}
 
+    {% endblock createpost %}
 
 <!-- Strart Dynamic content -->
     <!--Start Category-->
@@ -105,12 +107,12 @@
 
 
 
-    <footer class="bg-secondary">
+    <footer class="bg-dark">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md">
                     <div class="card-group mt-3">
-                        <div class="card m-3">
+                        <div class="card m-3 text-white-50 bg-dark ">
                            
                             <div class="card-body">
                                 <div class="text-center">
@@ -122,17 +124,17 @@
 
                             </div>
                         </div>
-                        <div class="card m-3">
+                        <div class="card m-3 text-white-50 bg-dark">
                             <p class="card-title text-center border-bottom p-2 m-3">Reverences</p>
                             <div class="card-body">
                                 <ul>
-                                    <li><a class="text-dark" href="https://www.python.org/doc/">python</a></li>
-                                    <li><a class="text-dark" href="https://docs.djangoproject.com/en/2.2/">django</a></li>
-                                    <li><a class="text-dark" href="https://developer.mozilla.org/">MDN</a></li>
+                                    <li><a class="text-white-50" href="https://www.python.org/doc/">python</a></li>
+                                    <li><a class="text-white-50" href="https://docs.djangoproject.com/en/2.2/">django</a></li>
+                                    <li><a class="text-white-50" href="https://developer.mozilla.org/">MDN</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="card m-3">
+                        <div class="card m-3 text-white-50 bg-dark">
                             <p class="card-title text-center border-bottom p-2 m-3">Social Media</p>
                             <p class="card-body text-center">
                               <!--Social Media 
@@ -150,7 +152,7 @@
             </div>
             <div class="row p-2">
                 <div class="col-md text-center">
-                    <small class="text-light">&copy; جميع الحقوق محفوظة {% now 'Y' %}</small>
+                    <small class="text-white-50">&copy; جميع الحقوق محفوظة {% now 'Y' %}</small>
                 </div>
             </div>
         </div>

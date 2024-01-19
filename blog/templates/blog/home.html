@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
+ <!--Start Carousel-->
+ {% include 'blog/includes/carsousel.html' %}
+ <!--End Carousel-->
+
+
+<!--Start Category row -->
 {% block category %}
     <div class="container-fluid">
         <div class="card text-dark bg-light mb-3 mt-3">
@@ -26,13 +32,13 @@
         </div>
     </div>        
 {% endblock category %}
-
+<!--End Category row -->
 
 
    
 
 
-
+<!--Start 2 columns grid  -->
 {% block main %}
 <section>
     <h1 class="screen-reader-only">Posts List for web development applications Skills</h1>      
@@ -106,3 +112,4 @@
     </div>
 </section>
 {% endblock main %}
+<!--END 2 columns grid   -->

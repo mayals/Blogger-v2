@@ -17,8 +17,14 @@ def home_view(request):
 
 
 def create_post(request):
-    form = PostForm(request.POST)
-    context:{
-        'form':form,
+    user = request.user
+    if request.method == 'POST' :
+        form = PostForm(request.POST)
+    else:
+        form = PostForm()
+    
+    context = {
+            'form':  form,
     }
+    
     return render(request,'blog/create_post.html',context)
