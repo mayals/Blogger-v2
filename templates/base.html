@@ -28,7 +28,7 @@
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 
-    <link href="{% static 'css/blog/blogstyle.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/blogstyle.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/userstyle.css' %}" rel="stylesheet" type="text/css">
     
     <!--https://ahrefs.com/blog/canonical-tags/-->
@@ -54,7 +54,7 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'blog:home' %}">Home</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>

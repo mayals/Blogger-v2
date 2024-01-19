@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 
 {% block createpost %}
-<form method="POST" action=".">
-    {% csrf_token %}
 
-    {{ form }}
+<section class='bg-light'>
+    
+    <div class='row justify-content-center'>
+        <div class="col-md-10 col-sm-11 border rounded border-secondary p-3 m-5 back-ggg">
+            <form method="POST" action=".">
+                {% csrf_token %}
 
-    <div>
-        <div >
-            <button class="but btn-success">Submit</button>
+                {{form.media }}
+                {{ form|crispy }}
+
+                <div>
+                    <div >
+                        <button class="but btn-success">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</form>
 
+</section>
 {% endblock createpost %}
 

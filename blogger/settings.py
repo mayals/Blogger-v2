@@ -50,9 +50,6 @@ ALLOWED_HOSTS = [ 'project.onrender.com',
 INSTALLED_APPS = [
     # Build-in app
     # -------------
-    # https://django-jazzmin.readthedocs.io/installation/
-    # Add jazzmin to your INSTALLED_APPS before django.contrib.admin
-    #'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,13 +65,28 @@ INSTALLED_APPS = [
    #-----------------
    # https://django-phonenumber-field.readthedocs.io/en/latest/
     "phonenumber_field",
-   # https://fontawesome.com/docs/web/use-with/python-django#add-the-font-awesome-free-requirement-and-app
-   'fontawesomefree',
-
+   
     # https://pypi.org/project/django-bootstrap-v5/
     'bootstrap5',
     
+    # https://fontawesome.com/docs/web/use-with/python-django#add-the-font-awesome-free-requirement-and-app
+   'fontawesomefree',
    
+    # crispy-bootstrap5
+    # https://github.com/django-crispy-forms/crispy-bootstrap5?tab=readme-ov-file
+    "crispy_forms",
+    "crispy_bootstrap5",
+    
+    
+    # https://django-jazzmin.readthedocs.io/installation/
+    # Add jazzmin to your INSTALLED_APPS before django.contrib.admin
+    #'jazzmin',
+    
+    # django-ckeditor
+    # https://pypi.org/project/django-ckeditor/
+    # https://pypi.org/project/django-ckeditor/#installation
+    'ckeditor',
+    'ckeditor_uploader'
 ]
 
 MIDDLEWARE = [
@@ -147,7 +159,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = 'static/'
+
 STATICFILES_DIRS = [ BASE_DIR / "static"]  #for static folder than put in main project root(near mnage.py file),which contain static belong to all project
+#STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),)     also work ok
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # for collectstatic for deployment
 
 
@@ -220,7 +235,108 @@ DATABASES = {
     #     conn_max_age=600    
     #     )
 }
-
 print(DATABASES)
+
+
+
+
+#crispy-bootstrap5:
+############################################# crispy-bootstrap5 settings ##############################################
+# https://pypi.org/project/crispy-bootstrap5/      # need when use bootstrap5 with crispy form library
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+# django-ckeditor setting 
+####################################### django-ckeditor setting ##############################################
+# https://pypi.org/project/django-ckeditor/#installation
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'awesome_ckeditor': {
+        'toolbar': 'Basic',
+    },
+}
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        # 'skin': 'office2013',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_YourCustomToolbarConfig': [
+            {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
+            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'forms',
+             'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                       'HiddenField']},
+            '/',
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                       'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert',
+             'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+            '/',
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            {'name': 'about', 'items': ['About']},
+            '/',  # put this to force next toolbar on new line
+            {'name': 'yourcustomtools', 'items': [
+                # put the name of your editor.ui.addButton here
+                'Preview',
+                'Maximize',
+
+            ]},
+        ],
+        'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
+        # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+        # 'height': 291,
+        # 'width': '100%',
+        # 'filebrowserWindowHeight': 725,
+        # 'filebrowserWindowWidth': 940,
+        # 'toolbarCanCollapse': True,
+        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'tabSpaces': 4,
+        'extraPlugins': ','.join([
+            'uploadimage', # the upload image feature
+            # your extra plugins here
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath'
+        ]),
+    }
+}
+
+# https://baronchibuike.medium.com/hey-i-will-be-showing-you-how-you-can-implement-ckeditor-to-your-django-project-in-less-than-5mins-6fb66deb8f4b
+CKEDITOR_UPLOAD_PATH = "uploads"
+
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_THUMBNAIL_SIZE = (300, 300)
+ # CKEDITOR_THUMBNAIL_SIZE = (300, 300)
+
+CKEDITOR_IMAGE_QUALITY = 40
+
+CKEDITOR_BROWSE_SHOW_DIRS = True
+
+CKEDITOR_ALLOW_NONIMAGE_FILES = True
+
+CKEDITOR_FORCE_JPEG_COMPRESSION = True
 
 

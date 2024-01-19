@@ -1,8 +1,6 @@
-# blog/models.py
-
 from django.db import models
 from django.conf import settings
-
+from ckeditor.fields import RichTextField
 
 # https://pypi.org/project/shortuuid/
 from shortuuid.django_fields import ShortUUIDField 
@@ -33,7 +31,7 @@ class Post(models.Model):
     id           = ShortUUIDField(primary_key=True, unique=True, length=6, max_length=6, editable=False)
     title        = models.CharField(max_length=200)
     slug         = models.SlugField(max_length=120, blank=True, null=True)
-    content      = models.TextField()
+    content      = RichTextField()
     photo        = models.ImageField(verbose_name='Post Image', default="img/blog/post_default.png", upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
     author       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_author')
     category     = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts_category')
