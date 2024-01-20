@@ -8,7 +8,7 @@
     
     <div class='row justify-content-center'>
         <div class="col-md-10 col-sm-11 border rounded border-secondary p-3 m-5 back-ggg">
-            <form method="POST" action=".">
+            <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
 
                 {{form.media }}
@@ -16,7 +16,7 @@
 
                 <div>
                     <div >
-                        <button class="but btn-success">Submit</button>
+                        <button type="submit" class="but btn-success">Submit</button>
                     </div>
                 </div>
             </form>

@@ -17,9 +17,16 @@ def home_view(request):
 
 
 def create_post(request):
-    user = request.user
     if request.method == 'POST' :
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
+        print(request.POST)
+        if form.is_valid():
+            post = form.save(commit = False)
+            
+            post.author = request.user
+            post.save()
+            form.save_m2m()
+            
     else:
         form = PostForm()
     
