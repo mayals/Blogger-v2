@@ -1,5 +1,9 @@
 from django.db import models
 from django.conf import settings
+from django.utils.text import slugify
+from django.urls import reverse
+
+# https://pypi.org/project/django-ckeditor/#installation 
 from ckeditor.fields import RichTextField
 
 # https://pypi.org/project/shortuuid/
@@ -43,6 +47,20 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+
+    def save(self, *args, **kwargs):    
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+    
+    
+    def get_absolute_url(self):
+        return reverse("post-detail", kwargs={"pk": self.slug})
+    
+    
     class Meta:
-        ordering = ['-created_at']
+        ordering            = ['-created_at']
+        verbose_name        = 'Post'
+        verbose_name_plural = 'Posts'
+    
+    
     

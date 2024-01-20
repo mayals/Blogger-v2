@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+<!-- start inlclude  'message' -->
+{% block messages %}
+   {% include 'blog/includes/messages.html' %}
+{% endblock messages %}
+<!-- END inlclude  'message' -->
+
+
+
+<!-- start  'post_detail.htm' -->
+{% block postdetail %}
+
+<section class='row m-1'>
+    <div class='col-md-9'>
+        <!-- post start-->
+        <div class="card mb-3">
+            {% if post.photo %}
+                <img class="card-img-top img-fluid" src="{{post.photo.url}}" width="150" height="250" alt="{{post.title}}">
+            {% else %}
+                <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="150" height="250" alt="{{post.title}}">
+            {% endif %}    
+            <div class="card-body">
+                <h1 class="card-title">{{post.title}}</h1>
+                <p class="card-text">{{post.content|safe}}</p>
+                <p class="card-text"><small class="text-muted">published at{{post.created_at|date:'d-m-Y'}}</small></p>
+            </div>
+        </div>
+        <!-- post end-->
+        <hr>
+        <!-- start post button delete - edit -->
+            {% if post.author == request.user %}
+            <div class="form-group btn-editing">
+                <a class="btn btn-secondary" href="#">Edit</a>
+                <a class="btn btn-danger" href="#">Delete</a>
+            </div>
+            {% endif %}
+        <!--  end post button delete - edit -->    
+        <hr>
+        <!--post button share  -->
+        <a href=""><i class="far fa-envelope fa-2x"></i></a>
+        <hr>
+        <!---->
+
+     
+<!-- form to add new comment section -->
+<div>
+    {% if new_comment %}
+    <h6 class="alert alert-success">Your comment has been added successfully to the database but it is need agreement from Admin to display.</h6>
+    {% else %}
+    <h4 class='mycolor p-2'>Add new comment</h4>
+    <div class='border rounded border-secondary p-3  mt-2 mb-5  border_comment'>
+        <form method='POST' novalidate>
+            {% csrf_token %}
+            {{ comment_form.media }}
+            {{ comment_form.as_p }}
+            <input class='btn btn-info' type="submit" value='add comment'>
+        </form>
+    </div>
+    {% endif %}
+</div>
+<!--form comment end -->
+   <!--comment start -->
+
+  <!--comment end -->
+
+
+        <!-- similar post start -->
+        <div>
+            <h2>Similar posts</h2>
+            {% for post in similar_posts %}
+            <p>
+                <a href="{% url 'blog:post_detail_show_path' post.id %}">{{ post.P_subject }}</a>
+            </p>
+            {% empty %} There are no similar posts yet. {% endfor %}
+        </div>
+        <!-- similar post end -->
+    
+    </div>
+    <div class="col-md-3">
+        <!--Start category names -->
+        <div class="card text-dark bg-light mb-3">
+            <div class="card-header text-center">Categories</div>
+            <div class="card-body">
+                {% for cat in categories %}
+                <button type="button" class="btn btn-info m-1">
+                    {{ cat.name }} <span class="badge bg-warning">5</span>
+                </button>
+                {% empty %}
+                <div class="border p-3 mb-3">
+                    <p>No Category!</p> 
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- End category names-->
+        
+        
+        <!--Start tags-->
+        <div class="card text-dark bg-light mb-3">
+            <div class="card-header text-center">Tags</div>
+            <div class="card-body">
+                {% for tag in tags %}
+                <button type="button" class="btn btn-secondary m-1">
+                    {{ tag.name }} <span class="badge bg-warning">5</span>
+                </button>
+                {% empty %}
+                <div class="border p-3 mb-3">
+                    <p>No Tag!</p> 
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- End tags-->
+    </div>
+ 
+</section>
+
+
+{% endblock postdetail %}
+<!-- end  'post_detail.htm' -->

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Post, Category,Tag
 from .forms import PostForm
@@ -18,7 +18,7 @@ def home_view(request):
 
 
 
-def create_post(request):
+def post_create(request):
     form = PostForm()
     if request.method == 'POST' :
         form = PostForm(request.POST, request.FILES)
@@ -28,7 +28,7 @@ def create_post(request):
             post.author = request.user
             post.save()
             form.save_m2m()
-            messages.success(request,f'Thanks ( {request.user.first_name} ),New Post add successfully !')
+            messages.success(request,f'Thanks ( {request.user.first_name} ), your post added successfully !')
             form = PostForm()
             return redirect('blog:home')
             
@@ -37,6 +37,22 @@ def create_post(request):
             messages.error(request,f'Post not add correctly! please complete those fields below.!')
     
     context = {
-            'form':  form,
+            'form': form,
     }
-    return render(request,'blog/create_post.html',context)
+    return render(request,'blog/post_create.html',context)
+
+
+
+
+
+def post_detail(request,slug):
+    post = get_object_or_404(Post, slug= slug) 
+    categories = Category.objects.all()
+    tags = Tag.objects.all()
+    context= {
+        'post' : post ,
+        'categories' : categories,
+        'tags'       : tags,
+        
+    }
+    return render(request,'blog/post_detail.html',context)

@@ -37,8 +37,6 @@
   </head>
 <!--End Head-->
 
-
-
 <!--Start Body-->
 <body>
     <header>
@@ -87,13 +85,6 @@
 
 
 
-<!--Start Carousel  'home.html'-->
-    {% block Carousel %}
-
-    {% endblock Carousel %}
-<!--End Carousel-->  
-
-
 <!-- start inlclude  'message' -->
 {% block messages %}
 
@@ -102,11 +93,12 @@
 
 
 
-<!-- start inlclude  'create_post.htm' -->
-    {% block createpost %}
+<!--Start Carousel  'home.html'-->
+{% block Carousel %}
 
-    {% endblock createpost %}
-<!-- end include create post -->
+{% endblock Carousel %}
+<!--End Carousel-->  
+
 
 
 <!--Start Category row  'home.html'-->
@@ -122,6 +114,20 @@
     {% endblock main %}        
 <!--End POST list ,categories, tags   grid -->
 
+
+<!-- start  'create_post.htm' -->
+{% block createpost %}
+
+{% endblock createpost %}
+<!-- end  create post -->
+
+
+
+<!-- start  'post_detail.htm' -->
+{% block postdetail %}
+
+{% endblock postdetail %}
+<!-- end  'post_detail.htm' -->
 
 
 <!--  End Dynamic content -->
