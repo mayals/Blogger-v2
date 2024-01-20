@@ -83,41 +83,48 @@
           </nav>
         <!--End Navbar-->
     </header>
+<!-- Strart Dynamic content -->
 
 
 
- <!--Start Carousel-->
+<!--Start Carousel  'home.html'-->
     {% block Carousel %}
 
     {% endblock Carousel %}
 <!--End Carousel-->  
 
 
+<!-- start inlclude  'message' -->
+{% block messages %}
 
+{% endblock messages %}
+<!-- END inlclude  'message' -->
+
+
+
+<!-- start inlclude  'create_post.htm' -->
     {% block createpost %}
 
     {% endblock createpost %}
+<!-- end include create post -->
 
 
-    
-<!-- Strart Dynamic content -->
-    <!--Start Category-->
-        {% block category %}
+<!--Start Category row  'home.html'-->
+    {% block category %}
 
-        {% endblock category %}
-    <!--End Category-->
+    {% endblock category %}
+<!--End Category row -->
 
 
-    <!--Start POST -->
-        {% block main %}
+<!--Start POST list ,categories, tags   grid  'home.html' -->
+    {% block main %}
 
-        {% endblock main %}        
-    <!--End POST -->
+    {% endblock main %}        
+<!--End POST list ,categories, tags   grid -->
+
+
 
 <!--  End Dynamic content -->
-
-
-
     <footer class="bg-dark">
         <div class="container-fluid">
             <div class="row">

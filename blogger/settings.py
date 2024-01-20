@@ -340,3 +340,12 @@ CKEDITOR_ALLOW_NONIMAGE_FILES = True
 CKEDITOR_FORCE_JPEG_COMPRESSION = True
 
 
+
+
+############################################# messages.ERROR ##############################################
+# https://docs.djangoproject.com/en/4.2/ref/contrib/messages/
+# https://stackoverflow.com/questions/55202684/does-bootstrap-django-error-message-has-no-red-color
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}

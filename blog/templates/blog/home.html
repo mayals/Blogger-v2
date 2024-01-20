@@ -2,12 +2,19 @@
 {% load static %}
 
 
+<!-- start inlclude  'message' -->
+{% block messages %}
+   {% include 'blog/includes/messages.html' %}
+{% endblock messages %}
+<!-- END inlclude  'message' -->
+
 
 <!--Start Carousel-->
 {% block Carousel %}
    {% include 'blog/includes/carsousel.html' %}
 {% endblock Carousel %}
 <!--End Carousel-->
+
 
 
 <!--Start Category row -->
