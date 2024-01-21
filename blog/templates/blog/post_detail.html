@@ -67,7 +67,7 @@
             {% if post.author == request.user %}
             <div class="form-group btn-editing">
                 <a class="btn btn-secondary" href="{% url 'blog:post-update' slug=post.slug  %}">Edit</a>
-                <a class="btn btn-danger" href="#">Delete</a>
+                <a class="btn btn-danger" href="{% url 'blog:post-delete-confirm' slug=post.slug  %}">Delete</a>
             </div>
             {% endif %}
         <!--  end post button delete - edit -->    
