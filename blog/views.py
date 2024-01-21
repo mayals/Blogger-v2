@@ -56,3 +56,30 @@ def post_detail(request,slug):
         
     }
     return render(request,'blog/post_detail.html',context)
+
+
+
+def post_update(request,slug):
+    post = get_object_or_404(Post, slug=slug)
+    form= PostForm(instance=post)
+    print(post)
+    if request.method == 'POST':
+        form = PostForm(request.POST,request.FILES,instance=post)
+        print(form) 
+        if form.is_valid():
+            updated_post = form.save(commit = False)
+            updated_post.author = request.user
+            updated_post.save()
+            print(form) 
+            messages.success(request,f'Thanks ( {request.user.first_name} ), your post updated successfully !')
+            form = PostForm()
+            return redirect('blog:home')
+        
+        else:
+           form = PostForm(request.POST,request.FILES,instance=post)
+           messages.error(request,f'Post not update correctly! please complete those fields below.!')
+             
+    context ={
+        'form' : form ,
+    }
+    return render(request,'blog/post_update.html',context)
