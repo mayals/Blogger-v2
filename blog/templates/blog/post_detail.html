@@ -28,26 +28,26 @@
           </nav>
         <!-- breadcrumb end -->
       
-        <br>
+        
 
-        <h1 class="card-title">{{post.title}}</h1>
-        <br>
-        <div class='row'>
-            <div class='col-1 d-flex justify-content-start align-items-start p-1'>
-                {% if post.author.profile_pic %}
-                    <img class='rounded-circle' src="{{post.author.profile_pic.url}}"          width="50" height="50" alt="{{post.author.first_name}}">
-                {% else %}
-                    <img class='rounded-circle' src="{% static 'img/profile_default.webp' %}"  width="50" height="50" alt="{{post.author.first_name}}">
-                {% endif %} 
+        <h1 class="card-title p-3">{{post.title}}</h1>
+            <div class='row'>
+                <div class='col-1 d-flex justify-content-start align-items-start'>
+                    {% if post.get_user.profile.profile_pic %}
+                        <img class='rounded-circle m-3' src="{{ post.get_user.profile.profile_pic.url }}"          width="50" height="50" alt="{{post.author.first_name}}">
+                    {% else %}
+                        <img class='rounded-circle m-3' src="{% static 'img/profile_default.webp' %}"  width="50" height="50" alt="{{post.author.first_name}}">
+                    {% endif %} 
+                </div>
+                <div class='col-7 d-flex justify-content-start align-items-center'>
+                    <p>&nbsp<small class="text-muted"><i class="fa-solid fa-pen-nib"></i>  {{post.author.get_user_fullname}}</small></p>&nbsp &nbsp &nbsp &nbsp
+                    <p><small class="text-muted"><i class="fa-regular fa-calendar-days"></i>  {{post.created_at|date:'d-m-Y'}}</small></p>
+                </div>
+                <div class='col-4 d-flex justify-content-end  align-items-center'>
+                    <i class="fa-sharp fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i> &nbsp &nbsp &nbsp &nbsp <i class="fa-sharp fa-regular fa-message fa-lg" style="color:#A9AA9E"></i>&nbsp &nbsp
+                </div>
             </div>
-            <div class='col-7 d-flex justify-content-start align-items-center'>
-                <p>&nbsp<small class="text-muted"><i class="fa-solid fa-pen-nib"></i>  {{post.author.get_user_fullname}}</small></p>&nbsp &nbsp &nbsp &nbsp
-                <p><small class="text-muted"><i class="fa-regular fa-calendar-days"></i>  {{post.created_at|date:'d-m-Y'}}</small></p>
-            </div>
-            <div class='col-4 d-flex justify-content-end  align-items-center'>
-                <i class="fa-sharp fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i> &nbsp &nbsp &nbsp &nbsp <i class="fa-sharp fa-regular fa-message fa-lg" style="color:#A9AA9E"></i>&nbsp &nbsp
-            </div>
-        </div>
+            
         <!-- post start-->
         <div class="card mb-3">
             {% if post.photo %}

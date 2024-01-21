@@ -48,6 +48,10 @@ ALLOWED_HOSTS = [ 'project.onrender.com',
 
 # Application definition
 INSTALLED_APPS = [
+    # https://django-jazzmin.readthedocs.io/installation/
+    # Add jazzmin to your INSTALLED_APPS before django.contrib.admin
+    'jazzmin',
+    
     # Build-in app
     # -------------
     'django.contrib.admin',
@@ -78,9 +82,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     
     
-    # https://django-jazzmin.readthedocs.io/installation/
-    # Add jazzmin to your INSTALLED_APPS before django.contrib.admin
-    #'jazzmin',
+    
     
     # django-ckeditor
     # https://pypi.org/project/django-ckeditor/

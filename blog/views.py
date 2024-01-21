@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Post, Category,Tag
+from user.models import UserModel
 from .forms import PostForm
 
 
@@ -50,6 +51,7 @@ def post_detail(request,slug):
     post = get_object_or_404(Post, slug= slug) 
     categories = Category.objects.all()
     tags = Tag.objects.all()
+    # post_user = UserModel.objects.get()
     context= {
         'post' : post ,
         'categories' : categories,

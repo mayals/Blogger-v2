@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.text import slugify
 from django.urls import reverse
+from user.models import UserModel
 
 # https://pypi.org/project/django-ckeditor/#installation 
 from ckeditor.fields import RichTextField
@@ -37,7 +38,7 @@ class Post(models.Model):
     slug         = models.SlugField(max_length=120, blank=True, null=True)
     content      = RichTextField()
     photo        = models.ImageField(verbose_name='Post Image', upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
-    author       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_author')
+    author       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_user')
     category     = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts_category')
     tags         = models.ManyToManyField(Tag)
     is_published = models.BooleanField(default=True)          
@@ -56,7 +57,14 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("post-detail", kwargs={"pk": self.slug})
     
+    @property
+    def get_user(self):
+        user = UserModel.objects.get(email=self.author)
+        print('user=',user)
+        return user 
     
+    
+        
     class Meta:
         ordering            = ['-created_at']
         verbose_name        = 'Post'
