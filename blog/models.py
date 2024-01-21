@@ -62,8 +62,6 @@ class Post(models.Model):
         user = UserModel.objects.get(email=self.author)
         print('user=',user)
         return user 
-    
-    
         
     class Meta:
         ordering            = ['-created_at']
@@ -72,3 +70,20 @@ class Post(models.Model):
     
     
     
+class Comment(models.Model):
+    STATUS_CHOICES = (
+        ('d', 'Draft'),
+        ('p', 'Published'),
+    )
+    post          = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
+    message       = models.TextField()
+    name          = models.CharField(max_length=50, null=True)
+    email         = models.EmailField(null=True, blank=False)
+    status        = models.CharField(max_length=10, choices=STATUS_CHOICES, default='p')
+    created_at    = models.DateTimeField(null=True, auto_now_add=True, auto_now=False)
+    published_at  = models.DateTimeField( auto_now_add=True, auto_now=False, null=True)
+  
+    def __str__(self):
+        return 'Commented by ({}) on the post: "{}" '.format(self.owner, self.post)
+    class Meta:
+        ordering = ('-p_published_at',)
