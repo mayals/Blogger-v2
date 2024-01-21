@@ -21,8 +21,8 @@
         <!-- breadcrumb start -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Library</a></li>
+              <li class="breadcrumb-item"><a class='link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' href="{% url 'blog:home' %}">Home</a></li>
+              <li class="breadcrumb-item"><a class='link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' href="#">{{post.category}}</a></li>
               <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
             </ol>
           </nav>
@@ -34,9 +34,9 @@
             <div class='row'>
                 <div class='col-1 d-flex justify-content-start align-items-start'>
                     {% if post.get_user.profile.profile_pic %}
-                        <img class='rounded-circle m-3' src="{{ post.get_user.profile.profile_pic.url }}"          width="50" height="50" alt="{{post.author.first_name}}">
+                        <img class='rounded-circle m-3 mb-1' src="{{ post.get_user.profile.profile_pic.url }}"          width="50" height="50" alt="{{post.author.first_name}}">
                     {% else %}
-                        <img class='rounded-circle m-3' src="{% static 'img/profile_default.webp' %}"  width="50" height="50" alt="{{post.author.first_name}}">
+                        <img class='rounded-circle m-3 mb-1' src="{% static 'img/profile_default.webp' %}"  width="50" height="50" alt="{{post.author.first_name}}">
                     {% endif %} 
                 </div>
                 <div class='col-7 d-flex justify-content-start align-items-center'>
@@ -47,7 +47,7 @@
                     <i class="fa-sharp fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i> &nbsp &nbsp &nbsp &nbsp <i class="fa-sharp fa-regular fa-message fa-lg" style="color:#A9AA9E"></i>&nbsp &nbsp
                 </div>
             </div>
-            
+
         <!-- post start-->
         <div class="card mb-3">
             {% if post.photo %}
@@ -55,28 +55,40 @@
             {% else %}
                 <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="150" height="250" alt="{{post.title}}">
             {% endif %}    
-            <div class="card-body">
-               
+            <div class="card-body"> 
                 <p class="card-text">{{post.content|safe}}</p>
-               
             </div>
-        </div>
-        <!-- post end-->
-        <hr>
-        <!-- start post button delete - edit -->
+
+            <!-- start category -->
+            <div  class="bg-light rounded-end-circle border-start border-5 border-secondary m-3 p-2">
+                Category: &nbsp
+                <a href="#"><span class="badge bg-secondary text-light">{{post.category}}</span></a>
+            </div>   
+            <!--end tags -->
+            
+            <!-- start tags -->
+            <div  class="bg-light rounded-end-circle border-start border-5 border-warning m-3 p-2">
+                Tags: &nbsp
+                {% for tag in post.tags.all  %}
+                   <a href="#"><span class="badge bg-warning text-secondary">{{tag}}</span></a>
+                {% endfor %}
+            </div>   
+            <!--end tags -->
+
+
+
+            <!-- start post button delete - edit -->
             {% if post.author == request.user %}
-            <div class="form-group btn-editing">
-                <a class="btn btn-secondary" href="{% url 'blog:post-update' slug=post.slug  %}">Edit</a>
-                <a class="btn btn-danger" href="{% url 'blog:post-delete-confirm' slug=post.slug  %}">Delete</a>
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-sm btn-secondary m-2" href="{% url 'blog:post-update' slug=post.slug  %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                <a class="btn btn-sm btn-danger m-2" href="{% url 'blog:post-delete-confirm' slug=post.slug  %}"><i class="fa-regular fa-trash-can"></i> Delete</a>
             </div>
             {% endif %}
-        <!--  end post button delete - edit -->    
-        <hr>
-        <!--post button share  -->
-        <a href=""><i class="far fa-envelope fa-2x"></i></a>
-        <hr>
-        <!---->
-
+            <!--  end post button delete - edit -->    
+        </div>
+        <!-- post end-->
+ 
+        
      
 <!-- form to add new comment section -->
 <div>
