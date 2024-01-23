@@ -16,7 +16,7 @@
 {% block postdetail %}
 
 <section class='row m-1'>
-    <div class='col-md-9'>
+<div class='col-md-9'>
         
         <!-- breadcrumb start -->
         <nav aria-label="breadcrumb">
@@ -32,27 +32,47 @@
 
         <h1 class="p-3">{{post.title}}</h1>
             <div class='row'>
-                <div class='col-1 d-flex justify-content-start align-items-start'>
+                <div class='col-md-auto d-flex justify-content-start align-items-center'>
                     {% if post.get_user.profile.profile_pic %}
-                        <img class='rounded-circle m-3 mb-1' src="{{ post.get_user.profile.profile_pic.url }}"  width="50" height="50" alt="{{post.author.first_name}}">
+                        <img class='rounded-circle  mb-1' src="{{ post.get_user.profile.profile_pic.url }}"  width="50" height="50" alt="{{post.author.first_name}}">
                     {% else %}
-                        <img class='rounded-circle m-3 mb-1' src="{% static 'img/profile_default.webp' %}"  width="50" height="50" alt="{{post.author.first_name}}">
+                        <img class='rounded-circle  mb-1' src="{% static 'img/profile_default.webp' %}"  width="50" height="50" alt="{{post.author.first_name}}">
                     {% endif %} 
                 </div>
-                <div class='col-7 d-flex justify-content-start align-items-center'>
+                <div class='col-md-auto d-flex justify-content-start align-items-center'>
                     <p>&nbsp<small class="text-muted"><i class="fa-solid fa-pen-nib"></i>  {{post.author.get_user_fullname}}</small></p>&nbsp &nbsp &nbsp &nbsp
                     <p><small class="text-muted"><i class="fa-regular fa-calendar-days"></i>  {{post.created_at|date:'d-m-Y'}}</small></p>
                 </div>
               
             
-                <div class='col-4 d-flex justify-content-end  align-items-center'>
+                <div class='col-md d-flex justify-content-end  align-items-center mb-2'>
                     <i class="fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i>
                     
                     &nbsp &nbsp &nbsp &nbsp
                    
                     <span  class="position-relative">
-                        <i class="fa-regular fa-message fa-lg" style="color:#A9AA9E"></i> 
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                        <i class="fa-regular fa-eye fa-lg" style="color:#68b1cc"></i> 
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
+                            <text class='text-light'>{{ post.comments.all.count }}<text>
+                            <span class="visually-hidden">views</span>
+                        </span>
+                    </span>
+
+                    &nbsp &nbsp &nbsp &nbsp
+
+                    <span  class="position-relative">
+                        <i class="fa-regular fa-heart fa-lg" style="color:#EF4990"></i> 
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
+                            <text class='text-light'>{{ post.comments.all.count }}<text>
+                            <span class="visually-hidden">likes</span>
+                        </span>
+                    </span>
+
+                    &nbsp &nbsp &nbsp &nbsp
+
+                    <span  class="position-relative">
+                        <i class="fa-regular fa-message fa-lg" style="color:#96cc4d"></i> 
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
                             <text class='text-light'>{{ post.comments.all.count }}<text>
                             <span class="visually-hidden">comments</span>
                         </span>
@@ -102,12 +122,7 @@
  
         
      
-<!-- form to add new comment section -->
-<div>
-    {% if new_comment %}
-    <h6 class="alert alert-success">Your comment has been added successfully to the database but it is need agreement from Admin to display.</h6>
-    {% else %}
-    
+    <!-- form to add new comment section -->
     <div class='border rounded border-secondary p-3  mt-2 mb-5 '>
         <i class="fa-solid fa-ellipsis-vertical"></i><span class='p-2'><small>Add new comment</small></span>
         <br><br>
@@ -120,32 +135,33 @@
             </div>
         </form>
     </div>
-    {% endif %}
-</div>
-<!--form comment end -->
+    <!--form comment end -->
    
 
-  <!--comments list start -->
 
-  <!--comments list end -->
-
-
-        <!-- similar post start -->
-        <div>
-            <h2>Similar posts</h2>
-            {% for post in similar_posts %}
-            <p>
-                <a href=""></a>
-            </p>
-            {% empty %} There are no similar posts yet. {% endfor %}
-        </div>
-        <!-- similar post end -->
-    
+    <!--comments list start -->
+    <div class='border rounded border-secondary p-3  mt-2 mb-5 '>
+        <i class="fa-solid fa-ellipsis-vertical"></i><span class='p-2'><small>Comments ({{ post.comments.all.count }})</small></span>
+        <br><br>
+        {% for comment in post.comments.all %}  
+        <div class="row mb-2 p-3">
+                
+                <div class='col-md-auto'>
+                    <img class='rounded-circle me-2' src="{% static 'img/profile_default.webp' %}"  width="30" height="30" alt="{{comment.name}}">
+                    <span><strong>{{ comment.name }}</strong></span>
+                </div>
+                <div class='col-md-auto  text-secondary text-muted'>
+                    {{ comment.message }}
+                </div>
+            </div>
+        {% endfor %}        
     </div>
+    <!--comments list end -->
 
+    
 
-   
-    <div class="col-md-3">
+</div>   
+<div class="col-md-3">
         <br><br><br><br>
         <!--Start category names -->
         <div class="card text-dark bg-light mb-3">
