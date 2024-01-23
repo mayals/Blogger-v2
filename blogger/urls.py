@@ -21,10 +21,11 @@ from django.conf import settings
 
 urlpatterns = [
    path('admin/', admin.site.urls),
-   # path('user/', include('user.urls')),
+   path('user/', include('user.urls')),
    path('blog/', include('blog.urls')),
    
    # https://pypi.org/project/django-ckeditor/#installation
    path('ckeditor/', include('ckeditor_uploader.urls')),
+
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

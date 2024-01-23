@@ -55,7 +55,7 @@ class Post(models.Model):
     
     
     def get_absolute_url(self):
-        return reverse("post-detail", kwargs={"pk": self.slug})
+        return reverse("post-detail", kwargs={"slug": self.slug})
     
     @property
     def get_user(self):
@@ -70,20 +70,22 @@ class Post(models.Model):
     
     
     
+    
+    
 class Comment(models.Model):
     STATUS_CHOICES = (
         ('d', 'Draft'),
         ('p', 'Published'),
     )
     post          = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
-    message       = models.TextField()
-    name          = models.CharField(max_length=50, null=True)
+    message       = models.TextField(blank=False)
+    name          = models.CharField(max_length=50, null=True,blank=False)
     email         = models.EmailField(null=True, blank=False)
     status        = models.CharField(max_length=10, choices=STATUS_CHOICES, default='p')
     created_at    = models.DateTimeField(null=True, auto_now_add=True, auto_now=False)
     published_at  = models.DateTimeField( auto_now_add=True, auto_now=False, null=True)
   
     def __str__(self):
-        return 'Commented by ({}) on the post: "{}" '.format(self.owner, self.post)
+        return 'Commented by ({}) on the post: "{}" '.format(self.name, self.post)
     class Meta:
-        ordering = ('-p_published_at',)
+        ordering = ('-published_at',)

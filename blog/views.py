@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Post, Category,Tag
-from user.models import UserModel
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 
 
 def home_view(request):
@@ -27,6 +26,7 @@ def post_create(request):
         print(request.POST)
         if form.is_valid():
             post = form.save(commit = False)
+            
             post.author = request.user
             post.save()
             form.save_m2m()
@@ -48,15 +48,29 @@ def post_create(request):
 
 
 def post_detail(request,slug):
+    # Post
     post = get_object_or_404(Post, slug= slug) 
     categories = Category.objects.all()
     tags = Tag.objects.all()
-    # post_user = UserModel.objects.get()
+    
+    # CommentForm
+    form = CommentForm()
+    if request.method == 'POST' :
+        form = CommentForm(request.POST)
+        if form.is_valid():
+           new_comment = form.save(commit=False)
+           new_comment.post = post
+           new_comment.save()
+           messages.success(request,f'Thanks (  ), your comment added successfully !')
+                   
+        else:
+            messages.error(request,f'comment not add correctly, try again!')
+    
     context= {
-        'post' : post ,
+        'post'       : post ,
         'categories' : categories,
-        'tags'       : tags,
-        
+        'tags'       : tags, 
+        'form'       : form, 
     }
     return render(request,'blog/post_detail.html',context)
 

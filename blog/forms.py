@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post,Comment
 from ckeditor.widgets import CKEditorWidget
 
 
@@ -29,3 +29,13 @@ class PostForm(forms.ModelForm):
             
             
             
+class CommentForm(forms.ModelForm):
+    name     = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Name..'}))
+    email    = forms.EmailField(label='',help_text='Email will be hidden', widget=forms.TextInput(attrs={'placeholder': 'Email..'}))
+    message  = forms.CharField(label='', help_text='Please add comment related to the post',min_length='20', widget = forms.Textarea(attrs={'rows': 5, 
+                                                                                                                            'class':'form-control',
+                                                                                                                           'placeholder': 'Your Comment .. '}))
+                                                                               
+    class Meta:
+        model   = Comment
+        fields  = ['name', 'email', 'message']

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractUser, PermissionsMixin
 from django.conf import settings
 from django.utils import timezone
-
+from django import forms
 
 
 # https://django-phonenumber-field.readthedocs.io/en/latest/#
@@ -42,9 +42,11 @@ class UserManager(BaseUserManager):
 class UserModel(AbstractUser, PermissionsMixin):
     id               = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)                     
     username         = None
-    email            = models.EmailField(unique = True,  null = True)
-    first_name       = models.CharField(max_length = 50, null = True)
-    last_name        = models.CharField(max_length = 50 ,null = True)
+    email            = models.EmailField(unique=True, null=True, blank=False)
+    first_name       = models.CharField(max_length=50, null=True, blank=False)
+    last_name        = models.CharField(max_length=50 , null=True, blank=False)
+    password1        = models.CharField(max_length=250, null=True, blank=False)
+    password2        = models.CharField(max_length=250, null=True, blank=False )
     created_at       = models.DateTimeField(auto_now_add=True)
     is_confirmEmail  = models.BooleanField(default=False)
     is_enable_2FA    = models.BooleanField(null=True, blank=True)
@@ -54,6 +56,17 @@ class UserModel(AbstractUser, PermissionsMixin):
     USERNAME_FIELD  = 'email'
     REQUIRED_FIELDS = ["first_name", "last_name"]
    
+   
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if not password2:
+            raise forms.ValidationError("You must confirm your password")
+        if password1 != password2:
+            raise forms.ValidationError("Your passwords do not match")
+        return password2
+    
+    
     def __str__(self):
        return "{}".format(self.email) 
     
