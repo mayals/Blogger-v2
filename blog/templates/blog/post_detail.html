@@ -92,14 +92,14 @@
             </div>
 
             <!-- start category -->
-            <div  class="bg-light rounded-end-circle border-start border-5 border-secondary m-3 p-2">
+            <div  class="bg-light rounded-end-circle border-start border-5 border-secondary  mb-1 p-2">
                 Category: &nbsp
                 <a href="#"><span class="badge bg-secondary text-light">{{post.category}}</span></a>
             </div>   
-            <!--end tags -->
+            <!--end category -->
             
             <!-- start tags -->
-            <div  class="bg-light rounded-end-circle border-start border-5 border-warning m-3 p-2">
+            <div  class="bg-light rounded-end-circle border-start border-5 border-warning  mb-1 p-2">
                 Tags: &nbsp
                 {% for tag in post.tags.all  %}
                    <a href="#"><span class="badge bg-warning text-secondary">{{tag}}</span></a>
