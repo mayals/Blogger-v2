@@ -43,8 +43,20 @@
                     <p>&nbsp<small class="text-muted"><i class="fa-solid fa-pen-nib"></i>  {{post.author.get_user_fullname}}</small></p>&nbsp &nbsp &nbsp &nbsp
                     <p><small class="text-muted"><i class="fa-regular fa-calendar-days"></i>  {{post.created_at|date:'d-m-Y'}}</small></p>
                 </div>
+              
+            
                 <div class='col-4 d-flex justify-content-end  align-items-center'>
-                    <i class="fa-sharp fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i> &nbsp &nbsp &nbsp &nbsp <i class="fa-sharp fa-regular fa-message fa-lg" style="color:#A9AA9E"></i>&nbsp &nbsp
+                    <i class="fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i>
+                    
+                    &nbsp &nbsp &nbsp &nbsp
+                   
+                    <span  class="position-relative">
+                        <i class="fa-regular fa-message fa-lg" style="color:#A9AA9E"></i> 
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                            <text class='text-light'>{{ post.comments.all.count }}<text>
+                            <span class="visually-hidden">comments</span>
+                        </span>
+                    </span>
                 </div>
             </div>
 

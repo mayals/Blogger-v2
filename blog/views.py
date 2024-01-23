@@ -61,10 +61,16 @@ def post_detail(request,slug):
            new_comment = form.save(commit=False)
            new_comment.post = post
            new_comment.save()
-           messages.success(request,f'Thanks (  ), your comment added successfully !')
-                   
+           name = form.cleaned_data.get('name')
+           messages.success(request,f'Thanks {name} , your comment added successfully !')
+           form = CommentForm()
+           return redirect('blog:post-detail',slug=post.slug)        
+        
         else:
             messages.error(request,f'comment not add correctly, try again!')
+    
+    else:
+        form = CommentForm()
     
     context= {
         'post'       : post ,
