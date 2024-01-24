@@ -351,3 +351,10 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+
+
+############################################# EMAIL settings ##############################################
+# At this stage, we are going to configure email backend to send confirmation links. Let's test it on console for this tutorial.
+EMAIL_BACKEND      = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'noreply@CodesCity'

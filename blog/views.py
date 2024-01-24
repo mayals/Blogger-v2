@@ -18,7 +18,7 @@ def home_view(request):
     return render(request,'blog/home.html', context)
 
 
-@login_required()
+@login_required(login_url='user:user-login')
 def post_create(request):
     form = PostForm()
     if request.method == 'POST' :
@@ -83,7 +83,7 @@ def post_detail(request,slug):
 
 
 
-@login_required()
+@login_required(login_url='user:user-login')
 def post_update(request,slug): 
     post = get_object_or_404(Post, slug=slug)
     if post.author == request.user :
@@ -115,7 +115,7 @@ def post_update(request,slug):
 
 
 
-@login_required()
+@login_required(login_url='user:user-login')
 def post_delete_confirm(request,slug):
     post = get_object_or_404(Post, slug=slug)
     if post.author == request.user :

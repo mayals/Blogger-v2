@@ -49,6 +49,7 @@ class UserModel(AbstractUser, PermissionsMixin):
     password2        = models.CharField(max_length=250, null=True, blank=False )
     created_at       = models.DateTimeField(auto_now_add=True)
     is_confirmEmail  = models.BooleanField(default=False)
+    is_active        = models.BooleanField(default=False)
     is_enable_2FA    = models.BooleanField(null=True, blank=True)
 
     objects = UserManager()
@@ -57,14 +58,6 @@ class UserModel(AbstractUser, PermissionsMixin):
     REQUIRED_FIELDS = ["first_name", "last_name"]
    
    
-    def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-        if not password2:
-            raise forms.ValidationError("You must confirm your password")
-        if password1 != password2:
-            raise forms.ValidationError("Your passwords do not match")
-        return password2
     
     
     def __str__(self):
@@ -76,7 +69,8 @@ class UserModel(AbstractUser, PermissionsMixin):
       
     def save(self, *args, **kwargs):
         if self.is_superuser:
-            self.is_confirmEmail = True 
+            self.is_confirmEmail = True
+            self.is_active = True 
             self.is_enable_2FA   = False
         return super().save(*args, **kwargs)
 
@@ -94,7 +88,7 @@ class Profile(models.Model):
     id              = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user            = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     bio             = models.TextField(blank=True, null=True)
-    profile_pic     = models.ImageField(verbose_name='Profile Picture', default="profile/default_image.jpg", upload_to="profile/%Y/%m/%d/", blank=True, null=True)
+    profile_pic     = models.ImageField(verbose_name='Profile Picture', default="static/img/profile_default.webp", upload_to="profile/%Y/%m/%d/", blank=True, null=True)
     date_of_birth   = models.DateField(blank=True, null=True)
     gender          = models.CharField(max_length=10, blank=True, null=True)
     website         = models.URLField(max_length = 255, null=True, blank=True)
@@ -125,8 +119,6 @@ class Profile(models.Model):
         return self.user.email
 
     
-
-
 
 
 class SMSCode(models.Model):
