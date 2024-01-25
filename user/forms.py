@@ -34,3 +34,10 @@ class UserLoginForm(forms.ModelForm):
     class Meta:
         model   = get_user_model()
         fields  = ("email", "password")
+        
+        
+class EmailForm(forms.Form):
+    email    = forms.EmailField(label='', widget=forms.TextInput(attrs={'placeholder': 'Email..'}))
+
+    class Meta:
+        fields  = ("email")

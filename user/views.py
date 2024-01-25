@@ -9,7 +9,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.http import urlsafe_base64_decode
 from blogger.settings import DEFAULT_FROM_EMAIL
 from django.utils.encoding import smart_bytes
-from .forms import UserModelForm, UserLoginForm
+from .forms import UserModelForm, UserLoginForm,EmailForm
 from django.utils.encoding import smart_str
 from .models import UserModel 
 
@@ -43,36 +43,40 @@ def user_create(request):
 
 # this function to send confim link to email of user manullay after user want of confirm his email
 def send_confirm_email_link_manuall(request):
-    if request.method == 'POST':
-        form     = UserLoginForm(request.POST)
-        email    = request.POST.get('email')     
-        password = request.POST.get('password')
-        
-        user = authenticate(request,username=email,password=password) 
-        if user.is_confirmEmail == False :
-            
-            subject = 'Confirm Your Email Address'
-            from_email = DEFAULT_FROM_EMAIL    # load_dotenv() - this work her to bring this variable value from file .env
-            to_email = user.email
-            message = render_to_string('user/email_confirmation.html', 
-                                                                    {
-                                                                    'user'  : user,
-                                                                    'domain': 'localhost:8000',
-                                                                    'uid'   : urlsafe_base64_encode(smart_bytes(user.pk)),
-                                                                    'token' : default_token_generator.make_token(user),
-                                                                    }
-                                        ) 
-            send_mail(subject, message, from_email, [to_email], fail_silently=False)
-            messages.success(request,f'( {request.user.first_name} ), please go to your email {request.user.email} to comlete the registeration')  
-            return redirect('user:user-login')
+    
+        if request.method == 'POST' :
+            form = EmailForm(request.POST)
+            if form.is_valid():
+                email    = request.POST.get('email')      
+                user = UserModel.objects.get(email=email) 
+                if user is not None and user.is_confirmEmail == False :
+                    
+                    subject = 'Confirm Your Email Address'
+                    from_email = DEFAULT_FROM_EMAIL    # load_dotenv() - this work her to bring this variable value from file .env
+                    to_email = user.email
+                    message = render_to_string('user/email_confirmation.html', 
+                                                                            {
+                                                                            'user'  : user,
+                                                                            'domain': 'localhost:8000',
+                                                                            'uid'   : urlsafe_base64_encode(smart_bytes(user.pk)),
+                                                                            'token' : default_token_generator.make_token(user),
+                                                                            }
+                                                ) 
+                    send_mail(subject, message, from_email, [to_email], fail_silently=False)
+                    messages.success(request,f'( {user.first_name} ), please go to your email {user.email} to comlete the registeration')  
+                    return redirect('user:user-login')
 
-    else:
-        form = UserLoginForm()
+                
+                if user is not None and user.is_confirmEmail == True :
+                    return redirect('user:user-login')
         
-    context = {
-        'form' : form,
-    }
-    return render(request,'user/user_login.html', context=context)
+        else:
+            form = EmailForm()   
+        
+        context = {
+            'form' : form,
+        }
+        return render(request,'user/send_confirm_email_link_button.html', context=context)
 
 
 
@@ -121,8 +125,9 @@ def user_login(request):
         email    = request.POST.get('email')     # must be confirm email to can login
         password = request.POST.get('password')
         
-        user = authenticate(request, password=password, username=email)
-      
+        user = authenticate(request,username=email,password=password)
+        print(user)
+        user = UserModel.objects.get(email=email)
         print(user)
         if user is not None and user.is_confirmEmail == True :
             print('user='+ str(user))
@@ -132,7 +137,7 @@ def user_login(request):
             return redirect('blog:home')
            
         
-        elif user is not None and user.is_confirmEmail == False:
+        if user is not None and user.is_confirmEmail == False:
             messages.error(request,f'email or password not correct, or your email not confirm')
             return redirect('user:send-confirm-email-link-manuall')
         

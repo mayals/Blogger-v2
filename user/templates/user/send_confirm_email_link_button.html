@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,8 +9,17 @@
         <h2>Hello {{ user.first_name }},</h2>
         <p>Welcome to CodesCity! Please confirm your email address by clicking on the following link:</p>
         
+        <form method="POST" enctype='multipart/form-data' novalidate>
+            {% csrf_token %}
+
         
-        <a href= "{% url 'user:send-confirm-email-link-manuall' %}>Confirm Email</a>
+            {{ form }}
+
+            <div class='d-flex justify-content-between'>
+                <button type="submit" class="btn btn-success">CONFIRM EMAIL</button>
+            </div>
+         
+        </form>
 
         <p>Please go to your emaill {{ user.email }} and press link to confirm it.</p>
         
