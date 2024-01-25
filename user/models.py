@@ -87,7 +87,7 @@ class Profile(models.Model):
     id              = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user            = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     bio             = models.TextField(blank=True, null=True)
-    profile_pic     = models.ImageField(verbose_name='Profile Picture', default="static/img/profile_default.webp", upload_to="profile/%Y/%m/%d/", blank=True, null=True)
+    profile_pic     = models.ImageField(verbose_name='Profile Picture', upload_to="profile/%Y/%m/%d/", blank=True, null=True)
     date_of_birth   = models.DateField(blank=True, null=True)
     gender          = models.CharField(max_length=10, blank=True, null=True)
     website         = models.URLField(max_length = 255, null=True, blank=True)

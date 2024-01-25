@@ -11,7 +11,7 @@ from blogger.settings import DEFAULT_FROM_EMAIL
 from django.utils.encoding import smart_bytes
 from .forms import UserModelForm, UserLoginForm,EmailForm
 from django.utils.encoding import smart_str
-from .models import UserModel 
+from .models import UserModel,Profile 
 
 
 def user_create(request):
@@ -164,3 +164,12 @@ def user_logout(request):
 
 def forget_password(request):
     return render 
+
+
+def my_profile(request):
+    profile = Profile.objects.get(user=request.user)
+    context = {
+        'profile' : profile,
+    }
+    return render(request,'user/profile.html',context)
+                  

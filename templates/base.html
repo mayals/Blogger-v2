@@ -73,7 +73,7 @@
                       <li><a class="dropdown-item" href="{% url 'user:user-register' %}">Rgister</a></li>
                       <li><a class="dropdown-item" href="{% url 'user:user-login' %}">Login</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><a class="dropdown-item" href="{% url 'user:my-profile' %}">Profile</a></li>
                       <li><a class="dropdown-item" href="{% url 'user:user-logout' %}">Logout</a></li>
                     </ul>
                   </li>
@@ -105,7 +105,8 @@
 
 {% endblock messages %}
 <!-- END inlclude  'message' -->
-
+{% block content %}
+{% endblock content %}
 
 
 <!--Start Carousel  'home.html'-->
