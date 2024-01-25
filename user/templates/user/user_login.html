@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-
-
 <!-- start inlclude  'message' -->
 {% block messages %}
    {% include 'blog/includes/messages.html' %}
@@ -11,10 +9,7 @@
 
 
 
-
-
-
-{% block userlogin %}
+{% block content %}
 
 <section class='bg-light'>
     <div class='row justify-content-center'>
@@ -42,5 +37,5 @@
     </p>
     <br>
 </section>
-{% endblock userlogin %}
+{% endblock content %}
 

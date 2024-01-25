@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block content %}
+
 
 <!-- start inlclude  'message' -->
 {% block messages %}
@@ -10,7 +10,10 @@
    {% endblock messages %}
 <!-- END inlclude  'message' -->
 
-    
+
+
+
+{% block content %}    
     <div class="my-form container p-5 my-5 rounded border border-warning">
       
             <h2 class="text-center"> Profile {{profile.user.get_user_fullname}}</h2>

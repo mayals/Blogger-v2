@@ -9,40 +9,50 @@
 <!-- END inlclude  'message' -->
 
 
-<!--Start Carousel-->
-{% block Carousel %}
+
+{% block content %}
+
+
+
+<!--Start include Carousel-->
    {% include 'blog/includes/carsousel.html' %}
-{% endblock Carousel %}
-<!--End Carousel-->
+<!--End  include Carousel-->
 
 
 
 <!--Start Category row -->
-{% block category %}
-    <div class="container-fluid">
-        <div class="card text-dark bg-light mb-3 mt-3">
-            <div class="card-header text-center">Ctegories</div>
+<br>
+<div class='container'>
+        <div class="card">
+            <div class="card-header text-center ">Ctegories</div>
                 <div class="row card-body justify-content-between m-1">
                         {% for cat in categories %}
-                            <div class='col-lg-2 col-sm-6 col-xs-6  rounded d-flex justify-content-center'>
-                            {% if cat.icon %}
-                                <figure class="figure">
-                                <img src="{{ cat.icon.url }}" class="rounded"  width="150" height="150" alt="{{cat.name}}">
-                                <figcaption class="figure-caption">{{ cat.name }}</figcaption>
+                        
+                            <div class='col-lg-2 col-md-6 col-sm-6 col-xs-6 rounded d-flex justify-content-center'>
+                                {% if cat.icon %}
+                                <a href="#">
+                                    <figure class="figure">
+                                        <img src="{{ cat.icon.url }}" class="rounded"  width="100" height="100" alt="{{cat.name}}">
+                                        <figcaption class="figure-caption"><small>{{ cat.name }}</small></figcaption>
+                                    </figure>
+                                </a>        
                                 {% else %}
-                                <img src="{% static 'img/cat_default.png' %}" width="150" height="150" alt="{{cat.name}}">
-                            {% endif %}
+                                    <figure class="figure">
+                                        <img src="{% static 'img/cat_default.png' %}" width="100" height="100" alt="{{cat.name}}">
+                                        <figcaption class="figure-caption"><small>{{ cat.name }}</small></figcaption>
+                                    </figure>
+                                {% endif %}
                             </div>
+                     
                         {% empty %}
                             <div class="border p-3 mb-3">
                                 <p>No Category!</p> 
-                            </div>    
+                            </div>  
                         {% endfor %}
                 </div>
             </div>
         </div>
     </div>        
-{% endblock category %}
 <!--End Category row -->
 
 
@@ -50,7 +60,6 @@
 
 
 <!--Start 2 columns grid  -->
-{% block main %}
 <section>
     <h1 class="screen-reader-only">Posts List for web development applications Skills</h1>      
     <div class="row mt-4 container-fluid">
@@ -124,5 +133,5 @@
         
     </div>
 </section>
-{% endblock main %}
 <!--END 2 columns grid   -->
+{% endblock content %}
