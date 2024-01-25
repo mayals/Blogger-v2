@@ -12,6 +12,5 @@ urlpatterns = [
     
     # EmailConfirm
     path('confirm-email/<uidb64>/<str:token>/',views.confirmEmail_and_activateUser, name='confirmEmail_and_activateUser'),
-    path('send_confirmation_email_manuall/<uidb64>/<str:token>/',views.send_confirmation_email_manuall, name='send-confirmation-email-manuall'),
-
+    path('send_confirm_email_link_manuall/',views.send_confirm_email_link_manuall, name='send-confirm-email-link-manuall'),
 ]
