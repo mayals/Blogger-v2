@@ -23,6 +23,7 @@ urlpatterns = [
    path('admin/', admin.site.urls),
    path('user/', include('user.urls')),
    path('blog/', include('blog.urls')),
+   path('pages/', include('pages.urls')),
    
    # https://pypi.org/project/django-ckeditor/#installation
    path('ckeditor/', include('ckeditor_uploader.urls')),

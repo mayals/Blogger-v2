@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     # My local apps
    'blog.apps.BlogConfig',
    'user.apps.UserConfig',
+   'pages.apps.PagesConfig',
 
    # Third party apps
    #-----------------
