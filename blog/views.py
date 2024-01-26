@@ -7,8 +7,46 @@ from .forms import PostForm, CommentForm
 
 def home_view(request):
     categories = Category.objects.all()
-    tags = Tag.objects.all()
-    posts = Post.objects.all()
+    tags       = Tag.objects.all()
+    posts      = Post.objects.all()
+    
+    if 'sc' in request.GET:    
+       sc = request.GET['sc']
+       posts = posts.filter(title__contains=sc) 
+ 
+    context ={
+        'categories' : categories,
+        'tags'       : tags,
+        'posts'      : posts,    
+    }
+    return render(request,'blog/home.html', context)
+
+
+
+def home_filter_category(request,category):
+    categories = Category.objects.all()
+    tags       = Tag.objects.all()
+    posts      = Post.objects.all()
+       
+    if category != None:
+       posts = posts.filter(category=category)
+      
+    context ={
+        'categories' : categories,
+        'tags'       : tags,
+        'posts'      : posts,    
+    }
+    return render(request,'blog/home.html', context)
+
+
+
+def home_filter_tag(request,tag):
+    categories = Category.objects.all()
+    tags       = Tag.objects.all()
+    posts      = Post.objects.all()
+    
+    if tag != None:
+       posts = posts.filter(tags=tag)
     
     context ={
         'categories' : categories,
@@ -16,6 +54,11 @@ def home_view(request):
         'posts'      : posts,    
     }
     return render(request,'blog/home.html', context)
+
+
+
+
+
 
 
 @login_required(login_url='user:user-login')
@@ -134,3 +177,6 @@ def post_delete_confirm(request,slug):
         messages.warning(request,f"Sorry, you have no permission to delete this post, only post's author can delete it")
         return redirect('blog:home')
     
+    
+    
+        

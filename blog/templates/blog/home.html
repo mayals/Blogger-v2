@@ -30,12 +30,12 @@
                         
                             <div class='col-lg-2 col-md-6 col-sm-6 col-xs-6 rounded d-flex justify-content-center'>
                                 {% if cat.icon %}
-                                <a href="#">
-                                    <figure class="figure">
-                                        <img src="{{ cat.icon.url }}" class="rounded"  width="100" height="100" alt="{{cat.name}}">
-                                        <figcaption class="figure-caption"><small>{{ cat.name }}</small></figcaption>
-                                    </figure>
-                                </a>        
+                                    <a  href="{% url 'blog:home-filter-category'  category=cat.id  %}">   
+                                        <figure class="figure">
+                                            <img src="{{ cat.icon.url }}" class="rounded"  width="100" height="100" alt="{{cat.name}}">
+                                            <figcaption class="figure-caption"><small>{{ cat.name }}</small></figcaption>
+                                        </figure>
+                                    </a> 
                                 {% else %}
                                     <figure class="figure">
                                         <img src="{% static 'img/cat_default.png' %}" width="100" height="100" alt="{{cat.name}}">
@@ -75,7 +75,7 @@
                     <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="150" height="250" alt="{{post.title}}">
                 {% endif %}    
                 <div class="card-body">
-                    <a href="{% url 'blog:post-detail' slug=post.slug %}"><h2 class="card-title">{{post.title}}</h2></a>
+                    <a href="{% url 'blog:post-detail' slug=post.slug %}"><h2 class="card-title">{{post.title}}</h2></a> {{ post.tags.all  }}
                     <p class="card-text">{{post.content|safe}}</p>
                     <p class="card-text"><small class="text-muted">published at{{post.created_at|date:'d-m-Y'}}</small></p>
                 </div>
@@ -95,9 +95,9 @@
                     <div class="card-header text-center">Tags</div>
                     <div class="card-body">
                         {% for tag in tags %}
-                        <button type="button" class="btn btn-secondary m-1">
+                        <a type="button" href="{% url 'blog:home-filter-tag' tag=tag.id %}"  class="btn btn-secondary m-1" >
                             {{ tag.name }} <span class="badge bg-warning">5</span>
-                        </button>
+                        </a>
                         {% empty %}
                         <div class="border p-3 mb-3">
                             <p>No Tag!</p> 
@@ -118,10 +118,10 @@
                     <div class="card-header text-center">Categories</div>
                     <div class="card-body">
                         {% for cat in categories %}
-                        <button type="button" class="btn btn-info m-1">
+                        <a type="button" href="{% url 'blog:home-filter-category' category=cat.id %}"  class="btn btn-info m-1" >
                             {{ cat.name }} <span class="badge bg-warning">5</span>
-                        </button>
-                        {% empty %}
+                        </a>
+                            {% empty %}
                         <div class="border p-3 mb-3">
                             <p>No Category!</p> 
                         </div>

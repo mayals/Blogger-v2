@@ -63,6 +63,14 @@ class Post(models.Model):
         print('user=',user)
         return user 
         
+    @property
+    def get_post_category(self):
+        return  self.category
+        
+    @property
+    def get_post_tags(self):
+        return self.tags
+    
     class Meta:
         ordering            = ['-created_at']
         verbose_name        = 'Post'
