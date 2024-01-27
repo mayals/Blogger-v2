@@ -168,9 +168,9 @@
             <div class="card-header text-center">Categories({{ categories.count }})</div>
             <div class="card-body">
                 {% for cat in categories %}
-                <button type="button" class="btn btn-secondary m-1">
+                <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-info m-1" >
                     {{ cat.name }} <span class="badge bg-warning">{{ cat.get_category_posts.count }}</span>
-                </button>
+                </a>
                 {% empty %}
                 <div class="border p-3 mb-3">
                     <p>No Category!</p> 
@@ -186,9 +186,9 @@
             <div class="card-header text-center">Tags({{ tags.count }})</div>
             <div class="card-body">
                 {% for tag in tags %}
-                <button type="button" class="btn btn-secondary m-1">
-                    {{ tag.name }} <span class="badge bg-warning">{{ tag.get_tag_posts.count }}</span>
-                </button>
+                <a type="button" href="{% url 'blog:home-filter-tag' tagslug=tag.slug %}"  class="btn btn-secondary m-1" >
+                    #{{ tag.slug }} <span class="badge bg-warning">{{tag.get_tag_posts.count}}</span>
+                </a>
                 {% empty %}
                 <div class="border p-3 mb-3">
                     <p>No Tag!</p> 
