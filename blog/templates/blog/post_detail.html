@@ -29,7 +29,7 @@
         <!-- breadcrumb end -->
       
         
-
+    <section class='border border-secondary bg-light text-dark container mb-3'> 
         <h1 class="p-3">{{post.title}}</h1>
             <div class='row'>
                 <div class='col-md-auto d-flex justify-content-start align-items-center'>
@@ -81,26 +81,26 @@
             </div>
 
         <!-- post start-->
-        <div class="card mb-3 border-secondary">
+        <div class="card pb-3">
             {% if post.photo %}
                 <img class="card-img-top img-fluid" src="{{post.photo.url}}" width="150" height="250" alt="{{post.title}}">
             {% else %}
                 <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="150" height="250" alt="{{post.title}}">
             {% endif %}    
-            <div class="card-body"> 
+            <div class="card-body text-dark"> 
                 <p class="card-text">{{post.content|safe}}</p>
             </div>
 
             <!-- start category -->
-            <div  class="bg-light rounded-end-circle border-start border-5 border-secondary  mb-1 p-2">
-                Category: &nbsp
+            <div  class="rounded-end-circle border-start border-5 border-secondary text-dark mb-1 p-2">
+                <small>Category:</small> &nbsp
                 <a href="#"><span class="badge bg-secondary text-light">{{post.category}}</span></a>
             </div>   
             <!--end category -->
             
             <!-- start tags -->
-            <div  class="bg-light rounded-end-circle border-start border-5 border-warning  mb-1 p-2">
-                Tags({{ post.tags.all.count }}): &nbsp
+            <div  class="bg-light rounded-end-circle border-start border-5 border-warning text-dark  mb-1 p-2">
+                <small>Tags:</small>({{ post.tags.all.count }}): &nbsp
                 {% for tag in post.tags.all  %}
                    <a href="#"><span class="badge bg-warning text-secondary">{{tag}}</span></a>
                 {% endfor %}
@@ -119,11 +119,11 @@
             <!--  end post button delete - edit -->    
         </div>
         <!-- post end-->
- 
-        
+ <br>
+    </section>        
      
     <!-- form to add new comment section -->
-    <div class='border rounded border-secondary p-3  mt-2 mb-5 '>
+    <div class='bg-light text-dark border rounded border-secondary p-3  mt-2 mb-5 '>
         <i class="fa-solid fa-ellipsis-vertical"></i><span class='p-2'><small>Add new comment</small></span>
         <br><br>
         <form method='POST' novalidate>
@@ -140,7 +140,7 @@
 
 
     <!--comments list start -->
-    <div class='border rounded border-secondary p-3  mt-2 mb-5 '>
+    <div class='bg-light text-dark border rounded border-secondary p-3  mt-2 mb-5 '>
         <i class="fa-solid fa-ellipsis-vertical"></i><span class='p-2'><small>Comments({{ post.comments.all.count }})</small></span>
         <br><br>
         {% for comment in post.comments.all %}  
@@ -154,6 +154,8 @@
                     {{ comment.message }}
                 </div>
             </div>
+            {% empty %}
+            <p class='text-center'> No Comment!</p>
         {% endfor %}        
     </div>
     <!--comments list end -->

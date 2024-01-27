@@ -60,9 +60,9 @@
 
 
 <!--Start 2 columns grid  -->
-<section>
+<section class='container'>
     <h1 class="screen-reader-only">Posts List for web development applications Skills</h1>      
-    <div class="row mt-4 container-fluid">
+    <div class="row mt-4">
         <!-- Start posts-->
         <div class="col-md-8">
             <a type="button" href='{% url 'blog:new-post' %}' class="btn btn-dark btn-lg"><i class="fa fa-plus" aria-hidden="true"></i> Add Post</a>
@@ -74,12 +74,62 @@
                 {% else %}
                     <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="150" height="250" alt="{{post.title}}">
                 {% endif %}    
-                <div class="card-body">
-                    <a href="{% url 'blog:post-detail' slug=post.slug %}"><h2 class="card-title">{{post.title}}</h2></a> {{ post.tags.all  }}
-                    <p class="card-text">{{post.content|safe}}</p>
-                    <p class="card-text"><small class="text-muted">published at{{post.created_at|date:'d-m-Y'}}</small></p>
+                <div class="card-body pt-0">
+                    <a href="{% url 'blog:post-detail' slug=post.slug %}"><h2 class="card-title">{{post.title}}</h2></a>
+                    <div class='row'>
+                        <div class='col-md-auto d-flex justify-content-start align-items-center'>
+                            {% if post.get_user.profile.profile_pic %}
+                                <img class='rounded-circle  mb-1' src="{{ post.get_user.profile.profile_pic.url }}"  width="50" height="50" alt="{{post.author.first_name}}">
+                            {% else %}
+                                <img class='rounded-circle  mb-1' src="{% static 'img/profile_default.webp' %}"  width="50" height="50" alt="{{post.author.first_name}}">
+                            {% endif %} 
+                        </div>
+                        <div class='col-md-auto d-flex justify-content-start align-items-center'>
+                            <p>&nbsp<small class="text-muted"><i class="fa-solid fa-pen-nib"></i>  {{post.author.get_user_fullname}}</small></p>&nbsp &nbsp &nbsp &nbsp
+                            <p><small class="text-muted"><i class="fa-regular fa-calendar-days"></i>  {{post.created_at|date:'d-m-Y'}}</small></p>
+                        </div>
+                        <div class='col-md d-flex justify-content-end  align-items-center mb-2'>
+                            <i class="fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i>
+                            
+                            &nbsp &nbsp &nbsp &nbsp
+                           
+                            <span  class="position-relative">
+                                <i class="fa-regular fa-eye fa-lg" style="color:#68b1cc"></i> 
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
+                                    <text class='text-light'>{{ post.comments.all.count }}<text>
+                                    <span class="visually-hidden">views</span>
+                                </span>
+                            </span>
+        
+                            &nbsp &nbsp &nbsp &nbsp
+        
+                            <span  class="position-relative">
+                                <i class="fa-regular fa-heart fa-lg" style="color:#EF4990"></i> 
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
+                                    <text class='text-light'>{{ post.comments.all.count }}<text>
+                                    <span class="visually-hidden">likes</span>
+                                </span>
+                            </span>
+        
+                            &nbsp &nbsp &nbsp &nbsp
+        
+                            <span  class="position-relative">
+                                <i class="fa-regular fa-message fa-lg" style="color:#96cc4d"></i> 
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
+                                    <text class='text-light'>{{ post.comments.all.count }}<text>
+                                    <span class="visually-hidden">comments</span>
+                                </span>
+                            </span>
+                        </div>
+                        <div>
+                            <p class="card-text">
+                               {{  post.content|truncatewords:20|safe }}
+                            </p>
+                        </div>   
+                    </div>
                 </div>
             </div>
+            <br>
             {% empty %}
             <div class="border p-3 mb-3">
                 <p>No Post!</p> 
