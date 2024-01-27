@@ -24,12 +24,17 @@ class Category(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
     
-       
+    def get_category_posts(self):
+        posts = Post.objects.filter(category=self)
+        return posts  
+    
+     
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=120, blank=True, null=True)
 
+    
     def __str__(self):
         return self.name
     
@@ -37,7 +42,9 @@ class Tag(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
-
+    def get_tag_posts(self):
+        posts = Post.objects.filter(tags=self)
+        return posts
 
 
 
