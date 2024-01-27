@@ -30,7 +30,7 @@
                         
                             <div class='col-lg-2 col-md-6 col-sm-6 col-xs-6 rounded d-flex justify-content-center'>
                                 {% if cat.icon %}
-                                    <a  href="{% url 'blog:home-filter-category'  category=cat.id  %}">   
+                                    <a  href="{% url 'blog:home-filter-category'  categoryid=cat.id  %}">   
                                         <figure class="figure">
                                             <img src="{{ cat.icon.url }}" class="rounded"  width="100" height="100" alt="{{cat.name}}">
                                             <figcaption class="figure-caption"><small>{{ cat.name }}</small></figcaption>
@@ -95,7 +95,7 @@
                     <div class="card-header text-center">Tags</div>
                     <div class="card-body">
                         {% for tag in tags %}
-                        <a type="button" href="{% url 'blog:home-filter-tag' tag=tag.id %}"  class="btn btn-secondary m-1" >
+                        <a type="button" href="{% url 'blog:home-filter-tag' tagid=tag.id %}"  class="btn btn-secondary m-1" >
                             {{ tag.name }} <span class="badge bg-warning">5</span>
                         </a>
                         {% empty %}
@@ -118,7 +118,7 @@
                     <div class="card-header text-center">Categories</div>
                     <div class="card-body">
                         {% for cat in categories %}
-                        <a type="button" href="{% url 'blog:home-filter-category' category=cat.id %}"  class="btn btn-info m-1" >
+                        <a type="button" href="{% url 'blog:home-filter-category' categoryid=cat.id %}"  class="btn btn-info m-1" >
                             {{ cat.name }} <span class="badge bg-warning">5</span>
                         </a>
                             {% empty %}

@@ -37,7 +37,7 @@ class Post(models.Model):
     title        = models.CharField(max_length=200)
     slug         = models.SlugField(max_length=120, blank=True, null=True)
     content      = RichTextField()
-    photo        = models.ImageField(verbose_name='Post Image', default="static/img/post_default.png", upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
+    photo        = models.ImageField(verbose_name='Post Image', upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
     author       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_user')
     category     = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts_category')
     tags         = models.ManyToManyField(Tag)

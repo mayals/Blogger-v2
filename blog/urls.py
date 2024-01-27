@@ -6,8 +6,8 @@ app_name = 'blog'
 
 urlpatterns = [
     path('', views.home_view, name='home'),
-    path('<int:category>/', views.home_filter_category, name='home-filter-category'),
-    path('<int:tag>/', views.home_filter_tag, name='home-filter-tag'),
+    path('cat/<int:categoryid>/', views.home_filter_category, name='home-filter-category'),
+    path('tag/<int:tagid>/', views.home_filter_tag, name='home-filter-tag'),
     # Post
     path('new-post/', views.post_create, name='new-post'),
     path('post-detail/<slug:slug>/', views.post_detail, name='post-detail'),

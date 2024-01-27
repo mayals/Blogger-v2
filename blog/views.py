@@ -23,13 +23,13 @@ def home_view(request):
 
 
 
-def home_filter_category(request,category):
+def home_filter_category(request,categoryid):
     categories = Category.objects.all()
     tags       = Tag.objects.all()
     posts      = Post.objects.all()
        
-    if category != None:
-       posts = posts.filter(category=category)
+    if categoryid != None:
+       posts = posts.filter(category__id=categoryid)
       
     context ={
         'categories' : categories,
@@ -40,22 +40,22 @@ def home_filter_category(request,category):
 
 
 
-def home_filter_tag(request,tag):
+def home_filter_tag(request,tagid):
     categories = Category.objects.all()
     tags       = Tag.objects.all()
-    posts      = Post.objects.all()
-    
-    if tag != None:
-       posts = posts.filter(tags=tag)
-    
+    posts = Post.objects.all()
+    if tagid :
+        print(tagid)
+        posts = posts.filter(tags=tagid)
+        print(posts)    
+       
+           
     context ={
         'categories' : categories,
         'tags'       : tags,
         'posts'      : posts,    
     }
     return render(request,'blog/home.html', context)
-
-
 
 
 

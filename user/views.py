@@ -24,8 +24,8 @@ def user_create(request):
            new_user.set_password(password2)
            new_user.save()     # here new user is saved in database
            first_name = form.cleaned_data['first_name']
-           last_name = form.cleaned_data['last_name']
-           email     = form.cleaned_data['email']
+           last_name  = form.cleaned_data['last_name']
+           email      = form.cleaned_data['email']
            messages.success(request,f'welcome( {first_name} {last_name} ), please go to your email {email} to comlete the registeration')
            form = UserModelForm()
            return redirect('blog:home')
@@ -112,13 +112,6 @@ def confirmEmail_and_activateUser(request,uidb64,token):
 
 
 
-
-
-
-
-
-
-
 def user_login(request):
     if request.method == 'POST':
         form     = UserLoginForm(request.POST)
@@ -155,6 +148,7 @@ def user_login(request):
 
 
 
+
 @login_required(login_url='user:user-login')
 def user_logout(request):
     logout(request)
@@ -172,4 +166,3 @@ def my_profile(request):
         'profile' : profile,
     }
     return render(request,'user/profile.html',context)
-                  
