@@ -23,13 +23,13 @@ def home_view(request):
 
 
 
-def home_filter_category(request,catname):
+def home_filter_category(request,catslug):
     categories = Category.objects.all()
     tags       = Tag.objects.all()
     posts      = Post.objects.all()
        
-    if catname != None:
-       posts = posts.filter(category__name=catname)
+    if catslug != None:
+       posts = posts.filter(category__slug=catslug)
       
     context ={
         'categories' : categories,
@@ -40,16 +40,15 @@ def home_filter_category(request,catname):
 
 
 
-def home_filter_tag(request,tagid):
+def home_filter_tag(request,tagslug):
     categories = Category.objects.all()
     tags       = Tag.objects.all()
     posts = Post.objects.all()
-    if tagid :
-        print(tagid)
-        posts = posts.filter(tags=tagid)
+    if tagslug :
+        print(tagslug)
+        posts = posts.filter(tags__slug=tagslug)
         print(posts)    
-       
-           
+             
     context ={
         'categories' : categories,
         'tags'       : tags,
