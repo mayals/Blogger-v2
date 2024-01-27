@@ -24,7 +24,7 @@
 <br>
 <div class='container'>
         <div class="card">
-            <div class="card-header text-center ">Ctegories</div>
+            <div class="card-header text-center ">Ctegories({{ categories.count }})</div>
                 <div class="row card-body justify-content-between m-1">
                         {% for cat in categories %}
                         
@@ -92,7 +92,7 @@
         <div class="col-md-4">
                 <!--Start tags-->
                 <div class="card text-dark bg-light mb-3">
-                    <div class="card-header text-center">Tags</div>
+                    <div class="card-header text-center">Tags({{ tags.count }})</div>
                     <div class="card-body">
                         {% for tag in tags %}
                         <a type="button" href="{% url 'blog:home-filter-tag' tagslug=tag.slug %}"  class="btn btn-secondary m-1" >
@@ -115,7 +115,7 @@
 
                 <!--Start category names -->
                 <div class="card text-dark bg-light mb-3">
-                    <div class="card-header text-center">Categories</div>
+                    <div class="card-header text-center">Categories({{ categories.count }})</div>
                     <div class="card-body">
                         {% for cat in categories %}
                         <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-info m-1" >
