@@ -23,13 +23,13 @@ def home_view(request):
 
 
 
-def home_filter_category(request,categoryid):
+def home_filter_category(request,catname):
     categories = Category.objects.all()
     tags       = Tag.objects.all()
     posts      = Post.objects.all()
        
-    if categoryid != None:
-       posts = posts.filter(category__id=categoryid)
+    if catname != None:
+       posts = posts.filter(category__name=catname)
       
     context ={
         'categories' : categories,
