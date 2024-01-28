@@ -6,7 +6,7 @@ from .forms import PostForm, CommentForm
 
 
 def home_view(request):
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('-posts_count')
     tags       = Tag.objects.all()
     posts      = Post.objects.all()
     
@@ -17,14 +17,15 @@ def home_view(request):
     context ={
         'categories' : categories,
         'tags'       : tags,
-        'posts'      : posts,    
+        'posts'      : posts,
+       
     }
     return render(request,'blog/home.html', context)
 
 
 
 def home_filter_category(request,catslug):
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('-posts_count')
     tags       = Tag.objects.all()
     posts      = Post.objects.all()
        
@@ -41,7 +42,7 @@ def home_filter_category(request,catslug):
 
 
 def home_filter_tag(request,tagslug):
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('-posts_count')
     tags       = Tag.objects.all()
     posts = Post.objects.all()
     if tagslug :
@@ -91,7 +92,7 @@ def post_create(request):
 def post_detail(request,slug):
     # Post
     post = get_object_or_404(Post,slug=slug) 
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('-posts_count')
     tags = Tag.objects.all()
     
     # post_views_count

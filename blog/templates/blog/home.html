@@ -26,7 +26,7 @@
         <div class="card">
             <div class="card-header text-center ">Ctegories({{ categories.count }})</div>
                 <div class="row card-body justify-content-between m-1">
-                        {% for cat in categories %}
+                        {% for cat in con_categories %}
                         
                             <div class='col-lg-2 col-md-6 col-sm-6 col-xs-6 rounded d-flex justify-content-center'>
                                 {% if cat.icon %}
@@ -149,7 +149,7 @@
                     <div class="card-header text-center">Tags({{ tags.count }})</div>
                     <div class="card-body">
                         {% for tag in tags %}
-                        <a type="button" href="{% url 'blog:home-filter-tag' tagslug=tag.slug %}"  class="btn btn-secondary m-1" >
+                        <a type="button" href="{% url 'blog:home-filter-tag' tagslug=tag.slug %}"  class="btn btn-outline-dark m-1" >
                             #{{ tag.slug }} <span class="badge bg-warning">{{tag.get_tag_posts.count}}</span>
                         </a>
                         {% empty %}
@@ -166,13 +166,44 @@
                     <br>
              
 
+                <!--Start top views posts  -->
+                <div class="card text-center text-dark bg-light mb-3">
+                    <div class="card-header">Top Views Posts</div>
+                    <div class="card-body">
+                        {% for post in con_topposts %}
+                            <div class="card">
+                                <a href="{% url 'blog:post-detail' slug=post.slug %}">
+                                    {% if post.photo %}
+                                    <img class="card-img-top img-fluid" src="{{post.photo.url}}" width="100" height="250" alt="{{post.title}}">
+                                    {% else %}
+                                    <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="100" height="250" alt="{{post.title}}">
+                                    {% endif %}
+                                    <div class="card-body">
+                                    <p class="card-text">{{ post.title }}</p>
+                                    </div>
+                                </a>
+                            </div>  
+                            <br>
+                        {% empty %}
+                        <div class="border p-3 mb-3">
+                            <p>No Post!</p> 
+                        </div>
+                        {% endfor %}
+                      
+                    </div>
+                    
+                </div>
+                <!-- End  top views posts-->
+                
+                <br>
+                <br>
 
                 <!--Start category names -->
                 <div class="card text-dark bg-light mb-3">
                     <div class="card-header text-center">Categories({{ categories.count }})</div>
                     <div class="card-body">
                         {% for cat in categories %}
-                        <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-secondary m-1" >
+                        <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-outline-dark m-1" >
                             {{ cat.name }} <span class="badge bg-warning">{{ cat.get_category_posts.count }}</span>
                         </a>
                             {% empty %}
@@ -183,7 +214,10 @@
                     </div>
                 </div>
                 <!-- End category names-->
-        </div>
+       
+       
+       
+            </div>
         
     </div>
 </section>
