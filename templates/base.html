@@ -67,6 +67,16 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Categories
+                </a>
+                <ul class="dropdown-menu">
+                  {% for cat in con_categories %} 
+                  <li><a  class="dropdown-item" href="#">{{ cat.name }} - ({{cat.posts_category.count}})</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Account
                 </a>
                 <ul class="dropdown-menu">     
@@ -145,7 +155,11 @@
                                     <img src="{% static 'img/logo.png' %}"  width="150" height="150" alt="logo">
                                 </div>
                                 <p>
-                                   lab lab laa 
+                                  <ul>
+                                  {% for cat in con_categories %} 
+                                   <li><a href="#">{{ cat.name }}</a></li>
+                                  {% endfor %}
+                                  </ul>
                                 </p>
 
                             </div>
