@@ -126,7 +126,7 @@ def user_login(request):
             print('user='+ str(user))
             login(request,user)
             form = UserLoginForm()
-            messages.success(request,f'welcome back {user.get_user_fullname} you do success login successfully.')
+            messages.success(request,f'welcome back {user.get_user_fullname} you do login successfully.')
             return redirect('blog:home')
            
         
@@ -135,8 +135,8 @@ def user_login(request):
             return redirect('user:send-confirm-email-link-manuall')
         
         else:
-            messages.error(request,f'you not have account with this email and password , you can register to get account')
-            return redirect('user:user-register')
+            messages.error(request,f'Error in email or password!')
+            return redirect('user:user-login')
             
     else:
         form = UserLoginForm()          

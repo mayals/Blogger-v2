@@ -1,14 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Contact Us</title>
-</head>
-<body>
-    <h2>Contact Us</h2>
-    <form method="POST" action="{% url 'pages:contact_us' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+<!-- start inlclude  'message' -->
+{% block messages %}
+   {% include 'blog/includes/messages.html' %}
+   {% endblock messages %}
+<!-- END inlclude  'message' -->
+
+
+
+{% block content %}
+<br><br>
+        <section class='bg-light container'>
+            <div class='row justify-content-center'>
+                <div class="col-md-10 col-sm-11 border rounded border-secondary p-3 m-5 back-ggg">
+                    <form method="POST" action="{% url 'pages:contact_us' %}" novalidate>
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class='d-flex justify-content-end'>
+                        <button type="submit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+{% endblock content %}
