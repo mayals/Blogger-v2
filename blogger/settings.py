@@ -238,7 +238,7 @@ DATABASES = {
     #     conn_max_age=600    
     #     )
 }
-print(DATABASES)
+#print(DATABASES)
 
 
 

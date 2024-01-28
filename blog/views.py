@@ -45,9 +45,8 @@ def home_filter_tag(request,tagslug):
     tags       = Tag.objects.all()
     posts = Post.objects.all()
     if tagslug :
-        print(tagslug)
         posts = posts.filter(tags__slug=tagslug)
-        print(posts)    
+    
              
     context ={
         'categories' : categories,
@@ -65,7 +64,7 @@ def post_create(request):
     form = PostForm()
     if request.method == 'POST' :
         form = PostForm(request.POST, request.FILES)
-        print(request.POST)
+      
         if form.is_valid():
             post = form.save(commit = False)
             
@@ -91,9 +90,23 @@ def post_create(request):
 
 def post_detail(request,slug):
     # Post
-    post = get_object_or_404(Post, slug= slug) 
+    post = get_object_or_404(Post,slug=slug) 
     categories = Category.objects.all()
     tags = Tag.objects.all()
+    
+    # post_views_count
+    # Get the session key for this post
+    my_session_key = 'session_key_for_post_id_{}'.format(post.id)
+    print(my_session_key)
+    # Check if the session key exists in the session
+    if not request.session.get(my_session_key,False):
+        print("key not exist")
+        # If the session key doesn't exist in request.session, increment views_count and set the session key
+        post.views_count += 1
+        post.save()
+        request.session[my_session_key] = True
+        print(request.session[my_session_key])
+    
     
     # CommentForm
     form = CommentForm()
@@ -132,7 +145,6 @@ def post_update(request,slug):
         form= PostForm(instance=post)
         if request.method == 'POST':
             form = PostForm(request.POST,request.FILES,instance=post)
-            print(form) 
             if form.is_valid():
                 updated_post = form.save(commit = False)
                 updated_post.author = request.user

@@ -58,7 +58,8 @@ class Post(models.Model):
     author       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_user')
     category     = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts_category')
     tags         = models.ManyToManyField(Tag)
-    likes        = models.ManyToManyField(UserModel, related_name='post_users')
+    views_count  = models.PositiveIntegerField(default=0, blank=True)
+    likes        = models.ManyToManyField(UserModel, related_name='post_users', blank=True)
     is_published = models.BooleanField(default=True)          
     created_at   = models.DateTimeField(auto_now_add=True)
     updated_at   = models.DateTimeField(auto_now=True)
@@ -79,7 +80,7 @@ class Post(models.Model):
     @property
     def get_user(self):
         user = UserModel.objects.get(email=self.author)
-        print('user=',user)
+        #print('user=',user)
         return user 
          
     @property
