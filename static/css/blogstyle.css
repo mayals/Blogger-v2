@@ -12,7 +12,22 @@
     background-color: #d9dbcc !important;
 }
 
+.bg-color{
+    background-color: #ffffff;
+}
 
+
+
+
+
+.my-button{
+  position:absolute;
+  top:2px;
+  right:2px;
+  z-index:3;
+  /* width:100px;
+  height:30px; */
+}
 
 
 .back-image {
@@ -23,3 +38,5 @@
     /*background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
   }
+
+

@@ -119,8 +119,8 @@ def user_login(request):
         password = request.POST.get('password')
         
         user = authenticate(request,username=email,password=password)
-        print(user)
-        user = UserModel.objects.get(email=email)
+        #print(user)
+        #user = UserModel.objects.get(email=email)
         print(user)
         if user is not None and user.is_confirmEmail == True :
             print('user='+ str(user))

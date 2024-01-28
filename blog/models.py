@@ -58,9 +58,11 @@ class Post(models.Model):
     author       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_user')
     category     = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts_category')
     tags         = models.ManyToManyField(Tag)
+    likes        = models.ManyToManyField(UserModel, related_name='post_users')
     is_published = models.BooleanField(default=True)          
     created_at   = models.DateTimeField(auto_now_add=True)
     updated_at   = models.DateTimeField(auto_now=True)
+    
 
     def __str__(self):
         return self.title
@@ -79,14 +81,14 @@ class Post(models.Model):
         user = UserModel.objects.get(email=self.author)
         print('user=',user)
         return user 
-        
-    @property
-    def get_post_category(self):
-        return  self.category
-        
+         
     @property
     def get_post_tags(self):
-        return self.tags
+        return self.tags.all()
+    
+    @property
+    def get_post_likes_count(self):
+        return self.likes.all().count()
     
     class Meta:
         ordering            = ['-created_at']

@@ -170,12 +170,21 @@ def post_delete_confirm(request,slug):
             'post' : post ,
         }
         return render(request,'blog/post_delete_confirm.html',context)
-
-        
+ 
     else:
         messages.warning(request,f"Sorry, you have no permission to delete this post, only post's author can delete it")
         return redirect('blog:home')
     
     
     
+def post_like_action(request,post_slug):
+    post = get_object_or_404(Post,slug=post_slug)
+    
+    if post.likes.filter(id=request.user.id).exists() == False :
+        post.likes.add(request.user)
         
+    else:
+        post.likes.remove(request.user)
+        
+    # post_likes_count=liked_post.count()       
+    return redirect('blog:post-detail', slug=post_slug)

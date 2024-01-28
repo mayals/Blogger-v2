@@ -17,15 +17,15 @@
 
 <section class='row m-1'>
 <div class='col-md-9'>
-        
+        <br><br>
         <!-- breadcrumb start -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a class='link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' href="{% url 'blog:home' %}">Home</a></li>
-              <li class="breadcrumb-item"><a class='link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' href="#">{{post.category}}</a></li>
+              <li class="breadcrumb-item"><a class='link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' href="{% url 'blog:home-filter-category' catslug=post.category.slug %}">{{post.category}}</a></li>
               <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
             </ol>
-          </nav>
+        </nav>
         <!-- breadcrumb end -->
       
         
@@ -63,7 +63,7 @@
                     <span  class="position-relative">
                         <i class="fa-regular fa-heart fa-lg" style="color:#EF4990"></i> 
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
-                            <text class='text-light'>{{ post.comments.all.count }}<text>
+                            <text class='text-light'>{{ post.get_post_likes_count }}<text>
                             <span class="visually-hidden">likes</span>
                         </span>
                     </span>
@@ -94,7 +94,7 @@
             <!-- start category -->
             <div  class="rounded-end-circle border-start border-5 border-secondary text-dark mb-1 p-2">
                 <small>Category:</small> &nbsp
-                <a href="#"><span class="badge bg-secondary text-light">{{post.category}}</span></a>
+                <a href="{% url 'blog:home-filter-category' catslug=post.category.slug %}"><span class="badge bg-secondary text-light">{{post.category}}</span></a>
             </div>   
             <!--end category -->
             
@@ -102,7 +102,7 @@
             <div  class="bg-light rounded-end-circle border-start border-5 border-warning text-dark  mb-1 p-2">
                 <small>Tags:</small>({{ post.tags.all.count }}): &nbsp
                 {% for tag in post.tags.all  %}
-                   <a href="#"><span class="badge bg-warning text-secondary">{{tag}}</span></a>
+                   <a href="{% url 'blog:home-filter-tag' tagslug=tag.slug %}"><span class="badge bg-warning text-secondary">{{tag}}</span></a>
                 {% endfor %}
             </div>   
             <!--end tags -->
@@ -116,7 +116,19 @@
                 <a class="btn btn-sm btn-danger m-2" href="{% url 'blog:post-delete-confirm' slug=post.slug  %}"><i class="fa-regular fa-trash-can"></i> Delete</a>
             </div>
             {% endif %}
-            <!--  end post button delete - edit -->    
+            <!--  end post button delete - edit --> 
+            
+            <!-- start like heart button action -->
+            {% if request.user.is_authenticated %}
+            <div class="d-flex justify-content-end">
+                {% if request.user not in post.likes.all %}
+                <a href="{% url 'blog:post-like' post_slug=post.slug  %}" class="btn btn-sm btn-light fs-5 m-2">🤍</a>  
+                {% else %}
+                <a href="{% url 'blog:post-like' post_slug=post.slug  %}" class="btn btn-sm btn-light fs-5 m-2">❤️</a>  
+                {% endif %}
+            </div>
+            {% endif %}
+            <!--  end like heart button action  -->    
         </div>
         <!-- post end-->
  <br>
@@ -170,7 +182,7 @@
             <div class="card-header text-center">Categories({{ categories.count }})</div>
             <div class="card-body">
                 {% for cat in categories %}
-                <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-info m-1" >
+                <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-secondary m-1" >
                     {{ cat.name }} <span class="badge bg-warning">{{ cat.get_category_posts.count }}</span>
                 </a>
                 {% empty %}
