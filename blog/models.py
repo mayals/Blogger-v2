@@ -16,13 +16,16 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=120, blank=True, null=True)
     icon = models.ImageField(verbose_name='Category Icon', default="img/cat_default.png", upload_to="blog/cat_img/%Y/%m/%d/", blank=True, null=True)
-    # posts_count = models.PositiveIntegerField(default=0, blank=True)
+    posts_count = models.PositiveIntegerField(default=0, blank=True)
     
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        
+        posts_count = Post.objects.filter(category=self).count()
+        self.posts_count = posts_count
         super().save(*args, **kwargs)
     
     
@@ -30,10 +33,8 @@ class Category(models.Model):
         posts = Post.objects.filter(category=self)
         return posts  
     
-    # @property
-    # def get_category_posts_count(self):
-    #     posts_count = Post.objects.filter(category=self).count()
-    #     return  self.posts_count   
+    
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
