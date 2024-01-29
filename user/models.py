@@ -4,6 +4,8 @@ from django.conf import settings
 from django.utils import timezone
 from django import forms
 
+# https://pypi.org/project/django-countries/
+from django_countries.fields import CountryField
 
 # https://django-phonenumber-field.readthedocs.io/en/latest/#
 # https://django-phonenumber-field.readthedocs.io/en/latest/reference.html#phonenumber_field.modelfields.PhoneNumberField
@@ -80,7 +82,9 @@ class UserModel(AbstractUser, PermissionsMixin):
 
 
 
-
+class GenderType(models.TextChoices):
+    MALE   = 'Male'
+    FEMALE = 'Female'
 
 
 class Profile(models.Model):
@@ -89,12 +93,12 @@ class Profile(models.Model):
     bio             = models.TextField(blank=True, null=True)
     profile_pic     = models.ImageField(verbose_name='Profile Picture', upload_to="profile/%Y/%m/%d/", blank=True, null=True)
     date_of_birth   = models.DateField(blank=True, null=True)
-    gender          = models.CharField(max_length=10, blank=True, null=True)
+    gender          = models.CharField(max_length=60, choices=GenderType.choices, default=GenderType.MALE)
     website         = models.URLField(max_length = 255, null=True, blank=True)
-    phone_number    = PhoneNumberField(blank=True, null=True)
+    phone_number    = PhoneNumberField(null=True, blank=False)
     created_at      = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at      = models.DateTimeField(auto_now_add=False, auto_now=True)
-    country         = models.CharField(max_length=50, blank=True, null=True)
+    country         = CountryField(blank_label="(select country)", multiple=False)
     # state           = models.CharField(max_length=50, blank=True, null=True)
     # city            = models.CharField(max_length=50, blank=True, null=True)
     #address         = models.CharField(max_length=100, blank=True, null=True)

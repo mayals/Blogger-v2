@@ -81,15 +81,23 @@ INSTALLED_APPS = [
     # https://github.com/django-crispy-forms/crispy-bootstrap5?tab=readme-ov-file
     "crispy_forms",
     "crispy_bootstrap5",
-    
-    
-    
-    
+     
     # django-ckeditor
     # https://pypi.org/project/django-ckeditor/
     # https://pypi.org/project/django-ckeditor/#installation
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
+    
+    
+    # pip install django-bootstrap-datepicker-plus
+    # https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/Getting_Started.html#install
+    "bootstrap_datepicker_plus",
+   
+   
+   # pip install django-countries
+   # https://pypi.org/project/django-countries/
+   "django_countries",
+   
 ]
 
 MIDDLEWARE = [

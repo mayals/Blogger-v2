@@ -14,6 +14,7 @@ urlpatterns = [
     path('confirm-email/<uidb64>/<str:token>/',views.confirmEmail_and_activateUser, name='confirmEmail_and_activateUser'),
     path('send_confirm_email_link_manuall/',views.send_confirm_email_link_manuall, name='send-confirm-email-link-manuall'),
 
-    path('my_profile/',views.my_profile, name='my-profile')
+    path('my_profile/',views.my_profile, name='my-profile'),
+    path('my_profile_usermodel_update/',views.my_profile_usermodel_update, name='my-profile-usermodel-update')
 ]   
         

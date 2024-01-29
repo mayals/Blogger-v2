@@ -7,9 +7,9 @@
 <!-- https://pypi.org/project/django-bootstrap-v5/ -->
 <!-- https://www.w3schools.com/django/django_add_bootstrap5.php -->
  {% load bootstrap5 %}
- {% bootstrap_css %}
+ 
  {% bootstrap_javascript %}
-
+ {% bootstrap_css %}
 
 <!--Start Head-->
 <head>
@@ -22,6 +22,8 @@
     <title>Bloger</title>
     {% endif %}
   
+  
+    
     <!--   https://fontawesome.com/docs/web/use-with/python-django#add-the-font-awesome-free-requirement-and-app    -->
     <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
@@ -31,10 +33,16 @@
     <link href="{% static 'css/blogstyle.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/userstyle.css' %}" rel="stylesheet" type="text/css">
     
+    
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    
     <!--https://ahrefs.com/blog/canonical-tags/-->
     <link rel="canonical" href=“https://codingloversblog.blogspot.com/” />
 
-</head>
+    
+  </head>
 <!--End Head-->
 
 <!--Start Body-->
@@ -204,6 +212,8 @@
     </footer>
 
 
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </body>
 
 </html>

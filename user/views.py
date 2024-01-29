@@ -9,7 +9,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.http import urlsafe_base64_decode
 from blogger.settings import DEFAULT_FROM_EMAIL
 from django.utils.encoding import smart_bytes
-from .forms import UserModelForm, UserLoginForm,EmailForm
+from .forms import UserModelForm, UserLoginForm, EmailForm, ProfileUpdateForm, UserModelUpdateForm
 from django.utils.encoding import smart_str
 from .models import UserModel,Profile 
 
@@ -166,3 +166,28 @@ def my_profile(request):
         'profile' : profile,
     }
     return render(request,'user/profile.html',context)
+
+
+
+def my_profile_usermodel_update(request):
+    instance_user    = request.user
+    instance_profile = get_object_or_404(Profile, user=instance_user)
+    
+    userform    = UserModelUpdateForm(instance=instance_user)
+    profileform = ProfileUpdateForm(instance=instance_profile)
+    
+    if request.method == 'POST' :
+        userform    = UserModelUpdateForm(request.POST, instance=instance_user)
+        profileform = ProfileUpdateForm(request.POST, instance=instance_profile)
+        if userform.is_valid() and  profileform.is_valid():
+           updated_user = userform.save()
+           update_profile = profileform.save()
+           messages.success(request,f'you update your profile and user successfully')
+           form = UserModelForm()
+           return redirect('user:my-profile')
+     
+    context = {
+        'userform'   : userform,
+        'profileform': profileform,
+    }
+    return render(request,'user/profile_usermodel_update.html',context)
