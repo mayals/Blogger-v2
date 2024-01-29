@@ -178,7 +178,7 @@ def my_profile_usermodel_update(request):
     
     if request.method == 'POST' :
         userform    = UserModelUpdateForm(request.POST, instance=instance_user)
-        profileform = ProfileUpdateForm(request.POST, instance=instance_profile)
+        profileform = ProfileUpdateForm(request.POST, request.FILES, instance=instance_profile)
         if userform.is_valid() and  profileform.is_valid():
            updated_user = userform.save()
            update_profile = profileform.save()
