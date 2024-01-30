@@ -16,6 +16,7 @@
 {% block content %}
 
 <section class='row m-1'>
+<h1 class="screen-reader-only">Post Detail page for Codes City- web development</h1>    
 <div class='col-md-9'>
         <br><br>
         <!-- breadcrumb start -->
@@ -30,7 +31,7 @@
       
         
     <section class='border border-secondary bg-light text-dark container mb-3'> 
-        <h1 class="p-3">{{post.title}}</h1>
+        <h2 class="p-3">{{post.title}}</h2>
             <div class='row'>
                 <div class='col-md-auto d-flex justify-content-start align-items-center'>
                     {% if post.get_user.profile.profile_pic %}

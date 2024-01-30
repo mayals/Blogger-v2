@@ -14,61 +14,45 @@
 
 
 {% block content %}    
-    <div class="my-form container p-5 my-5 rounded border border-warning">
-      
-            <h2 class="text-center"> Profile {{profile.user.get_user_fullname}}</h2>
-            <hr>
+<section class="my-form container p-5 my-5 rounded border border-warning">
+      <br><br><br>
+     <h1 class="screen-reader-only">Profile Codes City-Web Development, Django, Django Rest Framework.</h1> 
+     <h2 class='text-center'>Profile {{profile.user.get_user_fullname}}</h2>
+      <hr>
+        <div>
+          
+            <div class="row p-5">
 
-            <section>
-                
-                  <div class="row p-5">
-
-                    <div class="card mb-3 w-100" >
-                      <div class="row no-gutters">
-                        {% if profile.profile_pic  %}
-                          <div class="col-md-4">
-                            <img src="{{ profile.profile_pic.url }}" class="card-img img-thumbnail" alt={{profile.user.get_user_fullname}}>
-                          </div>
-                        {% else %} 
-                          <div class="col-md-4">
-                            <img src="{% static 'img/profile_default.webp' %}" class="card-img img-thumbnail" alt={{profile.user.get_user_fullname}}>
-                          </div> 
-                        {% endif %}
-                        <div class="col-md-8">
-                          <div class="card-body">
-                            <h5 class="card-title" ><span class="font-weight-bolder">First Name : </span>{{profile.user.first_name}}</h5>
-                            <h5 class="card-title" ><span class="font-weight-bolder">Last Name : </span>{{profile.user.last_name}}</h5>
-                            <hr>
-                            <p class="card-text"><span class="font-weight-bolder">Bio : </span>{{profile.bio}}</p>
-                                              
-                            <p class="card-text"><span class="font-weight-bolder">Gender : </span>{{profile.gender}}</p> 
-                            <hr>                           
-                            <p class="card-text"><span class="font-weight-bolder">Phone Number : </span>{{profile.phone_number}}</p>                           
-                            <hr>                           
-                            <p class="card-text"><span class="font-weight-bolder">created at : </span>{{profile.created_at}}</p>
-                            <hr>                           
-                            <p class="card-text"><span class="font-weight-bolder">Updated at : </span>{{profile.updated_at}}</p>
-                            <hr>                           
-                            <p class="card-text"><span class="font-weight-bolder">Website : </span>{{profile.website }}</p>
-                            <hr>                           
-                            <p class="card-text"><span class="font-weight-bolder">Country : </span>{{profile.country }}</p>
-
-                            
-                          </div>
-                          
-                        </div>
-                        <a type="link" class="btn btn-secondary btn-block" href="{% url 'user:my-profile-usermodel-update' %}" role="button"><span class="text-center">Update My Profile</span></a>
-                      </div>
+              <div class="card mb-3 w-100" >
+                <div class="row no-gutters">
+                  {% if profile.profile_pic  %}
+                    <div class="col-md-4">
+                      <img src="{{ profile.profile_pic.url }}" class="card-img img-thumbnail" width="250px" height="250px" alt={{profile.user.get_user_fullname}}>
                     </div>
+                  {% else %} 
+                    <div class="col-md-4">
+                      <img src="{% static 'img/profile_default.webp' %}" class="card-img img-thumbnail"  width="250px" height="250px" alt={{profile.user.get_user_fullname}}>
+                    </div> 
+                  {% endif %}
+                  <div class="col-md-8">
+                    <div class="card-body">
+                          <h3 class="card-title"><span class="font-weight-bolder">First Name : </span>{{profile.user.first_name}}</h3>
+                          <h3 class="card-title"><span class="font-weight-bolder">Last Name : </span>{{profile.user.last_name}}</h3>
+                          <h3 class="card-text"><span class="font-weight-bolder">Bio : </span>{{profile.bio}}</h3>                 
+                          <h3 class="card-text"><span class="font-weight-bolder">Gender : </span>{{profile.gender}}</h3>                           
+                          <h3 class="card-text"><span class="font-weight-bolder">Phone Number : </span>{{profile.phone_number}}</h3>                                  
+                          <h3 class="card-text"><span class="font-weight-bolder">created at : </span>{{profile.created_at}}</h3>                     
+                          <h3 class="card-text"><span class="font-weight-bolder">Updated at : </span>{{profile.updated_at}}</h3>                           
+                          <h3 class="card-text"><span class="font-weight-bolder">Website : </span>{{profile.website }}</h3>
+                          <h3 class="card-text"><span class="font-weight-bolder">Country : </span>{{profile.country }}</h3>
+                    </div>
+                    </div>
+                      <a type="link" class="btn btn-secondary btn-block" href="{% url 'user:my-profile-usermodel-update' %}" role="button"><span class="text-center">Update My Profile</span></a>
+                    </div>
+              </div>
 
-                  </div>
-                
-            </section>
-        
-
-        
-
-    </div>
-
-
+            </div>
+          
+        </div>
+</section>
 {% endblock %}

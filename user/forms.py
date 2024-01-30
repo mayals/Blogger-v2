@@ -21,7 +21,7 @@ class UserModelForm(forms.ModelForm):
         
         
     # https://docs.djangoproject.com/en/5.0/topics/auth/customizing/#a-full-example
-    def clean_password2(self):
+    def clean_(self):
         password1 = self.cleaned_data.get('password1')
         password = self.cleaned_data.get('password')
         if not password:

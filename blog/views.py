@@ -163,6 +163,7 @@ def post_update(request,slug):
         return redirect('blog:home')
     
     context ={
+        'post':post,
         'form' : form ,
     }
     return render(request,'blog/post_update.html',context)
