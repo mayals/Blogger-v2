@@ -22,13 +22,15 @@ def user_create(request):
            new_user = form.save(commit= False)
            password = form.cleaned_data['password']
            new_user.set_password(password)
+           new_user.is_active = True
+           new_user.is_confirmEmail = False
            new_user.save()     # here new user is saved in database
            first_name = form.cleaned_data['first_name']
            last_name  = form.cleaned_data['last_name']
            email      = form.cleaned_data['email']
-           messages.success(request,f'welcome( {first_name} {last_name} ), please go to your email {email} to comlete the registeration')
+           messages.success(request,f'welcome( {first_name} {last_name} ), please go to your email ({email}) to complete the registeration and you could login')
            form = UserModelForm()
-           return redirect('blog:home')
+           return redirect('user:user-login')
        
         else:
             messages.error(request,f'user not created! please complete those fields below.!')
@@ -43,20 +45,23 @@ def user_create(request):
 
 # this function to send confim link to email of user manullay after user want of confirm his email
 def send_confirm_email_link_manuall(request):
-    
         if request.method == 'POST' :
             form = EmailForm(request.POST)
             if form.is_valid():
-               email    = request.POST.get('email')      
+               email = request.POST.get('email')      
                users = UserModel.objects.all()
                for user in users :
-                    if user.email == email :
-                        user = user     
-                        if user is not None and user.is_confirmEmail == False :
+                   print(user)
+                   if user.email == email :
+                        user = user 
+                        print('user='+ str(user))    
+                        if user is not None and user.is_confirmEmail == False and user.is_active == True:
                             try:    
                                 subject = 'Confirm Your Email Address'
                                 from_email = DEFAULT_FROM_EMAIL    # load_dotenv() - this work her to bring this variable value from file .env
+                                print('from_email='+ str(from_email))
                                 to_email = user.email
+                                print('to_email='+ str(to_email)) 
                                 message = render_to_string('user/email_confirmation.html', 
                                                                                         {
                                                                                         'user'  : user,
@@ -125,9 +130,9 @@ def user_login(request):
         password = request.POST.get('password')
         print(email)
         print(password)
-        user=authenticate(username=email, password=password)
+        user=authenticate(username=email, password=password) #this user is found result only if user.is_active=True
         print('user='+ str(user))
-        if user is not None and user.is_confirmEmail == True :
+        if user is not None and user.is_confirmEmail == True and user.is_active == True :
             print('user='+ str(user))
             login(request,user)
             form = UserLoginForm()
@@ -135,7 +140,7 @@ def user_login(request):
             return redirect('blog:home')
            
         
-        if user is not None and user.is_confirmEmail == False:
+        if user is not None and user.is_confirmEmail == False and user.is_active == True :
             messages.error(request,f'email or password not correct, or your email not confirm')
             return redirect('user:send-confirm-email-link-manuall')
         

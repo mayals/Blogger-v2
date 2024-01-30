@@ -1,31 +1,34 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Confirm Your Email Address by click on this button</title>
-    </head>
-    <body>
-        <h2>Hello {{ user.first_name }},</h2>
-        <p>Welcome to CodesCity! Please confirm your email address by clicking on the following link:</p>
-        
-        <form method="POST" enctype='multipart/form-data' novalidate>
-            {% csrf_token %}
 
-        
-            {{ form }}
+<!-- start inlclude  'message' -->
+{% block messages %}
+{% include 'blog/includes/messages.html' %}
+{% endblock messages %}
+<!-- END inlclude  'message' -->
 
-            <div class='d-flex justify-content-between'>
-                <button type="submit" class="btn btn-success">CONFIRM EMAIL</button>
-            </div>
-         
-        </form>
 
+{% block content %}
+<section class='bg-light container'>
+    <br><br><br>
+    <h1 class="screen-reader-only">Send email confirm link to email {{ user.email }}.</h1> 
+        <p>Hello {{ user.first_name }},</p>
+        <p class='text-center'>Please enter your email here and click confirm to get email confirmation link</p>
+        <br>
+            <form method="POST"  novalidate>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class='d-flex justify-content-between'>
+                    <button type="submit" class="btn btn-success">Send link to my email</button>
+                </div>
+            </form>
+        <br>
         <p>Please go to your emaill {{ user.email }} and press link to confirm it.</p>
-        
+        <br>
         
         <p>Best regards,</p>
         <p>The CodesCity Team</p>
-    </body>
-</html>
-
+    
+</section>
+{% endblock content %}
