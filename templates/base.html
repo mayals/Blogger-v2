@@ -188,6 +188,8 @@
                                 <ul>
                                 {% for cat in con_categories %} 
                                  <li><a class="text-white-50" href="{% url 'blog:home-filter-category'  catslug=cat.slug  %}">{{ cat.name }}</a></li>
+                                 {% empty %}
+                                 <li>No Category</li>
                                 {% endfor %}
                                 </ul>
                             </div>

@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-# https://stackoverflow.com/questions/76897614/cannot-import-name-load-dotenv-from-dotenv-with-django-docker
+
 # https://pypi.org/project/python-dotenv/
 from dotenv import load_dotenv
-load_dotenv()  # take environment variables from .env. 
+load_dotenv()          # take environment variables from .env.  
 
 
 # https://pypi.org/project/django-database-url/
@@ -47,7 +47,10 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [ 'project.onrender.com',
+                  '127.0.0.1',
+                  'localhost'
+]
 
 
 
@@ -225,37 +228,46 @@ TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
 
 
 ############################################# Database settings ##############################################
+# Database
+# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# PRODUCTION
 # DATABASES = {
-#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'),conn_max_age=600,conn_health_checks=True)                                              
-# }
+    # Development
+    
+    #    'default': {
+    #       'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
+    #        'NAME': os.getenv('DB_NAME'),
 
-#https://django-environ.readthedocs.io/en/latest/quickstart.html 
+    #        'USER': os.getenv('DB_USER'),
+
+    #        'PASSWORD': os.getenv('DB_PASSWORD'),
+
+    #        'HOST': os.getenv('DB_HOST'),
+
+    #        'PORT': os.getenv('DB_PORT'),
+    #    }
+    
+    
+    # 'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': BASE_DIR / 'db.sqlite3',
+    #}
+   
+#}
 import environ
 env = environ.Env()
 environ.Env.read_env()
 
+
+# PRODUCTION
 DATABASES = {
-    'default': dj_database_url.parse(
-           'postgres://blogger_db_ca0j_user:aOBm5pIJEWzj6YczxXrhpbQwuM5aArYQ@dpg-cmslkaacn0vc73bjkh40-a.oregon-postgres.render.com/blogger_db_ca0j',
-            conn_max_age=600,
-            conn_health_checks=True,
-    )
- }
+    'default': dj_database_url.config('postgres://blogger_db_ca0j_user:aOBm5pIJEWzj6YczxXrhpbQwuM5aArYQ@dpg-cmslkaacn0vc73bjkh40-a.oregon-postgres.render.com/blogger_db_ca0j',conn_max_age=600,conn_health_checks=True)
+}
 print(DATABASES)
 
 
 
-
-# DATABASES = {
-#     'default': dj_database_url.parse(
-#         'postgres://...',
-#         conn_max_age=600,
-#         conn_health_checks=True,
-#     )
-# }
 
 
 
