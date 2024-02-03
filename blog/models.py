@@ -11,6 +11,7 @@ from ckeditor.fields import RichTextField
 from shortuuid.django_fields import ShortUUIDField 
 
 
+from django_ckeditor_5.fields import CKEditor5Field
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -59,7 +60,7 @@ class Post(models.Model):
     id           = ShortUUIDField(primary_key=True, unique=True, length=6, max_length=6, editable=False)
     title        = models.CharField(max_length=200)
     slug         = models.SlugField(max_length=120, blank=True, null=True)
-    content      = RichTextField()
+    content      = CKEditor5Field('Text', config_name='extends')
     photo        = models.ImageField(verbose_name='Post Image', upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
     author       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_user')
     category     = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts_category')

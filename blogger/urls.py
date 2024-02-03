@@ -28,10 +28,18 @@ urlpatterns = [
    path('pages/', include('pages.urls')),
    
    # https://pypi.org/project/django-ckeditor/#installation
-   path('ckeditor/', include('ckeditor_uploader.urls')),
+   # path('ckeditor/', include('ckeditor_uploader.urls')),
+   
+   # https://pypi.org/project/django-ckeditor-5/
+   path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
 ]
 
 
 urlpatterns += staticfiles_urlpatterns()
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# if settings.DEBUG:
+#     urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

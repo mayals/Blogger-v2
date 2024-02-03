@@ -7,6 +7,7 @@ Django==4.2.9
 django-bootstrap-datepicker-plus==5.0.5
 django-bootstrap-v5==1.0.11
 django-ckeditor==6.7.0
+django-ckeditor-5==0.2.11
 django-countries==7.5.1
 django-crispy-forms==2.1
 django-database-url==1.0.3

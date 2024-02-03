@@ -1,6 +1,6 @@
 from django import forms
 from .models import Post,Comment
-from ckeditor.widgets import CKEditorWidget
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 
 class PostForm(forms.ModelForm):
@@ -11,7 +11,14 @@ class PostForm(forms.ModelForm):
                               widget  = forms.TextInput(attrs = {'class':'form-control',}),
                               )
    
-    content = forms.CharField(widget=CKEditorWidget())
+   #  content = forms.CharField(widget=CKEditorWidget())
+    
+    
+    widgets = {
+            "content": CKEditor5Widget(
+                attrs={"class": "django_ckeditor_5"}, config_name="extends"
+            )
+        }
    
    
     # content = forms.CharField(label='Content',
@@ -21,7 +28,14 @@ class PostForm(forms.ModelForm):
     #                                                       'class':'form-control',
     #                                                     'placeholder': 'write post .. '
     #                                                     }))
+
     
+    
+    # widgets = {
+        #     "text": CKEditor5Widget(
+        #         attrs={"class": "django_ckeditor_5"}, config_name="extends"
+        #     )
+        # }
     
     class Meta:
             model   = Post

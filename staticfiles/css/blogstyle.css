@@ -1,0 +1,42 @@
+.screen-reader-only {
+    background-color: red !important;
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.back-ggg {
+    background-color: #d9dbcc !important;
+}
+
+.bg-color{
+    background-color: #ffffff;
+}
+
+
+
+
+
+.my-button{
+  position:absolute;
+  top:2px;
+  right:2px;
+  z-index:3;
+  /* width:100px;
+  height:30px; */
+}
+
+
+.back-image {
+    background-image: url("../img/back_white.webp"); /* The image used */
+    background-color: #dfe3f4; /* Used if the image is unavailable */
+    height: 500px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    /*background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+  }
+
+
