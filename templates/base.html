@@ -16,14 +16,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="home page that display all posts"/>
+    
     {% if title %}
     <title>Bloger | {{title}}</title>
     {% else %}
     <title>Bloger</title>
     {% endif %}
   
-  
-    
     <!--   https://fontawesome.com/docs/web/use-with/python-django#add-the-font-awesome-free-requirement-and-app    -->
     <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
@@ -36,127 +35,119 @@
      <!-- https://www.letscodemore.com/blog/how-to-add-ckeditor5-in-django/ -->
     <link href="{% static 'django_ckeditor_5/dist/styles.css' %}" type="text/css" media="all" rel="stylesheet">
     <script src="{% static 'django_ckeditor_5/dist/bundle.js' %}"></script>
-    <body> 
 
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    
     <!--https://ahrefs.com/blog/canonical-tags/-->
     <link rel="canonical" href=“https://codingloversblog.blogspot.com/” />
 
-    
-  </head>
+  
+    <!--https://search.google.com/search-console?utm_source=about-page&resource_id=sc-domain:codingloversblog.blogspot.com -->
+    <meta name="google-site-verification" content="a9_0yAa_ML2XH9TQdQ1gNQUI1N28vWJQnv51bs65zFU" /> 
+
+</head>
 <!--End Head-->
 
 <!--Start Body-->
 <body class='bg-color'>
-<header>
-    <!--Start Navbar-->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="{% url 'blog:home' %}">
-            <img class='rounded-circle' src="{% static 'img/logo.png' %}" alt="logo"  width="45" height="45"> Codes City
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'blog:home' %}">Home</a>
-              </li>
-              {% comment %} 
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Topics
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Django</a></li>
-                  <li><a class="dropdown-item" href="#">Django Rest Framework</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">ReactJS</a></li>
-                </ul>
-              </li> 
-              {% endcomment %}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Categories
-                </a>
-                <ul class="dropdown-menu">
-                  {% for cat in con_categories %} 
-                  <li><a  class="dropdown-item" href="{% url 'blog:home-filter-category'  catslug=cat.slug  %}">{{ cat.name }} - ({{cat.posts_category.count}})</a></li>
-                  {% endfor %}
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Account
-                </a>
-                <ul class="dropdown-menu">     
-                  {% if request.user.is_authenticated %}
-                  <li><a class="dropdown-item" href="{% url 'user:my-profile' %}">Profile</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'user:user-logout' %}">Logout</a></li>
-                  {% else %}
-                  <li><a class="dropdown-item" href="{% url 'user:user-register' %}">Rgister</a></li>
-                  <li><a class="dropdown-item" href="{% url 'user:user-login' %}">Login</a></li>
-                  {% endif %}
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Privacy Police</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'pages:contact_us' %}">Contact</a>
-              </li>
-            </ul>
-            <span href="#">
-              {% if request.user.is_authenticated %}
-                {% if request.user.profile.profile_pic %}
-                  <a href="{% url 'user:my-profile' %}">
-                  <img class='rounded-circle  mb-1' src="{{ request.user.profile.profile_pic.url }}"  width="40" height="40" alt="{{request.user.first_name}}">
+  <header>
+      <!--Start Navbar-->
+      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'blog:home' %}">
+              <img class='rounded-circle' src="{% static 'img/logo.png' %}" alt="logo"  width="45" height="45"> Codes City
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'blog:home' %}">Home</a>
+                </li>
+                {% comment %} 
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Topics
                   </a>
-                  {% endif  %}
-              {% else %}
-                <img class='rounded-circle  mb-1' src="{% static 'img/profile_default.webp' %}"  width="40" height="40" alt="anonymous user">
-              {% endif %} 
-            </span>
-            &nbsp
-            <form method='GET' class="d-flex" role="search" action={% url 'blog:home' %}>
-              <input class="form-control me-2" type="search" placeholder="Search post by title .." aria-label="Search" name="sc" value="">
-              <button class="btn btn-outline-primary" type="submit">Search</button>
-            </form>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Django</a></li>
+                    <li><a class="dropdown-item" href="#">Django Rest Framework</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">ReactJS</a></li>
+                  </ul>
+                </li> 
+                {% endcomment %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categories
+                  </a>
+                  <ul class="dropdown-menu">
+                    {% for cat in con_categories %} 
+                    <li><a  class="dropdown-item" href="{% url 'blog:home-filter-category'  catslug=cat.slug  %}">{{ cat.name }} - ({{cat.posts_category.count}})</a></li>
+                    {% endfor %}
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Account
+                  </a>
+                  <ul class="dropdown-menu">     
+                    {% if request.user.is_authenticated %}
+                    <li><a class="dropdown-item" href="{% url 'user:my-profile' %}">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'user:user-logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a class="dropdown-item" href="{% url 'user:user-register' %}">Rgister</a></li>
+                    <li><a class="dropdown-item" href="{% url 'user:user-login' %}">Login</a></li>
+                    {% endif %}
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Privacy Police</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'pages:contact_us' %}">Contact</a>
+                </li>
+              </ul>
+              <span href="#">
+                {% if request.user.is_authenticated %}
+                  {% if request.user.profile.profile_pic %}
+                    <a href="{% url 'user:my-profile' %}">
+                    <img class='rounded-circle  mb-1' src="{{ request.user.profile.profile_pic.url }}"  width="40" height="40" alt="{{request.user.first_name}}">
+                    </a>
+                    {% endif  %}
+                {% else %}
+                  <img class='rounded-circle  mb-1' src="{% static 'img/profile_default.webp' %}"  width="40" height="40" alt="anonymous user">
+                {% endif %} 
+              </span>
+              &nbsp
+              <form method='GET' class="d-flex" role="search" action={% url 'blog:home' %}>
+                <input class="form-control me-2" type="search" placeholder="Search post by title .." aria-label="Search" name="sc" value="">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+              </form>
+            </div>
           </div>
-        </div>
-      </nav>
-    <!--End Navbar-->
-</header>  
-<br>
+        </nav>
+      <!--End Navbar-->
+  </header>  
+  <br>
 
-<!-- Strart Dynamic content -->
-<!-- start inlclude  'message' -->
-{% block messages %}
+  <!-- Strart Dynamic content -->
+  <!-- start inlclude  'message' -->
+  {% block messages %}
 
-{% endblock messages %}
-<!-- END inlclude  'message' -->
+  {% endblock messages %}
+  <!-- END inlclude  'message' -->
 
-{% block content %}
+  {% block content %}
 
-
-
-
-
-
-
-
-
-
-{% endblock content %}
-<!--  End Dynamic content -->
+  {% endblock content %}
+  <!--  End Dynamic content -->
     <footer class="bg-dark">
         <div class="container-fluid">
             <div class="row">
@@ -218,8 +209,6 @@
             </div>
         </div>
     </footer>
-
-
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </body>
