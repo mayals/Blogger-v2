@@ -202,3 +202,9 @@ def post_like_action(request,post_slug):
         
     # post_likes_count=liked_post.count()       
     return redirect('blog:post-detail', slug=post_slug)
+
+
+from django.views.generic import TemplateView
+
+def google_verification_view(request):
+    return TemplateView.as_view(template_name='google7a03622cb96e4f8f.html')(request)
