@@ -66,6 +66,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "django.contrib.sites",     # sitemaps
+    'django.contrib.sitemaps',  # sitemaps 
+
 
     # My local apps
    'blog.apps.BlogConfig',
@@ -108,6 +111,8 @@ INSTALLED_APPS = [
    "django_countries",
    
 ]
+
+SITE_ID = 1  # sitemap - we have only one site in our project, we can use 1.
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -532,6 +537,14 @@ CKEDITOR_5_CONFIGS = {
         },
     },
 }
+
+
+
+
+
+
+
+
 
 ############################################# messages.ERROR ##############################################
 # https://docs.djangoproject.com/en/4.2/ref/contrib/messages/
