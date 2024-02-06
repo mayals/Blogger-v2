@@ -89,9 +89,9 @@ def post_create(request):
 
 
 
-def post_detail(request,slug):
+def post_detail(request,post_slug):
     # Post
-    post = get_object_or_404(Post,slug=slug) 
+    post = get_object_or_404(Post,slug=post_slug) 
     categories = Category.objects.all().order_by('-posts_count')
     tags = Tag.objects.all()
     
@@ -120,7 +120,7 @@ def post_detail(request,slug):
            name = form.cleaned_data.get('name')
            messages.success(request,f'Thanks {name} , your comment added successfully !')
            form = CommentForm()
-           return redirect('blog:post-detail',slug=post.slug)        
+           return redirect('blog:post-detail',post_slug=post_slug)        
         
         else:
             messages.error(request,f'comment not add correctly, try again!')
@@ -140,8 +140,8 @@ def post_detail(request,slug):
 
 
 @login_required(login_url='user:user-login')
-def post_update(request,slug): 
-    post = get_object_or_404(Post, slug=slug)
+def post_update(request,post_slug): 
+    post = get_object_or_404(Post, slug=post_slug)
     if post.author == request.user :
         form= PostForm(instance=post)
         if request.method == 'POST':
@@ -152,7 +152,7 @@ def post_update(request,slug):
                 updated_post.save()
                 form.save_m2m() 
                 messages.success(request,f'Thanks ( {request.user.first_name} ), your post updated successfully !')
-                return redirect('blog:home')
+                return redirect('blog:post-detail', slug=post_slug)
             
             else:
                 form = PostForm(request.POST,request.FILES,instance=post)
@@ -201,7 +201,7 @@ def post_like_action(request,post_slug):
         post.likes.remove(request.user)
         
     # post_likes_count=liked_post.count()       
-    return redirect('blog:post-detail', slug=post_slug)
+    return redirect('blog:post-detail',post_slug=post_slug)
 
 
 from django.views.generic import TemplateView

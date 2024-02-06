@@ -82,7 +82,8 @@ class Post(models.Model):
     
     
     def get_absolute_url(self):
-        return reverse("post-detail", args=[str(self.slug)])
+         return reverse("blog:post-detail", kwargs={"post_slug": self.slug })
+        # return reverse("blog:post-detail", args=[str(self.slug)])
     
     @property
     def get_user(self):

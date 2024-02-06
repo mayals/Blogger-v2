@@ -28,7 +28,7 @@ urlpatterns = [
    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
    
    # https://docs.djangoproject.com/en/4.2/ref/contrib/sitemaps/#module-django.contrib.sitemaps
-   path("sitemap.xml/", sitemap, {"sitemaps":sitemaps}, name="django.contrib.sitemaps.views.sitemap")
+   path("sitemap.xml", sitemap, {"sitemaps":sitemaps}, name="django.contrib.sitemaps.views.sitemap")
 
 ]
 

@@ -79,7 +79,7 @@
                     <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="150" height="250" alt="{{post.title}}">
                 {% endif %}    
                 <div class="card-body pt-0">
-                    <a href="{% url 'blog:post-detail' slug=post.slug %}"><h2 class="card-title">{{post.title}}</h2></a>
+                    <a href="{{ post.get_absolute_url }}"><h2 class="card-title">{{post.title}}</h2></a>
                     <div class='row'>
                         <div class='col-md-auto d-flex justify-content-start align-items-center'>
                             {% if post.get_user.profile.profile_pic %}
@@ -127,7 +127,7 @@
                         </div>
                         <div>
                             <p class="card-text">
-                               {{  post.content|truncatewords:20|safe }}&nbsp<a href="{% url 'blog:post-detail' slug=post.slug %}" class='btn-light'>Read more</a>
+                               {{  post.content|truncatewords:20|safe }}&nbsp<a href="{{ post.get_absolute_url }}" class='btn-light'>Read more</a>
                             </p>
                         </div>   
                     </div>
@@ -172,7 +172,7 @@
                     <div class="card-body">
                         {% for post in con_topposts %}
                             <div class="card">
-                                <a href="{% url 'blog:post-detail' slug=post.slug %}">
+                                <a href="{{ post.get_absolute_url }}">
                                     {% if post.photo %}
                                     <img class="card-img-top img-fluid" src="{{post.photo.url}}" width="100" height="250" alt="{{post.title}}">
                                     {% else %}

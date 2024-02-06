@@ -205,7 +205,7 @@
     <div class="card-body">
         {% for post in con_topposts %}
             <div >
-                <a href="{% url 'blog:post-detail' slug=post.slug %}">
+                <a href="{{ post.get_absolute_url }}">
                     {% if post.photo %}
                     <img class="card-img-top" src="{{post.photo.url}}" width="50px" height="250" alt="{{post.title}}">
                     {% else %}
