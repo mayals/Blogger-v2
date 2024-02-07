@@ -233,37 +233,22 @@ TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
 
 
 ############################################# Database settings ##############################################
-
 # PRODUCTION
+#https://django-environ.readthedocs.io/en/latest/quickstart.html 
+from environ import Env
+env = Env()
+Env.read_env()
+
 # DATABASES = {
-#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'),conn_max_age=600,conn_health_checks=True)                                              
+#     'default': dj_database_url.parse('postgres://...',conn_max_age=600,conn_health_checks=True)
 # }
 
-
-#https://django-environ.readthedocs.io/en/latest/quickstart.html 
-import environ
-env = environ.Env()
-environ.Env.read_env()
 
 DATABASES = {
-    'default': dj_database_url.parse(
-           'postgres://blogger_db_ca0j_user:aOBm5pIJEWzj6YczxXrhpbQwuM5aArYQ@dpg-cmslkaacn0vc73bjkh40-a.oregon-postgres.render.com/blogger_db_ca0j',
-            conn_max_age=600,
-            conn_health_checks=True,
-    )
- }
-print(DATABASES)
+    'default': dj_database_url.parse(env('DATABASE_URL'), conn_max_age=600, conn_health_checks=True)
+    }
+# print(DATABASES)
 
-
-
-
-# DATABASES = {
-#     'default': dj_database_url.parse(
-#         'postgres://...',
-#         conn_max_age=600,
-#         conn_health_checks=True,
-#     )
-# }
 
 
 

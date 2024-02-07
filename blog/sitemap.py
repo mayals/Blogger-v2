@@ -23,7 +23,7 @@ class PostSitemap(Sitemap):
     
     # By default, location() calls get_absolute_url() on each object and returns the result.
     #def location(self, obj):
-        # return reverse('post-detail', kwargs={'slug':obj.slug})  # Replace 'post-detail' with your actual URL pattern name
+        # return reverse('post-detail', kwargs={'post_slug':obj.slug})  # Replace 'post-detail' with your actual URL pattern name
         return obj
     
     
