@@ -19,6 +19,7 @@ django-environ==0.11.2
 django-jazzmin==2.6.0
 django-js-asset==2.2.0
 django-phonenumber-field==7.3.0
+django-resized==1.0.2
 fontawesomefree==6.5.1
 gunicorn==21.2.0
 idna==3.6
