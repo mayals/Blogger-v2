@@ -1,9 +1,22 @@
 from django.contrib.sitemaps import Sitemap
+from django.db.models.base import Model
 from .models import Post,Category,Tag
-from django.shortcuts import reverse
+from django.urls import reverse
 
 
 # https://docs.djangoproject.com/en/4.2/ref/contrib/sitemaps/#sitemap-classes
+
+
+class StaticSitemap(Sitemap):
+    def items(self):
+        return ['blog:home']
+
+    def location(self,item):
+        return reverse(item)
+        
+        
+        
+        
 class PostSitemap(Sitemap):
     # changefreq and priority are class attributes corresponding to <changefreq> and <priority> elements, respectively. They can be made callable as functions, as lastmod was in the example.
     # changefreq: Indicates how often pages are expected to change (always, hourly, daily, weekly, monthly, yearly, never).
@@ -15,7 +28,7 @@ class PostSitemap(Sitemap):
     # items() is a method that returns a sequence or QuerySet of objects. 
     # The objects returned will get passed to any callable methods corresponding to a sitemap property (location, lastmod, changefreq, and priority).
     def items(self):
-        return Post.objects.filter(is_published=True)
+        return Post.objects.filter(is_published=True)[:100]
     
     # lastmod should return a datetime.
     def lastmod(self, obj):

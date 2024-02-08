@@ -60,9 +60,13 @@ def send_confirmation_email(sender, instance, created, **kwargs):
 # receiver =   create_user_profile         --------  to creat new UserProfile in database table for the new registerd user 
 @receiver(post_save, sender=UserModel)
 def create_user_profile(sender, instance, created, **kwargs):
-    if created:
+    user = instance
+    if created:  # if created=true here we must create profile
             Profile.objects.create(user=instance)
-            
+    # if created == False :  # if created=False here we must update the selected profile        
+        # profile = get_object_or_404(Profile, user=user)
+        # profile.email = user.email
+        # profile.save()
 
 # another way of writing the above signal code 
 # def create_user_profile(sender, **kwarg):

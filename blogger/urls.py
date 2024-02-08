@@ -6,9 +6,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 # sitemaps
 from django.contrib.sitemaps import GenericSitemap  # new
 from django.contrib.sitemaps.views import sitemap  # new
-from blog.sitemap import PostSitemap, CategorySitemap, TagSitemap 
+from blog.sitemap import StaticSitemap, PostSitemap, CategorySitemap, TagSitemap 
 
 sitemaps = {
+   'static': StaticSitemap,
     'posts': PostSitemap,
     #'categories': CategorySitemap,
     #'tags': TagSitemap,
@@ -18,7 +19,7 @@ sitemaps = {
 urlpatterns = [
    path('admin/', admin.site.urls),
    path('user/', include('user.urls', namespace='user')),
-   path('blog/', include('blog.urls', namespace='blog')),
+   path('', include('blog.urls', namespace='blog')),
    path('pages/', include('pages.urls', namespace='pages')),
    
    # https://pypi.org/project/django-ckeditor/#installation
@@ -28,7 +29,7 @@ urlpatterns = [
    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
    
    # https://docs.djangoproject.com/en/4.2/ref/contrib/sitemaps/#module-django.contrib.sitemaps
-   path("sitemap.xml", sitemap, {"sitemaps":sitemaps}, name="django.contrib.sitemaps.views.sitemap")
+   path("sitemap.xml/", sitemap, {"sitemaps":sitemaps}, name="django.contrib.sitemaps.views.sitemap")
 
 ]
 
