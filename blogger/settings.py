@@ -12,10 +12,16 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+
+from environ import Env
+env = Env()
+Env.read_env()   # take environment variables from .env using env()
+
+
 # https://stackoverflow.com/questions/76897614/cannot-import-name-load-dotenv-from-dotenv-with-django-docker
 # https://pypi.org/project/python-dotenv/
 from dotenv import load_dotenv
-load_dotenv()  # take environment variables from .env. 
+load_dotenv()  # take environment variables from .env using  os.getenv()
 
 
 # https://pypi.org/project/django-database-url/
@@ -66,6 +72,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # https://pypi.org/project/django-cloudinary-storage/
+    # because django-cloudinary-storage overwrites Django collectstatic command. If you are going to use it only for media files though, it is django.contrib.staticfiles which has to be first:
+    'cloudinary_storage',          # Django Cloudinary Storage
+    'cloudinary',                  # Django Cloudinary Storage
+
     "django.contrib.sites",     # sitemaps
     'django.contrib.sitemaps',  # sitemaps 
 
@@ -110,6 +121,7 @@ INSTALLED_APPS = [
    # https://pypi.org/project/django-countries/
    "django_countries",
    
+    
 ]
 
 SITE_ID = 1  # sitemap - we have only one site in our project, we can use 1.
@@ -194,12 +206,21 @@ STATICFILES_DIRS = [ BASE_DIR / "static"]  #for static folder than put in main p
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # for collectstatic for deployment
 
-
-
 # Media
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_ROOT = os.path.join(BASE_DIR,'media/')                            # default storage of media in development 
+DEFAULT_FILE_STORAGE ='cloudinary_storage.storage.MediaCloudinaryStorage' # default storage of media in production
 
+# https://pypi.org/project/django-cloudinary-storage/
+# https://console.cloudinary.com/pm/c-afee3441808c64b2b27ef8b52a557c/developer-dashboard
+from environ import Env
+env = Env()
+Env.read_env()   # take environment variables from .env using env()
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY'   : env('CLOUD_API_KEY'),
+    'API_SECRET': env('CLOUD_API_SECRET')
+}
 
 
 
@@ -235,14 +256,9 @@ TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
 ############################################# Database settings ##############################################
 # PRODUCTION
 #https://django-environ.readthedocs.io/en/latest/quickstart.html 
-from environ import Env
-env = Env()
-Env.read_env()
-
 # DATABASES = {
 #     'default': dj_database_url.parse('postgres://...',conn_max_age=600,conn_health_checks=True)
 # }
-
 
 DATABASES = {
     'default': dj_database_url.parse(env('DATABASE_URL'), conn_max_age=600, conn_health_checks=True)
@@ -583,3 +599,5 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+
+
