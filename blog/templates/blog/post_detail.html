@@ -113,8 +113,8 @@
             <!-- start post button delete - edit -->
             {% if post.author == request.user %}
             <div class="d-flex justify-content-end">
-                <a class="btn btn-sm btn-secondary m-2" href="{% url 'blog:post-update' slug=post.slug  %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
-                <a class="btn btn-sm btn-danger m-2" href="{% url 'blog:post-delete-confirm' slug=post.slug  %}"><i class="fa-regular fa-trash-can"></i> Delete</a>
+                <a class="btn btn-sm btn-secondary m-2" href="{% url 'blog:post-update' post_slug=post.slug  %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                <a class="btn btn-sm btn-danger m-2" href="{% url 'blog:post-delete-confirm' post_slug=post.slug  %}"><i class="fa-regular fa-trash-can"></i> Delete</a>
             </div>
             {% endif %}
             <!--  end post button delete - edit --> 

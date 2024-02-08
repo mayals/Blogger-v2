@@ -168,7 +168,6 @@ WSGI_APPLICATION = 'blogger.wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -226,7 +225,6 @@ CLOUDINARY_STORAGE = {
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
@@ -240,11 +238,8 @@ AUTH_USER_MODEL = 'user.UserModel'
 
 ######################################### Twilio Account SID and Auth Token settings ##############################################
 # Twilio Account SID and Auth Token
-
 TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
-
 TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
-
 # Twilio phone number used for sending SMS messages
 TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
 

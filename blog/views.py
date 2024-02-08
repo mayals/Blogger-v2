@@ -152,7 +152,7 @@ def post_update(request,post_slug):
                 updated_post.save()
                 form.save_m2m() 
                 messages.success(request,f'Thanks ( {request.user.first_name} ), your post updated successfully !')
-                return redirect('blog:post-detail', slug=post_slug)
+                return redirect('blog:post-detail', post_slug=post_slug)
             
             else:
                 form = PostForm(request.POST,request.FILES,instance=post)
@@ -172,8 +172,8 @@ def post_update(request,post_slug):
 
 
 @login_required(login_url='user:user-login')
-def post_delete_confirm(request,slug):
-    post = get_object_or_404(Post, slug=slug)
+def post_delete_confirm(request,post_slug):
+    post = get_object_or_404(Post, slug=post_slug)
     if post.author == request.user :
         if request.method == 'POST' and 'yes-delete'in request.POST:
             post.delete()

@@ -5,13 +5,16 @@ from django.urls import reverse
 from user.models import UserModel
 
 # https://pypi.org/project/django-ckeditor/#installation 
-from ckeditor.fields import RichTextField
+# from ckeditor.fields import RichTextField
 
 # https://pypi.org/project/shortuuid/
 from shortuuid.django_fields import ShortUUIDField 
 
-
+# https://pypi.org/project/django-ckeditor-5/
 from django_ckeditor_5.fields import CKEditor5Field
+
+# https://pypi.org/project/django-resized/
+from django_resized import ResizedImageField
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -61,7 +64,8 @@ class Post(models.Model):
     title        = models.CharField(max_length=200)
     slug         = models.SlugField(max_length=120, blank=True, null=True)
     content      = CKEditor5Field('Text', config_name='extends')
-    photo        = models.ImageField(verbose_name='Post Image', upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
+    # photo        = models.ImageField(verbose_name='Post Image', upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
+    photo        = ResizedImageField(size=[600, 600], quality=85,verbose_name='Post Image', upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
     author       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts_user')
     category     = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts_category')
     tags         = models.ManyToManyField(Tag)

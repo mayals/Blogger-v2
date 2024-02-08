@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 ## https: // monim67.github.io/django-bootstrap-datepicker-plus/configure / 
 # from bootstrap_datepicker_plus import DatePickerInput
 from bootstrap_datepicker_plus.widgets import DatePickerInput
-
+# https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/customization.html
 
 
 class UserModelForm(forms.ModelForm):
@@ -62,6 +62,8 @@ class UserModelUpdateForm(forms.ModelForm):
         fields = ['first_name','last_name']
 
 
+
+# https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/customization.html
 class ProfileUpdateForm(forms.ModelForm):
     bio  = forms.CharField(label='', widget = forms.Textarea(attrs={'rows': 5,
                                                                         'placeholder': 'Bio..'}))
@@ -69,6 +71,10 @@ class ProfileUpdateForm(forms.ModelForm):
         model   = Profile
         fields  = ('bio', 'profile_pic', 'date_of_birth', 'gender', 'website', 'phone_number', 'country')
         widgets = {
-            # specify date-frmat
-            'date_of_birth': DatePickerInput(format='%Y-%m-%d'),
+            # specify date-fromat
+            'date_of_birth': DatePickerInput(attrs={"class": "my-exclusive-input"},
+        options={
+            "format": "MM/DD/YYYY",
+            "showTodayButton": False,
+        },),
         }

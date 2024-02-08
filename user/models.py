@@ -2,7 +2,9 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractUser, PermissionsMixin
 from django.conf import settings
 from django.utils import timezone
-from django import forms
+
+# https://pypi.org/project/django-resized/
+from django_resized import ResizedImageField
 
 # https://pypi.org/project/django-countries/
 from django_countries.fields import CountryField
@@ -91,7 +93,8 @@ class Profile(models.Model):
     id              = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user            = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     bio             = models.TextField(blank=True, null=True)
-    profile_pic     = models.ImageField(verbose_name='Profile Picture', upload_to="profile/%Y/%m/%d/", blank=True, null=True)
+    #profile_pic     = models.ImageField(verbose_name='Profile Picture', upload_to="profile/%Y/%m/%d/", blank=True, null=True)
+    profile_pic     = ResizedImageField(size=[600, 600],quality=85,upload_to="profile/%Y/%m/%d/", verbose_name='Profile Picture', blank=True, null=True)
     date_of_birth   = models.DateField(blank=True, null=True)
     gender          = models.CharField(max_length=60, choices=GenderType.choices, default=GenderType.MALE)
     website         = models.URLField(max_length = 255, null=True, blank=True)
