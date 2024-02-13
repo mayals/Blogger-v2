@@ -14,3 +14,9 @@ To run the API locally, follow these steps:
 7.  Set up the database: `python manage.py migrate`
 8.  Create a superuser account: `python manage.py createsuperuser`
 9.  Start the development server: `python manage.py runserver`
+
+I have deploy this project to render :
+
+https://bloggerwebservice.onrender.com
+
+
