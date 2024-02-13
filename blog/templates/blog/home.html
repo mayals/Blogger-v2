@@ -52,159 +52,168 @@
     </div>        
     <!--End Category row -->
 
-
+<br>
+<br>
     
 
 
     <!--Start 2 columns grid  -->
-    <section class='row container'>
+    <section class='row bg-info justify-content-center px-3'>
         <h1 class="screen-reader-only">Posts List for web development applications Skills</h1>      
-            <br><br>
-            <div class="col-md-8 bg-warning">
+            <br>
+            <br>
+
+            <div class="col-md-9 bg-warning">
                 <!-- Start posts-->
                         <!-- add new post-->
                         {% if request.user.is_authenticated %}
-                        <div>
-                            <a type="button" href='{% url 'blog:new-post' %}' class="btn btn-sm btn-dark text-warning"><i class="fa fa-plus" aria-hidden="true"></i> Add Post</a>
-                            <br><br>
-                        </div>
+                            <div>
+                                <a type="button" href='{% url 'blog:new-post' %}' class="btn btn-sm btn-dark text-warning"><i class="fa fa-plus" aria-hidden="true"></i> Add Post</a>
+                                <br><br>
+                            </div>
                         {% endif %} 
                         <!-- posts list -->
                         {% for post in posts %}
-                        <div class="card mb-3">
-                            {% if post.photo %}
-                                <img class="card-img-top img-fluid" src="{{post.photo.url}}" width="150" height="250" alt="{{post.title}}">
-                            {% else %}
-                                <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="150" height="250" alt="{{post.title}}">
-                            {% endif %}    
-                            <div class="card-body pt-0">
-                                <a href="{{ post.get_absolute_url }}"><h2 class="card-title">{{post.title}}</h2></a>
-                                <div class='row'>
-                                    <div class='col-md-auto d-flex justify-content-start align-items-center'>
-                                        {% if post.get_user.profile.profile_pic %}
-                                            <img class='rounded-circle  mb-1' src="{{ post.get_user.profile.profile_pic.url }}"  width="50" height="50" alt="{{post.author.first_name}}">
-                                        {% else %}
-                                            <img class='rounded-circle  mb-1' src="{% static 'img/profile_default.webp' %}"  width="50" height="50" alt="{{post.author.first_name}}">
-                                        {% endif %} 
-                                    </div>
-                                    <div class='col-md-auto d-flex justify-content-start align-items-center'>
-                                        <p>&nbsp<small class="text-muted"><i class="fa-solid fa-pen-nib"></i>  {{post.author.get_user_fullname}}</small></p>&nbsp &nbsp &nbsp &nbsp
-                                        <p><small class="text-muted"><i class="fa-regular fa-calendar-days"></i>  {{post.created_at|date:'d-m-Y'}}</small></p>
-                                    </div>
-                                    <div class='col-md d-flex justify-content-end  align-items-center mb-2'>
-                                        <i class="fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i>
+                            <div class="card mb-3">
+                                {% if post.photo %}
+                                    <img class="card-img-top img-fluid" src="{{post.photo.url}}" width="100" height="250" alt="{{post.title}}">
+                                {% else %}
+                                    <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="100" height="250" alt="{{post.title}}">
+                                {% endif %}    
+                                <div class="card-body pt-0">
+                                    <a href="{{ post.get_absolute_url }}"><h2 class="card-title">{{post.title}}</h2></a>
+                                    <div class='row'>
+                                        <div class='col-md-auto d-flex justify-content-start align-items-center'>
+                                            {% if post.get_user.profile.profile_pic %}
+                                                <img class='rounded-circle  mb-1' src="{{ post.get_user.profile.profile_pic.url }}"  width="50" height="50" alt="{{post.author.first_name}}">
+                                            {% else %}
+                                                <img class='rounded-circle  mb-1' src="{% static 'img/profile_default.webp' %}"  width="50" height="50" alt="{{post.author.first_name}}">
+                                            {% endif %} 
+                                        </div>
+
+                                        <div class='col-md-auto d-flex justify-content-start align-items-center'>
+                                            <p>&nbsp<small class="text-muted"><i class="fa-solid fa-pen-nib"></i>  {{post.author.get_user_fullname}}</small></p>&nbsp &nbsp &nbsp &nbsp
+                                            <p><small class="text-muted"><i class="fa-regular fa-calendar-days"></i>  {{post.created_at|date:'d-m-Y'}}</small></p>
+                                        </div>
+
+                                        <div class='col-md d-flex justify-content-end  align-items-center mb-2'>
+                                            <i class="fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i>
+                                            
+                                            &nbsp &nbsp &nbsp &nbsp
                                         
-                                        &nbsp &nbsp &nbsp &nbsp
-                                    
-                                        <span  class="position-relative">
-                                            <i class="fa-regular fa-eye fa-lg" style="color:#68b1cc"></i> 
-                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
-                                                <text class='text-light'>{{ post.views_count }}<text>
-                                                <span class="visually-hidden">views</span>
+                                            <span  class="position-relative">
+                                                <i class="fa-regular fa-eye fa-lg" style="color:#68b1cc"></i> 
+                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
+                                                    <text class='text-light'>{{ post.views_count }}<text>
+                                                    <span class="visually-hidden">views</span>
+                                                </span>
                                             </span>
-                                        </span>
-                    
-                                        &nbsp &nbsp &nbsp &nbsp
-                    
-                                        <span  class="position-relative">
-                                            <i class="fa-regular fa-heart fa-lg" style="color:#EF4990"></i> 
-                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
-                                                <text class='text-light'>{{ post.get_post_likes_count }}<text>
-                                                <span class="visually-hidden">likes</span>
+                        
+                                            &nbsp &nbsp &nbsp &nbsp
+                        
+                                            <span  class="position-relative">
+                                                <i class="fa-regular fa-heart fa-lg" style="color:#EF4990"></i> 
+                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
+                                                    <text class='text-light'>{{ post.get_post_likes_count }}<text>
+                                                    <span class="visually-hidden">likes</span>
+                                                </span>
                                             </span>
-                                        </span>
-                    
-                                        &nbsp &nbsp &nbsp &nbsp
-                    
-                                        <span  class="position-relative">
-                                            <i class="fa-regular fa-message fa-lg" style="color:#96cc4d"></i> 
-                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
-                                                <text class='text-light'>{{ post.comments.all.count }}<text>
-                                                <span class="visually-hidden">comments</span>
+                        
+                                            &nbsp &nbsp &nbsp &nbsp
+                        
+                                            <span  class="position-relative">
+                                                <i class="fa-regular fa-message fa-lg" style="color:#96cc4d"></i> 
+                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark opacity-50">
+                                                    <text class='text-light'>{{ post.comments.all.count }}<text>
+                                                    <span class="visually-hidden">comments</span>
+                                                </span>
                                             </span>
-                                        </span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="card-text">
-                                        {{  post.content|truncatewords:20|safe }}&nbsp<a href="{{ post.get_absolute_url }}" class='btn-light'>Read more</a>
-                                        </p>
-                                    </div>   
+                                    <div class='row' >
+                                        <p>{{  post.content| truncatewords:100 |safe }}<a href="{{ post.get_absolute_url }}" class='btn-light'>Read more</a> </p>
+                                    </div>
+                                        
+                                        
+                                    
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                       {% empty %}
-                        <div class="border p-3 mb-3">
-                            <p>No Post!</p> 
-                        </div>
-                       {% endfor %}
-            
-                       
-            </div>
-            
-            <div class="col-md-4 bg-secondary">
-                <div class="card text-dark bg-light mb-3">
-                    <div class="card-header text-center">Tags({{ tags.count }})</div>
-                    <div class="card-body">
-                        {% for tag in tags %}
-                        <a type="button" href="{% url 'blog:home-filter-tag' tagslug=tag.slug %}"  class="btn btn-outline-dark m-1" >
-                            #{{ tag.slug }} <span class="badge bg-warning">{{tag.get_tag_posts.count}}</span>
-                        </a>
-                        {% empty %}
-                        <div class="border p-3 mb-3">
-                            <p>No Tag!</p> 
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <br>
-                <br>
-                <!--Start top views posts  -->
-                <div class="card text-center text-dark bg-light mb-3">
-                    <div class="card-header">Top Views Posts</div>
-                    <div class="card-body">
-                        {% for post in con_topposts %}
-                            <div class="card">
-                                <a href="{{ post.get_absolute_url }}">
-                                    {% if post.photo %}
-                                    <img class="card-img-top img-fluid" src="{{post.photo.url}}" width="100" height="250" alt="{{post.title}}">
-                                    {% else %}
-                                    <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="100" height="250" alt="{{post.title}}">
-                                    {% endif %}
-                                    <div class="card-body">
-                                    <p class="card-text">{{ post.title }}</p>
-                                    </div>
-                                </a>
-                            </div>  
                             <br>
-                        {% empty %}
-                        <div class="border p-3 mb-3">
-                            <p>No Post!</p> 
-                        </div>
-                        {% endfor %}
-                    </div> 
-                </div>
-                <!-- End  top views posts-->
-                <br>
-                <br>
-                <!--Start category names -->
-                <div class="card text-dark bg-light mb-3">
-                    <div class="card-header text-center">Categories({{ categories.count }})</div>
-                    <div class="card-body">
-                        {% for cat in categories %}
-                        <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-outline-dark m-1" >
-                            {{ cat.name }} <span class="badge bg-warning">{{ cat.get_category_posts.count }}</span>
-                        </a>
-                            {% empty %}
-                        <div class="border p-3 mb-3">
-                            <p>No Category!</p> 
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <!-- End category names-->
+                       {% empty %}
+                            <div class="border p-3 mb-3">
+                                <p>No Post!</p> 
+                            </div>
+                       {% endfor %}
+                        
             </div>
-  
-    </section>
+
+
+            <div class="col-md-3 bg-secondary">
+                    <!--Start tag names -->
+                    <div class="card text-dark bg-light mb-3">
+                        <div class="card-header text-center">Tags({{ tags.count }})</div>
+                        <div class="card-body">
+                            {% for tag in tags %}
+                            <a type="button" href="{% url 'blog:home-filter-tag' tagslug=tag.slug %}"  class="btn btn-outline-dark m-1" >
+                                #{{ tag.slug }} <span class="badge bg-warning">{{tag.get_tag_posts.count}}</span>
+                            </a>
+                            {% empty %}
+                            <div class="border p-3 mb-3">
+                                <p>No Tag!</p> 
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- End tag names -->
+                    <br>
+                    <br>
+                    <!--Start top views posts -->
+                    <div class="card text-center text-dark bg-light mb-3">
+                            <p class="card-header">Top Views Posts</p>
+                            <div class="card-body">
+                                {% for post in con_topposts %}
+                                    <div class="card">
+                                        <a href="{{ post.get_absolute_url }}">
+                                            {% if post.photo %}
+                                            <img class="card-img-top img-fluid" src="{{post.photo.url}}" width="100" height="250" alt="{{post.title}}">
+                                            {% else %}
+                                            <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="100" height="250" alt="{{post.title}}">
+                                            {% endif %}
+                                            <div class="card-body">
+                                            <p class="card-text">{{ post.title }}</p>
+                                            </div>
+                                        </a>
+                                    </div>  
+                                    <br>
+                                {% empty %}
+                                <div class="border p-3 mb-3">
+                                    <p>No Post!</p> 
+                                </div>
+                                {% endfor %}
+                            </div> 
+                            
+                    </div>
+                    <!-- End top views posts-->
+                    <br>
+                    <br>
+                    <!--Start category names -->
+                    <div class="card text-dark bg-light mb-3">
+                        <div class="card-header text-center">Categories({{ categories.count }})</div>
+                        <div class="card-body">
+                            {% for cat in categories %}
+                            <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-outline-dark m-1" >
+                                {{ cat.name }} <span class="badge bg-warning">{{ cat.get_category_posts.count }}</span>
+                            </a>
+                                {% empty %}
+                            <div class="border p-3 mb-3">
+                                <p>No Category!</p> 
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- End category names-->
+            </div>
+    
+        </section>
     <!--END 2 columns grid   -->
     {% endblock content %}

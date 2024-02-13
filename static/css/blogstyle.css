@@ -39,4 +39,22 @@
     background-size: cover; /* Resize the background image to cover the entire container */
   }
 
+/* 
+  .row {
+    --bs-gutter-x: 0 !important; 
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: 0;
+    margin-left:  0;
+  } */
 
+
+
+  .truncated-text {
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: fit-content; /* or a specific width you want */
+}
