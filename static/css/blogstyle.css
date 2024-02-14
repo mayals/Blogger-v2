@@ -13,7 +13,7 @@
 }
 
 .bg-color{
-    background-color: #ffffff;
+    background-color: #eeeeee;
 }
 
 
@@ -39,7 +39,7 @@
     background-size: cover; /* Resize the background image to cover the entire container */
   }
 
-/* 
+
   .row {
     --bs-gutter-x: 0 !important; 
     --bs-gutter-y: 0;
@@ -48,7 +48,7 @@
     margin-top: calc(-1 * var(--bs-gutter-y));
     margin-right: 0;
     margin-left:  0;
-  } */
+  } 
 
 
 
@@ -57,4 +57,37 @@
   overflow: hidden;
   text-overflow: ellipsis;
   width: fit-content; /* or a specific width you want */
+}
+
+
+
+
+/* https://fonts.google.com/selection/embed */
+
+.andika-regular {
+  font-family: "Andika", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.andika-bold {
+  font-family: "Andika", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.andika-regular-italic {
+  font-family: "Andika", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.andika-bold-italic {
+  font-family: "Andika", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.card-body{
+  background-color: white;
 }

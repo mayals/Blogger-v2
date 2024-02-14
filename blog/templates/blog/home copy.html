@@ -19,9 +19,9 @@
 
     <!--Start Category row -->
     <br>
-    <div class='container' style="background-color: #eeeeee;" >
+    <div class='container'>
             <div class="card">
-                <div class="text-center andika-bold pt-1">Categories({{ categories.count }})</div>
+                <div class="card-header text-center ">Ctegories({{ categories.count }})</div>
                     <div class="row card-body justify-content-between m-1">
                             {% for cat in con_categories %}
                             
@@ -63,12 +63,12 @@
             <br>
             <br>
 
-            <div class="col-md-9 p-1" style="background-color: #eeeeee;">
+            <div class="col-md-9">
                 <!-- Start posts-->
                         <!-- add new post-->
                         {% if request.user.is_authenticated %}
                             <div>
-                                <a type="button" href='{% url 'blog:new-post' %}' class="btn btn-sm btn-dark text-light"><i class="fa fa-plus" aria-hidden="true"></i> Add Post</a>
+                                <a type="button" href='{% url 'blog:new-post' %}' class="btn btn-sm btn-dark text-warning"><i class="fa fa-plus" aria-hidden="true"></i> Add Post</a>
                                 <br><br>
                             </div>
                         {% endif %} 
@@ -148,10 +148,10 @@
             </div>
 
 
-            <div class="col-md-3 p-1" style="background-color: #eeeeee;">
+            <div class="col-md-3">
                     <!--Start tag names -->
                     <div class="card text-dark bg-light mb-3">
-                        <div class="text-center andika-bold pt-1">Tags({{ tags.count }})</div>
+                        <div class="card-header text-center">Tags({{ tags.count }})</div>
                         <div class="card-body">
                             {% for tag in tags %}
                             <a type="button" href="{% url 'blog:home-filter-tag' tagslug=tag.slug %}"  class="btn btn-outline-dark m-1" >
@@ -168,9 +168,9 @@
                     <br>
                     <br>
                     <!--Start top views posts -->
-                    <div class="text-center text-dark mb-3" style="background-color: #eeeeee;">
-                            <p class="text-center andika-bold pt-1">Top Views Posts</p>
-                            <div >
+                    <div class="card text-center text-dark bg-light mb-3">
+                            <p class="card-header">Top Views Posts</p>
+                            <div class="card-body">
                                 {% for post in con_topposts %}
                                     <div class="card">
                                         <a href="{{ post.get_absolute_url }}">
@@ -180,7 +180,7 @@
                                             <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="100" height="250" alt="{{post.title}}">
                                             {% endif %}
                                             <div class="card-body">
-                                            <p class="link-underline-light text-dark">{{ post.title }}</p>
+                                            <p class="card-text">{{ post.title }}</p>
                                             </div>
                                         </a>
                                     </div>  
@@ -198,7 +198,7 @@
                     <br>
                     <!--Start category names -->
                     <div class="card text-dark bg-light mb-3">
-                        <div class="text-center andika-bold pt-1">Categories({{ categories.count }})</div>
+                        <div class="card-header text-center">Categories({{ categories.count }})</div>
                         <div class="card-body">
                             {% for cat in categories %}
                             <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-outline-dark m-1" >

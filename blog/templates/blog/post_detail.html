@@ -46,7 +46,7 @@
                 </div>
               
             
-                <div class='col-md d-flex justify-content-end  align-items-center mb-2'>
+                <div class='col-md d-flex justify-content-end  align-items-center mb-2 px-3'>
                     <i class="fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i>
                     
                     &nbsp &nbsp &nbsp &nbsp
@@ -176,12 +176,12 @@
     
 
 </div>   
-<div class="col-md-3">
+<div class="col-md-3 px-1">
         <br><br><br><br>
  
       <!--Start tags-->
       <div class="card text-dark bg-light mb-3">
-        <div class="card-header text-center">Tags({{ tags.count }})</div>
+        <div class="text-center andika-bold pt-1">Tags({{ tags.count }})</div>
         <div class="card-body">
             {% for tag in tags %}
             <a type="button" href="{% url 'blog:home-filter-tag' tagslug=tag.slug %}"  class="btn btn-outline-dark m-1" >
@@ -201,7 +201,7 @@
 
 <!--Start top views posts  -->
 <div class="card text-center text-dark bg-light mb-3" >
-    <div class="card-header">Top Views Posts</div>
+    <div class="text-center andika-bold pt-1">Top Views Posts</div>
     <div class="card-body">
         {% for post in con_topposts %}
             <div >
@@ -233,7 +233,7 @@
 
          <!--Start category names -->
          <div class="card text-dark bg-light mb-3">
-            <div class="card-header text-center">Categories({{ categories.count }})</div>
+            <div class="text-center andika-bold pt-1">Categories({{ categories.count }})</div>
             <div class="card-body">
                 {% for cat in categories %}
                 <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-outline-dark m-1" >
