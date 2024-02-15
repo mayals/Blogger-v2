@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Post, Category,Tag
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, SharePostByEmailForm
+from django.views.generic import TemplateView
+from django.core.mail import send_mail
 
 
 def home_view(request):
@@ -190,7 +192,9 @@ def post_delete_confirm(request,post_slug):
         return redirect('blog:home')
     
     
-    
+
+
+@login_required(login_url='user:user-login')   
 def post_like_action(request,post_slug):
     post = get_object_or_404(Post,slug=post_slug)
     
@@ -204,7 +208,55 @@ def post_like_action(request,post_slug):
     return redirect('blog:post-detail',post_slug=post_slug)
 
 
-from django.views.generic import TemplateView
 
+
+def post_share_by_email(request,post_slug):
+    post = get_object_or_404(Post,slug=post_slug)
+    form = SharePostByEmailForm()
+    if request.method == 'POST':
+        form = SharePostByEmailForm(data=request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data['request.POST']
+            print(cd)
+            sender_name = cd.get('sender_name')
+            sender_email = cd.get('sender_email')
+            recipient_email = cd.get('recipient_email')
+            sender_comment = cd.get('sender_comment')
+            
+            # https://docs.djangoproject.com/en/4.2/topics/email/#send-mail
+            # send_mail(subject, message, from_email, recipient_list, fail_silently=False, auth_user=None, auth_password=None, connection=None, html_message=None)¶
+            subject = f"{sender_name} recommends you read {post.title}"
+            post_url = request.build_absolute_uri(post.get_absolute_url())
+            message = f"Read {post.title} at {post_url} \n {sender_name}\'s comments:{sender_comment}"
+            send_mail(
+                    subject        = subject,
+                    message        = message,
+                    from_email     = sender_email,
+                    recipient_list = [recipient_email]
+            )
+            messages.success(request,f'Thanks ( {sender_name} ), for sharing the post ({post.title}).')
+            return redirect('blog:post-detail',post_slug=post_slug)
+    
+        else:
+            form = SharePostByEmailForm()
+            messages.error(request,f'The post ({post.title}) not shared! please try again')
+            
+    else:
+        form = SharePostByEmailForm()
+    
+    context = {
+        'post': post,
+        'form': form,
+    }
+    return  render(request,'blog/post_share.html',context=context)    
+
+
+
+
+
+
+#  https://search.google.com/search-console
 def google_verification_view(request):
     return TemplateView.as_view(template_name='google7a03622cb96e4f8f.html')(request)
+
+

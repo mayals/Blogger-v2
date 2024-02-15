@@ -47,9 +47,26 @@ class CommentForm(forms.ModelForm):
     name     = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Name..'}))
     email    = forms.EmailField(label='',help_text='Email will be hidden', widget=forms.TextInput(attrs={'placeholder': 'Email..'}))
     message  = forms.CharField(label='', help_text='Please add comment related to the post',min_length='20', widget = forms.Textarea(attrs={'rows': 5, 
-                                                                                                                            'class':'form-control',
-                                                                                                                           'placeholder': 'Your Comment .. '}))
-                                                                               
+                                                                                                                                           'class':'form-control',
+                                                                                                                                           'placeholder': 'Your Comment .. '}))                                                                       
     class Meta:
         model   = Comment
         fields  = ['name', 'email', 'message']
+        
+class SharePostByEmailForm(forms.Form):
+        sender_name     = forms.CharField(label='', required=True, widget=forms.TextInput(attrs={'placeholder': 'Your Name..'}))
+        sender_email    = forms.EmailField(label='', required=True, widget=forms.TextInput(attrs={'placeholder': 'Your Email..'}))
+        recipient_email = forms.EmailField(label='', required=True, widget=forms.TextInput(attrs={'placeholder': 'Recipient Email..'}))
+        sender_comment  = forms.CharField(label='', required=True, help_text='Please add comment related to the sharing the post', widget = forms.Textarea(attrs={'rows': 5, 'class':'form-control', 'placeholder': 'Your Comment ..'})) 
+                                                                                                                                                  
+        def clean_sender_name(self):
+            sender_name = self.cleaned_data['sender_name']
+            if len(sender_name) == 0 :
+                raise forms.ValidationError('sender_name must not be empty.')
+            return sender_name   
+        
+        def clean(self):
+            cleaned_data = super().clean()
+            if cleaned_data.get('sender_name') == "" or cleaned_data.get('sender_email') == "" or cleaned_data.get('recipient_email')  == "" :
+                raise forms.ValidationError('Field not empty.')
+            return cleaned_data                                                                                                                              

@@ -47,7 +47,9 @@
               
             
                 <div class='col-md d-flex justify-content-end  align-items-center mb-2 px-3'>
+                    <a href={% url 'blog:post-share-by-email'  post_slug=post.slug %}>
                     <i class="fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i>
+                    </a>
                     
                     &nbsp &nbsp &nbsp &nbsp
                    
@@ -89,7 +91,7 @@
                 <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="150" height="250" alt="{{post.title}}">
             {% endif %}    
             <div class="card-body text-dark"> 
-                <p class="card-text">{{post.content|safe}}</p>
+                <p class="card-text">{{post.content |safe}}</p>
             </div>
 
             <!-- start category -->
