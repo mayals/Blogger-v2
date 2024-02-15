@@ -562,7 +562,7 @@ MESSAGE_TAGS = {
 # DEFAULT_FROM_EMAIL = 'noreply@CodesCity'
 
 
-#2) to send confirmation links by using your - SMTP Server of your Gmail:
+#2) to send confirmation links by using your - SMTP Server of your Gmail or yahoo mail :
 # -----------------------------------------
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
@@ -574,25 +574,27 @@ MESSAGE_TAGS = {
 # DEFAULT_FROM_EMAIL = 'noreply@yourwebsitename'
 
 
-#EMAIL_BACKEND       = os.getenv('EMAIL_BACKEND')
-#EMAIL_HOST          = os.getenv('EMAIL_HOST')
-#EMAIL_HOST_USER     = os.getenv('EMAIL_HOST_USER') 
-#EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-#EMAIL_PORT          = os.getenv('EMAIL_PORT')
-#EMAIL_USE_TLS       = os.getenv('EMAIL_USE_TLS')
-#EMAIL_USE_SSL       = os.getenv('EMAIL_USE_SSL')
-#DEFAULT_FROM_EMAIL  = os.getenv('DEFAULT_FROM_EMAIL')
+# EMAIL_BACKEND = 'django_email_utils.backends.HTMLEmailBackend'
+# EMAIL_HOST = 'smtp.your-smtp-server.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your_email@example.com'
+# EMAIL_HOST_PASSWORD = 'your_password'
+
+# Debug logging (enable temporarily)
+#logging.basicConfig(level=logging.DEBUG)
 
 
 
-#3) to send confirmation links by using your - SMTP Server of your Yahoo mail:
-# https://kinsta.com/blog/yahoo-smtp-settings/#:~:text=SMTP%20Server%3A%20smtp.mail.,TLS%3A%20Yes%20(if%20available)
-EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_BACKEND       = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST          = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER     = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = os.getenv('EMAIL_PORT')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+EMAIL_PORT          = os.getenv('EMAIL_PORT')
+EMAIL_USE_TLS       = os.getenv('EMAIL_USE_TLS')
+#EMAIL_USE_SSL      = os.getenv('EMAIL_USE_SSL')
+DEFAULT_FROM_EMAIL  = os.getenv('DEFAULT_FROM_EMAIL')
 
-
+EMAIL_DEBUG = True
+if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
+    raise ValueError('Missing EMAIL_HOST_USER or EMAIL_HOST_PASSWORD in environment variables.')

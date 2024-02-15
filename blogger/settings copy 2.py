@@ -248,7 +248,7 @@ DATABASES = {
             conn_health_checks=True,
     )
  }
-print(DATABASES)
+# print(DATABASES)
 
 
 

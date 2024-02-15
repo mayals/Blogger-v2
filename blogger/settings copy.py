@@ -264,7 +264,7 @@ environ.Env.read_env()
 DATABASES = {
     'default': dj_database_url.config('postgres://blogger_db_ca0j_user:aOBm5pIJEWzj6YczxXrhpbQwuM5aArYQ@dpg-cmslkaacn0vc73bjkh40-a.oregon-postgres.render.com/blogger_db_ca0j',conn_max_age=600,conn_health_checks=True)
 }
-print(DATABASES)
+# print(DATABASES)
 
 
 

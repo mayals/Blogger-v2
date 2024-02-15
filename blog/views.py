@@ -100,15 +100,15 @@ def post_detail(request,post_slug):
     # post_views_count
     # Get the session key for this post
     my_session_key = 'session_key_for_post_id_{}'.format(post.id)
-    print(my_session_key)
+    # print(my_session_key)
     # Check if the session key exists in the session
     if not request.session.get(my_session_key,False):
-        print("key not exist")
+        # print("key not exist")
         # If the session key doesn't exist in request.session, increment views_count and set the session key
         post.views_count += 1
         post.save()
         request.session[my_session_key] = True
-        print(request.session[my_session_key])
+        # print(request.session[my_session_key])
     
     
     # CommentForm
@@ -214,10 +214,11 @@ def post_share_by_email(request,post_slug):
     post = get_object_or_404(Post,slug=post_slug)
     form = SharePostByEmailForm()
     if request.method == 'POST':
-        form = SharePostByEmailForm(data=request.POST)
+        form = SharePostByEmailForm(request.POST)
+        # print("form"+ str(form))
         if form.is_valid():
-            cd = form.cleaned_data['request.POST']
-            print(cd)
+            cd = form.cleaned_data
+            print("cd="+ str(cd))
             sender_name = cd.get('sender_name')
             sender_email = cd.get('sender_email')
             recipient_email = cd.get('recipient_email')
@@ -228,12 +229,10 @@ def post_share_by_email(request,post_slug):
             subject = f"{sender_name} recommends you read {post.title}"
             post_url = request.build_absolute_uri(post.get_absolute_url())
             message = f"Read {post.title} at {post_url} \n {sender_name}\'s comments:{sender_comment}"
-            send_mail(
-                    subject        = subject,
-                    message        = message,
-                    from_email     = sender_email,
-                    recipient_list = [recipient_email]
-            )
+            from_email =  sender_email
+            recipient_list = [recipient_email]
+            send_mail(subject,message,from_email,recipient_list,fail_silently=False)
+            print("send_mail=",send_mail(subject,message,from_email,recipient_list))
             messages.success(request,f'Thanks ( {sender_name} ), for sharing the post ({post.title}).')
             return redirect('blog:post-detail',post_slug=post_slug)
     

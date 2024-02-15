@@ -8,7 +8,7 @@ def context_categories(request):
     
 def context_topposts(request):
     topposts   = Post.objects.all().order_by('-views_count')[:5]
-    print(topposts)
+    # print(topposts)
     return {
         'con_topposts': topposts,
         }
