@@ -35,22 +35,28 @@
                     </div> 
                   {% endif %}
                   <div class="col-md-8">
-                    <div class="card-body">
-                          <h3 class="card-title"><span class="font-weight-bolder">First Name : </span>{{profile.user.first_name}}</h3>
-                          <h3 class="card-title"><span class="font-weight-bolder">Last Name : </span>{{profile.user.last_name}}</h3>
-                          <h3 class="card-text"><span class="font-weight-bolder">Bio : </span>{{profile.bio}}</h3>                 
-                          <h3 class="card-text"><span class="font-weight-bolder">Gender : </span>{{profile.gender}}</h3>                           
-                          <h3 class="card-text"><span class="font-weight-bolder">Phone Number : </span>{{profile.phone_number}}</h3>                                  
-                          <h3 class="card-text"><span class="font-weight-bolder">Date Of Birth : </span>{{profile.date_of_birth}}</h3>
-                          <h3 class="card-text"><span class="font-weight-bolder">created at : </span>{{profile.created_at}}</h3>                     
-                          <h3 class="card-text"><span class="font-weight-bolder">Updated at : </span>{{profile.updated_at}}</h3>                           
-                          <h3 class="card-text"><span class="font-weight-bolder">Website : </span>{{profile.website }}</h3>
-                          <h3 class="card-text"><span class="font-weight-bolder">Country : </span>{{profile.country }}</h3>
-                    </div>
-                    </div>
-                      <a type="link" class="btn btn-secondary btn-block" href="{% url 'user:my-profile-usermodel-update' %}" role="button"><span class="text-center">Update My Profile</span></a>
-                    </div>
-              </div>
+                      <div class="card-body">
+                            <h3 class="card-title"><span class="font-weight-bolder">First Name : </span>{{profile.user.first_name}}</h3>
+                            <h3 class="card-title"><span class="font-weight-bolder">Last Name : </span>{{profile.user.last_name}}</h3>
+                            <h3 class="card-title"><span class="font-weight-bolder">Email : </span>{{profile.user.email}}</h3>
+                            <h3 class="card-text"><span class="font-weight-bolder">Bio : </span>{{profile.bio}}</h3>                 
+                            <h3 class="card-text"><span class="font-weight-bolder">Gender : </span>{{profile.gender}}</h3>                           
+                            <h3 class="card-text"><span class="font-weight-bolder">Phone Number : </span>{{profile.phone_number}}</h3>                                  
+                            <h3 class="card-text"><span class="font-weight-bolder">Date Of Birth : </span>{{profile.date_of_birth}}</h3>
+                            <h3 class="card-text"><span class="font-weight-bolder">created at : </span>{{profile.created_at}}</h3>                     
+                            <h3 class="card-text"><span class="font-weight-bolder">Updated at : </span>{{profile.updated_at}}</h3>                           
+                            <h3 class="card-text"><span class="font-weight-bolder">Website : </span>{{profile.website }}</h3>
+                            <h3 class="card-text"><span class="font-weight-bolder">Country : </span>{{profile.country }}</h3>
+                      </div>
+                      
+                      <div class='m-x-10'>
+                        <a type="link" class="btn btn-warning" href="{% url 'user:my-profile-usermodel-update' %}" role="button"><span class="text-center">Update My Profile</span></a>
+                        <a type="link" class="btn btn-danger" href="{% url 'user:password_change' %}" role="button"><span class="text-center">Change My Password</span></a>
+                      </div>
+                      <br>
+                  </div>
+              
+                </div>
 
             </div>
           

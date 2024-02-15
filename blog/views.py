@@ -5,6 +5,8 @@ from .models import Post, Category,Tag
 from .forms import PostForm, CommentForm, SharePostByEmailForm
 from django.views.generic import TemplateView
 from django.core.mail import send_mail
+from django.contrib.auth.views import PasswordChangeView
+
 
 
 def home_view(request):
@@ -248,6 +250,9 @@ def post_share_by_email(request,post_slug):
         'form': form,
     }
     return  render(request,'blog/post_share.html',context=context)    
+
+
+
 
 
 

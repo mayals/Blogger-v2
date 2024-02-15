@@ -1,17 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model 
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView,PasswordChangeDoneView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
+from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
-from django.utils.http import urlsafe_base64_decode
-from blogger.settings import DEFAULT_FROM_EMAIL
 from django.utils.encoding import smart_bytes
-from .forms import UserModelForm, UserLoginForm, EmailForm, ProfileUpdateForm, UserModelUpdateForm
 from django.utils.encoding import smart_str
+
 from .models import UserModel,Profile 
+from .forms import UserModelForm, UserLoginForm, EmailForm, ProfileUpdateForm, UserModelUpdateForm
+from blogger.settings import DEFAULT_FROM_EMAIL
 
 
 def user_create(request):
@@ -201,3 +204,16 @@ def my_profile_usermodel_update(request):
         'profileform': profileform,
     }
     return render(request,'user/profile_usermodel_update.html',context)
+
+
+
+
+class CustomPasswordChangeView(PasswordChangeView):
+    # form_class = PasswordChangeForm
+    success_url = reverse_lazy("user:password_change_done")
+    template_name = "user/password_change_form.html"
+    # title = _("Password change")
+
+
+class CustomPasswordChangeDoneView(PasswordChangeDoneView):
+    template_name = "user/password_change_done.html"
