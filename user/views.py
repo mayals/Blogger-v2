@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model 
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import PasswordChangeView,PasswordChangeDoneView
+from django.contrib.auth.views import PasswordChangeView,PasswordChangeDoneView,PasswordResetView,PasswordResetDoneView,PasswordResetConfirmView,PasswordResetCompleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 from django.urls import reverse_lazy
@@ -208,6 +208,30 @@ def my_profile_usermodel_update(request):
 
 
 
+
+######################## Password Reset #################################
+class CustomPasswordResetView(PasswordResetView):
+    email_template_name = "user/password_reset_email.html"
+    success_url         = reverse_lazy("user:password_reset_done")
+    template_name       = "user/password_reset_form.html"
+   
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    template_name = "user/password_reset_done.html"
+    
+    
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    success_url = reverse_lazy("user:password_reset_complete")
+    template_name = "user/password_reset_confirm.html"
+   
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = "user/password_reset_complete.html"
+    
+    
+    
+    
+######################## Password Change #################################
 class CustomPasswordChangeView(PasswordChangeView):
     # form_class = PasswordChangeForm
     success_url = reverse_lazy("user:password_change_done")

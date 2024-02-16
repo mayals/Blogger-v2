@@ -60,6 +60,12 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
+    # My local app
+    # ------------
+   'blog.apps.BlogConfig',
+   'user.apps.UserConfig',
+   'pages.apps.PagesConfig',
+    
     # https://django-jazzmin.readthedocs.io/installation/
     # Add jazzmin to your INSTALLED_APPS before django.contrib.admin
     'jazzmin',
@@ -81,10 +87,6 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',  # sitemaps 
 
 
-    # My local apps
-   'blog.apps.BlogConfig',
-   'user.apps.UserConfig',
-   'pages.apps.PagesConfig',
 
    # Third party apps
    #-----------------
@@ -558,8 +560,8 @@ MESSAGE_TAGS = {
 
 # 1) to send confirmation links in console:
 # -----------------------------------------
-# EMAIL_BACKEND      = 'django.core.mail.backends.console.EmailBackend'
-# DEFAULT_FROM_EMAIL = 'noreply@CodesCity'
+EMAIL_BACKEND      = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'noreply@CodesCity'
 
 
 #2) to send confirmation links by using your - SMTP Server of your Gmail or yahoo mail :
@@ -586,15 +588,17 @@ MESSAGE_TAGS = {
 
 
 
-EMAIL_BACKEND       = os.getenv('EMAIL_BACKEND')
-EMAIL_HOST          = os.getenv('EMAIL_HOST')
-EMAIL_HOST_USER     = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_PORT          = os.getenv('EMAIL_PORT')
-EMAIL_USE_TLS       = os.getenv('EMAIL_USE_TLS')
-#EMAIL_USE_SSL      = os.getenv('EMAIL_USE_SSL')
-DEFAULT_FROM_EMAIL  = os.getenv('DEFAULT_FROM_EMAIL')
 
-EMAIL_DEBUG = True
-if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
-    raise ValueError('Missing EMAIL_HOST_USER or EMAIL_HOST_PASSWORD in environment variables.')
+# EMAIL_BACKEND       = os.getenv('EMAIL_BACKEND')
+# EMAIL_HOST          = os.getenv('EMAIL_HOST')
+# EMAIL_HOST_USER     = os.getenv('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+# EMAIL_PORT          = os.getenv('EMAIL_PORT')
+# EMAIL_USE_TLS       = os.getenv('EMAIL_USE_TLS')
+# #EMAIL_USE_SSL      = os.getenv('EMAIL_USE_SSL')
+# DEFAULT_FROM_EMAIL  = os.getenv('DEFAULT_FROM_EMAIL')
+
+# EMAIL_DEBUG = True
+# if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
+#     raise ValueError('Missing EMAIL_HOST_USER or EMAIL_HOST_PASSWORD in environment variables.')
+ 

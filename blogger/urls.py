@@ -8,6 +8,8 @@ from django.contrib.sitemaps import GenericSitemap  # new
 from django.contrib.sitemaps.views import sitemap  # new
 from blog.sitemap import StaticSitemap, PostSitemap, CategorySitemap, TagSitemap 
 
+
+
 sitemaps = {
    'static': StaticSitemap,
     'posts': PostSitemap,
@@ -21,7 +23,8 @@ urlpatterns = [
    path('user/', include('user.urls', namespace='user')),
    path('', include('blog.urls', namespace='blog')),
    path('pages/', include('pages.urls', namespace='pages')),
-   
+    
+    
    # https://pypi.org/project/django-ckeditor/#installation
    # path('ckeditor/', include('ckeditor_uploader.urls')),
    
