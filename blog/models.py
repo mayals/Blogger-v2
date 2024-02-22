@@ -130,7 +130,7 @@ class Comment(models.Model):
     email         = models.EmailField(null=True, blank=False)
     status        = models.CharField(max_length=10, choices=STATUS_CHOICES, default='p')
     created_at    = models.DateTimeField(null=True, auto_now_add=True, auto_now=False)
-    published_at  = models.DateTimeField( auto_now_add=True, auto_now=False, null=True)
+    published_at  = models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
   
     def __str__(self):
         return 'Commented by ({}) on the post: "{}" '.format(self.name, self.post)
