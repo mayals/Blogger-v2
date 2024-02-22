@@ -111,7 +111,7 @@ class Post(models.Model):
         return self.likes.all().count()
     
     class Meta:
-        ordering            = ['-created_at']
+        ordering = ('-published_at',)
         verbose_name        = 'Post'
         verbose_name_plural = 'Posts'
     
