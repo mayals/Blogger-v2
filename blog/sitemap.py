@@ -28,7 +28,7 @@ class PostSitemap(Sitemap):
     # items() is a method that returns a sequence or QuerySet of objects. 
     # The objects returned will get passed to any callable methods corresponding to a sitemap property (location, lastmod, changefreq, and priority).
     def items(self):
-        return Post.objects.filter(is_published=True)[:100]
+        return Post.objects.filter(status=Post.Status.PUBLISHED)[:100]
     
     # lastmod should return a datetime.
     def lastmod(self, obj):

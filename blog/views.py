@@ -93,9 +93,14 @@ def post_create(request):
 
 
 
-def post_detail(request,post_slug):
+def post_detail(request,year,month,day,post_slug):
     # Post
-    post = get_object_or_404(Post,slug=post_slug) 
+    post = get_object_or_404(Post, status=Post.Status.PUBLISHED,
+                                    slug=post_slug, 
+                                    published_at__year=year,
+                                    published_at__month=month,
+                                    published_at__day=day,
+    ) 
     categories = Category.objects.all().order_by('-posts_count')
     tags = Tag.objects.all()
     
@@ -124,7 +129,7 @@ def post_detail(request,post_slug):
            name = form.cleaned_data.get('name')
            messages.success(request,f'Thanks {name} , your comment added successfully !')
            form = CommentForm()
-           return redirect('blog:post-detail',post_slug=post_slug)        
+           return redirect('blog:post-detail',year=year,month=month,day=day,post_slug=post_slug)        
         
         else:
             messages.error(request,f'comment not add correctly, try again!')
@@ -144,8 +149,13 @@ def post_detail(request,post_slug):
 
 
 @login_required(login_url='user:user-login')
-def post_update(request,post_slug): 
-    post = get_object_or_404(Post, slug=post_slug)
+def post_update(request,year,month,day,post_slug): 
+    post = get_object_or_404(Post, status=Post.Status.PUBLISHED,
+                                    slug=post_slug, 
+                                    published_at__year=year,
+                                    published_at__month=month,
+                                    published_at__day=day,
+    ) 
     if post.author == request.user :
         form= PostForm(instance=post)
         if request.method == 'POST':
@@ -156,7 +166,7 @@ def post_update(request,post_slug):
                 updated_post.save()
                 form.save_m2m() 
                 messages.success(request,f'Thanks ( {request.user.first_name} ), your post updated successfully !')
-                return redirect('blog:post-detail', post_slug=post_slug)
+                return redirect('blog:post-detail',year=year,month=month,day=day,post_slug=post_slug)
             
             else:
                 form = PostForm(request.POST,request.FILES,instance=post)
@@ -176,8 +186,13 @@ def post_update(request,post_slug):
 
 
 @login_required(login_url='user:user-login')
-def post_delete_confirm(request,post_slug):
-    post = get_object_or_404(Post, slug=post_slug)
+def post_delete_confirm(request,year,month,day,post_slug):
+    post = get_object_or_404(Post, status=Post.Status.PUBLISHED,
+                                    slug=post_slug, 
+                                    published_at__year=year,
+                                    published_at__month=month,
+                                    published_at__day=day,
+    ) 
     if post.author == request.user :
         if request.method == 'POST' and 'yes-delete'in request.POST:
             post.delete()
@@ -197,8 +212,13 @@ def post_delete_confirm(request,post_slug):
 
 
 @login_required(login_url='user:user-login')   
-def post_like_action(request,post_slug):
-    post = get_object_or_404(Post,slug=post_slug)
+def post_like_action(request,year,month,day,post_slug):
+    post = get_object_or_404(Post, status=Post.Status.PUBLISHED,
+                                    slug=post_slug, 
+                                    published_at__year=year,
+                                    published_at__month=month,
+                                    published_at__day=day,
+    ) 
     
     if post.likes.filter(id=request.user.id).exists() == False :
         post.likes.add(request.user)
@@ -207,13 +227,18 @@ def post_like_action(request,post_slug):
         post.likes.remove(request.user)
         
     # post_likes_count=liked_post.count()       
-    return redirect('blog:post-detail',post_slug=post_slug)
+    return redirect('blog:post-detail',year=year,month=month,day=day,post_slug=post_slug)
 
 
 
 
-def post_share_by_email(request,post_slug):
-    post = get_object_or_404(Post,slug=post_slug)
+def post_share_by_email(request,year,month,day,post_slug):
+    post = get_object_or_404(Post, status=Post.Status.PUBLISHED,
+                                    slug=post_slug, 
+                                    published_at__year=year,
+                                    published_at__month=month,
+                                    published_at__day=day,
+    ) 
     form = SharePostByEmailForm()
     if request.method == 'POST':
         form = SharePostByEmailForm(request.POST)
@@ -236,7 +261,7 @@ def post_share_by_email(request,post_slug):
             send_mail(subject,message,from_email,recipient_list,fail_silently=False)
             print("send_mail=",send_mail(subject,message,from_email,recipient_list))
             messages.success(request,f'Thanks ( {sender_name} ), for sharing the post ({post.title}).')
-            return redirect('blog:post-detail',post_slug=post_slug)
+            return redirect('blog:post-detail',year=year,month=month,day=day,post_slug=post_slug)
     
         else:
             form = SharePostByEmailForm()

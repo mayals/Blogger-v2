@@ -1,8 +1,10 @@
 from django.db import models
 from django.conf import settings
-from django.utils.text import slugify
 from django.urls import reverse
 from user.models import UserModel
+from django.utils import timezone
+from django.utils.text import slugify
+
 
 # https://pypi.org/project/django-ckeditor/#installation 
 # from ckeditor.fields import RichTextField
@@ -60,9 +62,13 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
+    class Status(models.TextChoices):
+        DRAFT     = 'DR' , 'Draft'
+        PUBLISHED = 'PB' , 'Published'
+         
     id           = ShortUUIDField(primary_key=True, unique=True, length=6, max_length=6, editable=False)
     title        = models.CharField(max_length=200)
-    slug         = models.SlugField(max_length=120, blank=True, null=True)
+    slug         = models.SlugField(max_length=120, blank=True, null=True,unique_for_date="published_at")
     content      = CKEditor5Field('Text', config_name='extends')
     # photo        = models.ImageField(verbose_name='Post Image', upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
     photo        = ResizedImageField(size=[600, 600], quality=85,verbose_name='Post Image', upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
@@ -71,10 +77,11 @@ class Post(models.Model):
     tags         = models.ManyToManyField(Tag)
     views_count  = models.PositiveIntegerField(default=0, blank=True)
     likes        = models.ManyToManyField(UserModel, related_name='post_users', blank=True)
-    is_published = models.BooleanField(default=True)          
+    published_at = models.DateTimeField(default=timezone.now)        
     created_at   = models.DateTimeField(auto_now_add=True)
     updated_at   = models.DateTimeField(auto_now=True)
-    
+    status       = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
+               
 
     def __str__(self):
         return self.title
