@@ -601,22 +601,22 @@ DEFAULT_FROM_EMAIL = 'noreply@CodesCity'
 
 # Development
 # postgresql_psycopg2
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-#        'NAME': os.getenv('DB_NAME'),
+        'NAME': os.getenv('DB_NAME'),
 
-#        'USER': os.getenv('DB_USER'),
+        'USER': os.getenv('DB_USER'),
 
-#        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
 
-#        'HOST': os.getenv('DB_HOST'),
+        'HOST': os.getenv('DB_HOST'),
 
-#        'PORT': os.getenv('DB_PORT'),
-#    }
+        'PORT': os.getenv('DB_PORT'),
+    }
  
-#}  
+}  
 
 
 # PRODUCTION
@@ -624,9 +624,9 @@ DEFAULT_FROM_EMAIL = 'noreply@CodesCity'
 # DATABASES = {
 #     'default': dj_database_url.parse('postgres://...',conn_max_age=600,conn_health_checks=True)
 # }
-DATABASES = {
-   'default': dj_database_url.parse(env('DATABASE_URL'), conn_max_age=600, conn_health_checks=True)
-}
+#DATABASES = {
+#   'default': dj_database_url.parse(env('DATABASE_URL'), conn_max_age=600, conn_health_checks=True)
+#}
 
 
 print(DATABASES)
