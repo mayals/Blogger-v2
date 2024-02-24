@@ -95,11 +95,11 @@ def post_create(request):
 
 def post_detail(request,year,month,day,post_slug):
     # Post
-    post = get_object_or_404(Post, status=Post.Status.PUBLISHED,
-                                    slug=post_slug, 
+    post = get_object_or_404(Post,slug=post_slug, 
                                     published_at__year=year,
                                     published_at__month=month,
                                     published_at__day=day,
+                                    status=Post.Status.PUBLISHED
     ) 
     categories = Category.objects.all().order_by('-posts_count')
     tags = Tag.objects.all()
@@ -161,12 +161,12 @@ def post_update(request,year,month,day,post_slug):
         if request.method == 'POST':
             form = PostForm(request.POST,request.FILES,instance=post)
             if form.is_valid():
-                updated_post = form.save(commit = False)
+                updated_post = form.save(commit=False)
                 updated_post.author = request.user
                 updated_post.save()
                 form.save_m2m() 
                 messages.success(request,f'Thanks ( {request.user.first_name} ), your post updated successfully !')
-                return redirect('blog:post-detail',year=year,month=month,day=day,post_slug=post_slug)
+                return redirect('blog:post-detail',year=year,month=month,day=day,post_slug=post.slug)
             
             else:
                 form = PostForm(request.POST,request.FILES,instance=post)

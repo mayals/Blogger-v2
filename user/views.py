@@ -1,17 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model 
-from django.contrib.auth.forms import PasswordChangeForm
+# from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView,PasswordChangeDoneView,PasswordResetView,PasswordResetDoneView,PasswordResetConfirmView,PasswordResetCompleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import smart_bytes
-from django.utils.encoding import smart_str
 
+from django.utils.encoding import smart_bytes
+# from django.utils.encoding import smart_str
+from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import force_str
 from .models import UserModel,Profile 
 from .forms import UserModelForm, UserLoginForm, EmailForm, ProfileUpdateForm, UserModelUpdateForm
 from blogger.settings import DEFAULT_FROM_EMAIL
@@ -102,7 +103,7 @@ def confirmEmail_and_activateUser(request,uidb64,token):
     print('uidb64='+uidb64)
     print('token='+token) 
     try:
-        uid = smart_str(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         print(uid)
         #user = get_user_model().objects.get(pk=uid)
         user = UserModel.objects.get(id=uid)

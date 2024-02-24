@@ -6,7 +6,7 @@ charset-normalizer==3.3.2
 cloudinary==1.38.0
 crispy-bootstrap5==2023.10
 dj-database-url==2.1.0
-Django==4.2.10
+Django==4.2.9
 django-bootstrap-datepicker-plus==5.0.5
 django-bootstrap-v5==1.0.11
 django-ckeditor==6.7.0

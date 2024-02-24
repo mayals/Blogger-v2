@@ -249,27 +249,6 @@ TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
 
 
 
-
-############################################# Database settings ##############################################
-# PRODUCTION
-#https://django-environ.readthedocs.io/en/latest/quickstart.html 
-# DATABASES = {
-#     'default': dj_database_url.parse('postgres://...',conn_max_age=600,conn_health_checks=True)
-# }
-
-DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL'), conn_max_age=600, conn_health_checks=True)
-    }
-# print(DATABASES)
-
-
-
-
-
-
-
-
-
 #crispy-bootstrap5:
 ############################################# crispy-bootstrap5 settings ##############################################
 # https://pypi.org/project/crispy-bootstrap5/      # need when use bootstrap5 with crispy form library
@@ -602,3 +581,57 @@ DEFAULT_FROM_EMAIL = 'noreply@CodesCity'
 # if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
 #     raise ValueError('Missing EMAIL_HOST_USER or EMAIL_HOST_PASSWORD in environment variables.')
  
+ 
+ 
+ 
+ 
+
+############################################# Database settings ##############################################
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+# Development
+# sqlite3
+# DATABASES = {
+#     'default': {
+#       'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#   }
+#}
+
+
+# Development
+# postgresql_psycopg2
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': os.getenv('DB_NAME'),
+
+        'USER': os.getenv('DB_USER'),
+
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+
+        'HOST': os.getenv('DB_HOST'),
+
+        'PORT': os.getenv('DB_PORT'),
+    }
+ 
+}  
+
+
+# PRODUCTION
+#https://django-environ.readthedocs.io/en/latest/quickstart.html 
+# DATABASES = {
+#     'default': dj_database_url.parse('postgres://...',conn_max_age=600,conn_health_checks=True)
+# }
+#DATABASES = {
+#   'default': dj_database_url.parse(env('DATABASE_URL'), conn_max_age=600, conn_health_checks=True)
+#}
+
+
+print(DATABASES)
+
+
+
+
+

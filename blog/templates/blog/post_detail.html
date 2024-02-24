@@ -47,7 +47,7 @@
               
             
                 <div class='col-md d-flex justify-content-end  align-items-center mb-2 px-3'>
-                    <a href={% url 'blog:post-share-by-email'  post_slug=post.slug %}>
+                    <a href={% url 'blog:post-share-by-email'  post_slug=post.slug year=post.published_at.year month=post.published_at.month day=post.published_at.day %}>
                     <i class="fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i>
                     </a>
                     
@@ -115,8 +115,8 @@
             <!-- start post button delete - edit -->
             {% if post.author == request.user %}
             <div class="d-flex justify-content-end">
-                <a class="btn btn-sm btn-secondary m-2" href="{% url 'blog:post-update' post_slug=post.slug  %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
-                <a class="btn btn-sm btn-danger m-2" href="{% url 'blog:post-delete-confirm' post_slug=post.slug  %}"><i class="fa-regular fa-trash-can"></i> Delete</a>
+                <a class="btn btn-sm btn-secondary m-2" href="{% url 'blog:post-update' post_slug=post.slug year=post.published_at.year month=post.published_at.month day=post.published_at.day  %}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                <a class="btn btn-sm btn-danger m-2" href="{% url 'blog:post-delete-confirm' post_slug=post.slug year=post.published_at.year month=post.published_at.month day=post.published_at.day  %}"><i class="fa-regular fa-trash-can"></i> Delete</a>
             </div>
             {% endif %}
             <!--  end post button delete - edit --> 
@@ -125,9 +125,9 @@
             {% if request.user.is_authenticated %}
             <div class="d-flex justify-content-end">
                 {% if request.user not in post.likes.all %}
-                <a href="{% url 'blog:post-like' post_slug=post.slug  %}" class="btn btn-sm btn-light fs-5 m-2">🤍</a>  
+                <a href="{% url 'blog:post-like' post_slug=post.slug year=post.published_at.year month=post.published_at.month day=post.published_at.day  %}" class="btn btn-sm btn-light fs-5 m-2">🤍</a>  
                 {% else %}
-                <a href="{% url 'blog:post-like' post_slug=post.slug  %}" class="btn btn-sm btn-light fs-5 m-2">❤️</a>  
+                <a href="{% url 'blog:post-like' post_slug=post.slug year=post.published_at.year month=post.published_at.month day=post.published_at.day  %}" class="btn btn-sm btn-light fs-5 m-2">❤️</a>  
                 {% endif %}
             </div>
             {% endif %}
