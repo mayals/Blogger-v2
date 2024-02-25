@@ -17,6 +17,6 @@ To run the API locally, follow these steps:
 
 I have deploy this project to render :
 
-https://bloggerwebservice.onrender.com
+https://blogger-no5a.onrender.com/
 
 
