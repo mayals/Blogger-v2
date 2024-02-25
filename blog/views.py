@@ -7,6 +7,8 @@ from django.views.generic import TemplateView
 from django.core.mail import send_mail
 from django.contrib.auth.views import PasswordChangeView
 from django.core.paginator import Paginator,PageNotAnInteger, EmptyPage
+from django.db.models import Count
+
 
 
 def home_view(request,catslug=None,tagslug=None):
@@ -92,6 +94,10 @@ def post_detail(request,year,month,day,post_slug):
     categories = Category.objects.all().order_by('-posts_count')
     tags = Tag.objects.all()
     
+    
+    
+    
+    
     # post_views_count
     # Get the session key for this post
     my_session_key = 'session_key_for_post_id_{}'.format(post.id)
@@ -104,6 +110,14 @@ def post_detail(request,year,month,day,post_slug):
         post.save()
         request.session[my_session_key] = True
         # print(request.session[my_session_key])
+    
+    
+    
+    # similar posts
+    post_tags_ids = post.tags.values_list('id', flat=True)
+    similar_posts = Post.objects.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags','-published_at')
+    
     
     
     # CommentForm
@@ -126,10 +140,11 @@ def post_detail(request,year,month,day,post_slug):
         form = CommentForm()
     
     context= {
-        'post'       : post ,
-        'categories' : categories,
-        'tags'       : tags, 
-        'form'       : form, 
+        'post'         : post ,
+        'categories'   : categories,
+        'tags'         : tags, 
+        'form'         : form,
+        'similar_posts': similar_posts,
     }
     return render(request,'blog/post_detail.html',context)
 

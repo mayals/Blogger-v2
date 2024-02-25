@@ -48,7 +48,7 @@
             
                 <div class='col-md d-flex justify-content-end  align-items-center mb-2 px-3'>
                     <a href={% url 'blog:post-share-by-email'  post_slug=post.slug year=post.published_at.year month=post.published_at.month day=post.published_at.day %}>
-                    <i class="fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i>
+                    <i class="fa-regular fa-share-nodes fa-lg" style="color:#A9AA9E"></i><text class="d-none">Share</text>
                     </a>
                     
                     &nbsp &nbsp &nbsp &nbsp
@@ -171,6 +171,32 @@
         </div>
         {% empty %}
             <p class='text-center'> No Comment!</p>
+        {% endfor %}        
+        </div>
+        <!--comments list end -->
+
+
+        <!--similar_posts list start -->
+    <div class='bg-light text-dark border rounded border-secondary p-3  mt-2 mb-5 '>
+        <i class="fa-solid fa-ellipsis-vertical"></i><span class='p-2'><small>
+            Similar Posts({{ similar_posts.count }})</small></span>
+        <br><br>
+        {% for sp in similar_posts %}  
+        <div class="row mb-2 p-3">
+                
+                <div class='col-md-auto d-flex justify-content-start align-items-center'> 
+                    {% if post.get_user.profile.profile_pic %}
+                        <img class='rounded-circle  mb-1' src="{{ sp.get_user.profile.profile_pic.url }}"  width="30" height="30" alt="{{post.author.first_name}}">
+                    {% else %}
+                        <img class='rounded-circle  mb-1' src="{% static 'img/profile_default.webp' %}"  width="30" height="30" alt="{{post.author.first_name}}">
+                    {% endif %} 
+                </div>
+                <div class='col-md-auto  text-secondary text-muted'>
+                    &nbsp<a href="{{ sp.get_absolute_url }}"><p class="card-title">{{sp.title}}</p></a>
+                </div>
+        </div>
+        {% empty %}
+            <p class='text-center'> No Similar Post Yet!</p>
         {% endfor %}        
         </div>
         <!--comments list end -->
