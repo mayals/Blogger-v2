@@ -155,6 +155,7 @@ TEMPLATES = [
                 # Other context processors
                 'blog.context_processors.context_categories',
                 'blog.context_processors.context_topposts',
+                'blog.context_processors.context_topcomments_posts',
             ],
         },
     },
