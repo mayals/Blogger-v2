@@ -7,7 +7,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.sitemaps import GenericSitemap  # new
 from django.contrib.sitemaps.views import sitemap  # new
 from blog.sitemap import StaticSitemap, PostSitemap, CategorySitemap, TagSitemap 
-
+from django.views.generic import TemplateView
 
 
 sitemaps = {
@@ -19,6 +19,9 @@ sitemaps = {
 
 
 urlpatterns = [
+   # robots.txt
+   path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
+   
    path('admin/', admin.site.urls),
    path('user/', include('user.urls', namespace='user')),
    path('', include('blog.urls', namespace='blog')),
