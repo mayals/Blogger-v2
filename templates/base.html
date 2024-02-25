@@ -91,7 +91,9 @@
                   </a>
                   <ul class="dropdown-menu">
                     {% for cat in con_categories %} 
-                    <li><a  class="dropdown-item" href="{% url 'blog:home-filter-category'  catslug=cat.slug  %}">{{ cat.name }} - ({{cat.posts_category.count}})</a></li>
+                    <li><a  class="dropdown-item" href="{% url 'blog:home-filter-category' catslug=cat.slug %}">{{ cat.name }} - ({{cat.posts_category.count}})</a></li>
+                    {% empty %}
+                    <li class='p-1'>No Category</li>
                     {% endfor %}
                   </ul>
                 </li>
@@ -188,7 +190,7 @@
                             <div class="card-body bg-dark">
                                 <ul>
                                 {% for cat in con_categories %} 
-                                 <li><a class="text-white-50" href="{% url 'blog:home-filter-category'  catslug=cat.slug  %}">{{ cat.name }}</a></li>
+                                 <li><a class="text-white-50" href="{% url 'blog:home-filter-category' catslug=cat.slug  %}">{{ cat.name }}</a></li>
                                  {% empty %}
                                  <li>No Category</li>
                                 {% endfor %}

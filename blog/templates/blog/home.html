@@ -27,7 +27,7 @@
                             
                                 <div class='col-lg-2 col-md-6 col-sm-6 col-xs-6 rounded d-flex justify-content-center'>
                                     {% if cat.icon %}
-                                        <a  href="{% url 'blog:home-filter-category'  catslug=cat.slug  %}">   
+                                        <a  href="{% url 'blog:home-filter-category' catslug=cat.slug %}">   
                                             <figure class="figure">
                                                 <img src="{{ cat.icon.url }}" class="rounded"  width="100" height="100" alt="{{cat.name}}">
                                                 <figcaption class="figure-caption"><small>{{ cat.name }}</small></figcaption>

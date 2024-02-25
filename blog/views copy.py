@@ -9,29 +9,54 @@ from django.contrib.auth.views import PasswordChangeView
 from django.core.paginator import Paginator,PageNotAnInteger, EmptyPage
 
 
-def home_view(request,catslug=None,tagslug=None):
+def home_view(request):
     categories = Category.objects.all().order_by('-posts_count')
     tags       = Tag.objects.all()
     posts      = Post.objects.all()
     
-    if catslug != None:
-       posts   = posts.filter(category__slug=catslug)
-    
-    
-    if tagslug != None:
-        posts = posts.filter(tags__slug=tagslug)
-    
-    
     if 'sc' in request.GET:    
        sc = request.GET['sc']
-       posts = posts.filter(title__icontains=sc) 
+       posts = posts.filter(title__contains=sc) 
  
-    
     context ={
         'categories' : categories,
         'tags'       : tags,
         'posts'      : posts,
        
+    }
+    return render(request,'blog/home.html', context)
+
+
+
+def home_filter_category(request,catslug):
+    categories = Category.objects.all().order_by('-posts_count')
+    tags       = Tag.objects.all()
+    posts      = Post.objects.all()
+       
+    if catslug != None:
+       posts = posts.filter(category__slug=catslug)
+      
+    context ={
+        'categories' : categories,
+        'tags'       : tags,
+        'posts'      : posts,    
+    }
+    return render(request,'blog/home.html', context)
+
+
+
+def home_filter_tag(request,tagslug):
+    categories = Category.objects.all().order_by('-posts_count')
+    tags       = Tag.objects.all()
+    posts = Post.objects.all()
+    if tagslug :
+        posts = posts.filter(tags__slug=tagslug)
+    
+             
+    context ={
+        'categories' : categories,
+        'tags'       : tags,
+        'posts'      : posts,    
     }
     return render(request,'blog/home.html', context)
 
