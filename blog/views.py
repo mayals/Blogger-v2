@@ -12,25 +12,38 @@ from django.core.paginator import Paginator,PageNotAnInteger, EmptyPage
 def home_view(request,catslug=None,tagslug=None):
     categories = Category.objects.all().order_by('-posts_count')
     tags       = Tag.objects.all()
-    posts      = Post.objects.all()
+    posts      = Post.objects.filter(status=Post.Status.PUBLISHED)
     
+    # filter by category
     if catslug != None:
        posts   = posts.filter(category__slug=catslug)
     
-    
+    # filter by tag
     if tagslug != None:
         posts = posts.filter(tags__slug=tagslug)
     
-    
+    # search by title
     if 'sc' in request.GET:    
        sc = request.GET['sc']
        posts = posts.filter(title__icontains=sc) 
  
     
+    #--- paginator -- belong show all posts--------
+    paginator = Paginator(posts, 2)
+    page_number = request.GET.get('page') #Get the requested page number from the URL
+    try:
+        posts = paginator.page(page_number)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_page)
+    
+    
     context ={
         'categories' : categories,
         'tags'       : tags,
         'posts'      : posts,
+        'page'       : page_number,
        
     }
     return render(request,'blog/home.html', context)

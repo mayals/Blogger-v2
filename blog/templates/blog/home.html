@@ -144,9 +144,14 @@
                                 <p>No Post!</p> 
                             </div>
                        {% endfor %}
-                        
+                       <div class="d-flex justify-content-center">
+                        {% include 'blog/includes/pagination.html' with page=posts %}
+                       </div>             
+            
+                       
             </div>
 
+            
 
             <div class="col-md-3 p-1" style="background-color: #eeeeee;">
                     <!--Start tag names -->
