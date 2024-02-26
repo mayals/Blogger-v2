@@ -47,8 +47,9 @@ class CategorySitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        return Category.objects.filter(slug__isnull=False)  # Only include categories with slugs
-
+       # return Category.objects.filter(slug__isnull=False)  # Only include categories with slugs
+       return Category.objects.all()
+    
     # Omitting lastmod: The lastmod method has been removed as it's not applicable without a field tracking the last modification date.
     # def lastmod(self, obj):
     #     return obj.updated_at
@@ -61,8 +62,9 @@ class TagSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        return Tag.objects.filter(slug__isnull=False)  # Only include tags with slugs
-
+        # return Tag.objects.filter(slug__isnull=False)  # Only include tags with slugs
+        return Tag.objects.all()
+    
     # Omitting lastmod: The lastmod method has been removed as it's not applicable without a field tracking the last modification date.
     # def lastmod(self, obj):
     #     return obj.updated_at

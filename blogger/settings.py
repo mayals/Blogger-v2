@@ -633,6 +633,6 @@ DATABASES = {
 print(DATABASES)
 
 
-
+SITE_URL = 'https://blogger-no5a.onrender.com'
 
 

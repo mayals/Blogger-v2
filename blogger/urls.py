@@ -13,12 +13,15 @@ from django.views.generic import TemplateView
 sitemaps = {
    'static': StaticSitemap,
     'posts': PostSitemap,
-    #'categories': CategorySitemap,
-    #'tags': TagSitemap,
+    'categories': CategorySitemap,
+    'tags': TagSitemap,
 }
 
 
 urlpatterns = [
+   # https://docs.djangoproject.com/en/4.2/ref/contrib/sitemaps/#module-django.contrib.sitemaps
+   path("sitemap.xml/", sitemap, {"sitemaps":sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
+   
    # robots.txt
    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
    
@@ -34,9 +37,7 @@ urlpatterns = [
    # https://pypi.org/project/django-ckeditor-5/
    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
    
-   # https://docs.djangoproject.com/en/4.2/ref/contrib/sitemaps/#module-django.contrib.sitemaps
-   path("sitemap.xml/", sitemap, {"sitemaps":sitemaps}, name="django.contrib.sitemaps.views.sitemap")
-
+   
 ]
 
 urlpatterns += staticfiles_urlpatterns()
