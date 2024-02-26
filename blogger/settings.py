@@ -53,8 +53,14 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['blogger-no5a.onrender.com','localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = [ 'https://*.onrender.com' ]
+
+INTERNAL_IPS = (
+    '127.0.0.1',
+    'localhost:8000'
+)
 
 
 
