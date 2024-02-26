@@ -30,7 +30,7 @@
             <h2 class="p-3">Tags</h2>
             <div class="text-center andika-bold pt-1">Tags({{ tags.count }})</div>
             <div class="card-body">
-                {% for cat in categories %}
+                {% for tag in tags %}
                 <a type="button" href="{% url 'blog:home-filter-tag' tagslug=tag.slug %}"  class="btn btn-outline-dark m-1" >
                     {{ tag.name }} <span class="badge bg-warning">{{ tag.get_tags_posts.count }}</span>
                 </a>

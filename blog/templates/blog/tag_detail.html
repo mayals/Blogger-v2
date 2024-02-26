@@ -14,14 +14,14 @@
 {% block content %}
 
 <section class='row m-1'>
-    <h1 class="screen-reader-only">Category Detail page for Codes City- web development</h1>    
+    <h1 class="screen-reader-only">Tag Detail page for Codes City- web development</h1>    
     <div class='container'>
             <br><br>
             <!-- breadcrumb start -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class='link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' href="{% url 'blog:categories' %}">categories</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ cat.name }}</li>
+                <li class="breadcrumb-item"><a class='link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' href="{% url 'blog:tag' %}">Tags</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ tag.name }}</li>
                 </ol>
             </nav>
             <!-- breadcrumb end -->
@@ -29,13 +29,6 @@
             
         <section class='border border-secondary bg-light text-dark container mb-3'> 
             <h2 class="p-3">{{cat.name}}</h2>
-                    <div class='col-md-auto d-flex justify-content-start align-items-center'>
-                        {% if cat.icon %}
-                            <img class='rounded-circle  mb-1' src="{{ cat.icon.url }}"  width="50" height="50" alt="{{cat.name}}">
-                        {% else %}
-                        <img class="card-img-top img-fluid" src="{% static 'img/post_default.png' %}"  width="150" height="250" alt="{{post.title}}">
-                        {% endif %} 
-                    </div>
         </section>
     </div>
 </section>
