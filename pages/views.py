@@ -15,7 +15,8 @@ def contact_us(request):
         form = ContactForm()
 
     context = {
-        'form': form,
+        'title': 'Contact Us',
+        'form' : form,
     }
     return render(request, 'pages/contact_us.html', context)
 

@@ -76,6 +76,7 @@ def post_create(request):
             messages.error(request,f'Post not add correctly! please complete those fields below.!')
     
     context = {
+           'title': 'Add Post',
             'form': form,
     }
     return render(request,'blog/post_create.html',context)
@@ -141,6 +142,7 @@ def post_detail(request,year,month,day,post_slug):
         form = CommentForm()
     
     context= {
+        'title'        : 'Post Detail',
         'post'         : post ,
         'categories'   : categories,
         'tags'         : tags, 
@@ -181,7 +183,8 @@ def post_update(request,year,month,day,post_slug):
         return redirect('blog:home')
     
     context ={
-        'post':post,
+        'title':'Post Update',
+        'post' : post,
         'form' : form ,
     }
     return render(request,'blog/post_update.html',context)
@@ -204,7 +207,8 @@ def post_delete_confirm(request,year,month,day,post_slug):
             return redirect('blog:home')
                 
         context ={
-            'post' : post ,
+            'title': 'Post Delete Confirm',
+            'post' :  post ,
         }
         return render(request,'blog/post_delete_confirm.html',context)
  
@@ -275,8 +279,9 @@ def post_share_by_email(request,year,month,day,post_slug):
         form = SharePostByEmailForm()
     
     context = {
-        'post': post,
-        'form': form,
+        'title': 'Post Share By Email',
+        'post' : post,
+        'form' : form,
     }
     return  render(request,'blog/post_share.html',context=context)    
 
@@ -297,6 +302,7 @@ def google_verification_view(request):
 def categories(request):
     categories = Category.objects.all()
     context={
+        'title'     : 'Categories',
         'categories': categories,
     }
     return render(request,'blog/categories.html',context)
@@ -305,7 +311,8 @@ def categories(request):
 def cat_detail(request,cat_slug):
     category = get_object_or_404(Category,slug=cat_slug)
     context = {
-        'cat' : category,
+        'title': 'Category Detail',
+        'cat'  : category,
     }
     return render(request,'blog/cat_detail.html',context)
     
@@ -315,7 +322,8 @@ def cat_detail(request,cat_slug):
 def tags(request):
     tags = Tag.objects.all()
     context={
-        'tags': tags,
+        'title': 'Tags',
+        'tags' : tags,
     }
     return render(request,'blog/tags.html',context)
 
@@ -323,6 +331,7 @@ def tags(request):
 def tag_detail(request,tag_slug):
     tag = get_object_or_404(Tag,slug=tag_slug)
     context = {
-        'tag' : tag,
+        'title': 'Tag Detail',
+        'tag'  : tag,
     }
     return render(request,'blog/tag_detail.html',context)

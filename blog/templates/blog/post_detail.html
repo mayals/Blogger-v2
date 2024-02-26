@@ -3,6 +3,13 @@
 {% load crispy_forms_tags %}
 
 
+{% if title %}
+    <title>{% block title %}Codes City Blog | {{title}}{% endblock title %}</title>
+    {% else %}
+    <title>Codes City Blog</title>
+{% endif %}
+
+
 
 <!-- start include  'message' -->
 {% block messages %}

@@ -2,6 +2,14 @@
 {% load static %}
 
 
+{% if title %}
+    <title>{% block title %}Codes City Blog | {{title}}{% endblock title %}</title>
+    {% else %}
+    <title>Codes City Blog</title>
+{% endif %}
+
+
+
 <!-- start inlclude  'message' -->
 {% block messages %}
    {% include 'blog/includes/messages.html' %}

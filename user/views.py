@@ -40,6 +40,7 @@ def user_create(request):
             messages.error(request,f'user not created! please complete those fields below.!')
     
     context = {
+            'title': 'Register',
             'form' : form ,
     }
     return render(request,'user/user_create.html',context = context)
@@ -89,6 +90,7 @@ def send_confirm_email_link_manuall(request):
             form = EmailForm()   
         
         context = {
+            'title': 'Send Confirm Email link',
             'form' : form,
         }
         return render(request,'user/send_confirm_email_link_button.html', context=context)
@@ -156,6 +158,7 @@ def user_login(request):
         form = UserLoginForm()          
     
     context = {
+            'title': 'Login',
             'form' : form,
     }
     return render(request,'user/user_login.html', context=context)
@@ -170,13 +173,11 @@ def user_logout(request):
 
 
 
-def forget_password(request):
-    return render 
-
 
 def my_profile(request):
     profile = Profile.objects.get(user=request.user)
     context = {
+        'title': 'My Profile',
         'profile' : profile,
     }
     return render(request,'user/profile.html',context)
@@ -201,6 +202,7 @@ def my_profile_usermodel_update(request):
            return redirect('user:my-profile')
      
     context = {
+        'title'      : 'Update My Profile',
         'userform'   : userform,
         'profileform': profileform,
     }
