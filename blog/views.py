@@ -292,3 +292,36 @@ def google_verification_view(request):
     return TemplateView.as_view(template_name='google7a03622cb96e4f8f.html')(request)
 
 
+
+def categories(request):
+    categories = Category.objects.all()
+    context={
+        'categories': categories,
+    }
+    return render(request,'blog/categories.html',context)
+
+
+def cat_detail(request,cat_slug):
+    category = get_object_or_404(Category,slug=cat_slug)
+    context = {
+        'cat' : category,
+    }
+    return render(request,'blog/cat_detail.html',context)
+    
+    
+    
+    
+def tags(request):
+    tags = Tag.objects.all()
+    context={
+        'tags': tags,
+    }
+    return render(request,'blog/tags.html',context)
+
+
+def tag_detail(request,tag_slug):
+    tag = get_object_or_404(Tag,slug=tag_slug)
+    context = {
+        'tag' : tag,
+    }
+    return render(request,'blog/tag_detail.html',context)

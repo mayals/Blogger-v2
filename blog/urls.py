@@ -19,5 +19,10 @@ urlpatterns = [
     path('google7a03622cb96e4f8f.html', views.google_verification_view),
 
     # Category
+    path('categories/', views.categories, name='categories'),
+    path('cat-detail/<slug:cat_slug>/', views.cat_detail, name='cat-detail'),
+
     # Tag
+    path('tags/', views.tags, name='tags'),
+    path('tag-detail/<slug:tag_slug>/', views.tag_detail, name='tag-detail'),
 ]

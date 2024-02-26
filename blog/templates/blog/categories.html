@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+<!-- start inlclude  'message' -->
+{% block messages %}
+   {% include 'blog/includes/messages.html' %}
+{% endblock messages %}
+<!-- END inlclude  'message' -->
+
+
+
+<!-- start  'cat_detail.htm' -->
+{% block content %}
+
+<section class='row m-1'>
+    <h1 class="screen-reader-only">Categories page for Codes City- web development</h1>    
+    <div class='container'>
+            <br><br>
+            <!-- breadcrumb start -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                </ol>
+            </nav>
+            <!-- breadcrumb end -->
+        
+            
+        <section class='border border-secondary bg-light text-dark container mb-3'> 
+            <h2 class="p-3">Categories</h2>
+            <div class="text-center andika-bold pt-1">Categories({{ categories.count }})</div>
+            <div class="card-body">
+                {% for cat in categories %}
+                <a type="button" href="{% url 'blog:home-filter-category' catslug=cat.slug %}"  class="btn btn-outline-dark m-1" >
+                    {{ cat.name }} <span class="badge bg-warning">{{ cat.get_category_posts.count }}</span>
+                </a>
+                {% empty %}
+                <div class="border p-3 mb-3">
+                    <p>No Category!</p> 
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</section>
+
+{% endblock content %}
+<!-- end  'cat_detail.htm' -->
