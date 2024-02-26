@@ -18,9 +18,9 @@
     <meta name="description" content="home page that display all posts"/>
     
     {% if title %}
-    <title>Bloger | {{title}}</title>
+    <title>{% block title %}Codes City Blog|{{title}}{% endblock title %}</title>
     {% else %}
-    <title>Bloger</title>
+    <title>Codes City Blog</title>
     {% endif %}
   
     <!--   https://fontawesome.com/docs/web/use-with/python-django#add-the-font-awesome-free-requirement-and-app    -->

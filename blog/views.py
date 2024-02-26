@@ -42,6 +42,7 @@ def home_view(request,catslug=None,tagslug=None):
     
     
     context ={
+        'title'      : 'Home',
         'categories' : categories,
         'tags'       : tags,
         'posts'      : posts,

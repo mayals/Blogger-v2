@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% if title %}
+    <title>{% block title %} Bloger | {{title}}{% endblock title %}</title>
+    {% else %}
+    <title>Bloger</title>
+{% endif %}
+
+
+
 
 <!-- start inlclude  'message' -->
 {% block messages %}
