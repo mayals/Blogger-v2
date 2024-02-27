@@ -14,9 +14,7 @@ urlpatterns = [
     path('post-update/<int:year>/<int:month>/<int:day>/<slug:post_slug>/', views.post_update, name= 'post-update'),
     path('post-delete-confirm/<int:year>/<int:month>/<int:day>/<slug:post_slug>/', views.post_delete_confirm, name ='post-delete-confirm'),
     path('post-like/<int:year>/<int:month>/<int:day>/<slug:post_slug>/', views.post_like_action, name='post-like'),
-    path('post-share-by-email/<int:year>/<int:month>/<int:day>/<slug:post_slug>/', views.post_share_by_email, name='post-share-by-email'),
-   
-    path('google7a03622cb96e4f8f.html', views.google_verification_view),
+    path('post-share-by-email/<int:year>/<int:month>/<int:day>/<slug:post_slug>/', views.post_share_by_email, name='post-share-by-email'), 
 
     # Category
     path('categories/', views.categories, name='categories'),
