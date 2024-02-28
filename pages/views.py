@@ -28,9 +28,30 @@ class ThankTemplateView(TemplateView):
     template_name = "pages/thank_you.html"
     
     
+    
+class AboutTemplateView(TemplateView):
+    template_name = 'pages/about.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutTemplateView, self).get_context_data(**kwargs)
+        context['title'] = 'About'  
+    
+   
+class LicenceTemplateView(TemplateView):
+    template_name = 'pages/licence.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(LicenceTemplateView, self).get_context_data(**kwargs)
+        context['title'] = 'Privacy Police'     
+   
+   
+    
+    
 def handling_404(request,exception):
     context={
         'title': 'Page 404'
     }
     return render(request,'pages/404.html',context)
+
+
 
