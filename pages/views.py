@@ -26,3 +26,11 @@ from django.views.generic import TemplateView
 
 class ThankTemplateView(TemplateView):
     template_name = "pages/thank_you.html"
+    
+    
+def handling_404(request,exception):
+    context={
+        'title': 'Page 404'
+    }
+    return render(request,'pages/404.html',context)
+

@@ -56,17 +56,17 @@ def send_confirm_email_link_manuall(request):
                email = request.POST.get('email')      
                users = UserModel.objects.all()
                for user in users :
-                   print(user)
+                   #print(user)
                    if user.email == email :
                         user = user 
-                        print('user='+ str(user))    
+                        #print('user='+ str(user))    
                         if user is not None and user.is_confirmEmail == False and user.is_active == True:
                             try:    
                                 subject = 'Confirm Your Email Address'
                                 from_email = DEFAULT_FROM_EMAIL    # load_dotenv() - this work her to bring this variable value from file .env
-                                print('from_email='+ str(from_email))
+                                #print('from_email='+ str(from_email))
                                 to_email = user.email
-                                print('to_email='+ str(to_email)) 
+                                #print('to_email='+ str(to_email)) 
                                 message = render_to_string('user/email_confirmation.html', 
                                                                                         {
                                                                                         'user'  : user,
@@ -80,7 +80,7 @@ def send_confirm_email_link_manuall(request):
                                 return redirect('user:user-login')
                             
                             except Exception as e:
-                                print(f'Error sending confirmation email: {e}')
+                                 print(f'Error sending confirmation email: {e}')
                 
                 
                         if user is not None and user.is_confirmEmail == True :
@@ -102,14 +102,14 @@ def send_confirm_email_link_manuall(request):
 # check before login - work after the email reach to user and he clik the link inside it 
 ###################### EmailConfirmAPIView #################
 def confirmEmail_and_activateUser(request,uidb64,token):
-    print('uidb64='+uidb64)
-    print('token='+token) 
+    #print('uidb64='+uidb64)
+    #print('token='+token) 
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
-        print(uid)
+        #print(uid)
         #user = get_user_model().objects.get(pk=uid)
         user = UserModel.objects.get(id=uid)
-        print(user)
+        #print(user)
     except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
         messages.error(request,f'User does not exist.!')
         return redirect('user:user-register')
@@ -134,12 +134,12 @@ def user_login(request):
         form     = UserLoginForm(request.POST)
         email    = request.POST.get('email')     # must be confirm email to can login
         password = request.POST.get('password')
-        print(email)
-        print(password)
+        #print(email)
+        #print(password)
         user=authenticate(username=email, password=password) #this user is found result only if user.is_active=True
-        print('user='+ str(user))
+        #print('user='+ str(user))
         if user is not None and user.is_confirmEmail == True and user.is_active == True :
-            print('user='+ str(user))
+            #print('user='+ str(user))
             login(request,user)
             form = UserLoginForm()
             messages.success(request,f'welcome back {user.get_user_fullname} you do login successfully.')

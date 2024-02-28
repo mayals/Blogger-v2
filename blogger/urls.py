@@ -25,6 +25,9 @@ urlpatterns = [
    # robots.txt
    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
    
+   
+   
+   
    # google-site-verification
    #  https://search.google.com/search-console
    path('google-site-verification', TemplateView.as_view(template_name="google7a03622cb96e4f8f.html")),
@@ -44,10 +47,11 @@ urlpatterns = [
    
    
 ]
-
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+
+handler404 = 'pages.views.handling_404'
 
 
 
