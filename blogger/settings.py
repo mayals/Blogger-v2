@@ -136,6 +136,8 @@ SITE_ID = 1  # sitemap - we have only one site in our project, we can use 1.
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # https://whitenoise.readthedocs.io/en/latest/
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -208,7 +210,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = 'static/'
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+# https://whitenoise.readthedocs.io/en/latest/
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 
 STATICFILES_DIRS = [ BASE_DIR / "static"]  #for static folder than put in main project root(near mnage.py file),which contain static belong to all project
