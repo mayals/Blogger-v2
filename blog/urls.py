@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import AdsView
 
 
 app_name = 'blog'
@@ -23,4 +24,7 @@ urlpatterns = [
     # Tag
     path('tags/', views.tags, name='tags'),
     path('tag-detail/<slug:tag_slug>/', views.tag_detail, name='tag-detail'),
+    
+    # GOOGLE ADS -- ads.txt
+    path('ads.txt', AdsView.as_view()),
 ]

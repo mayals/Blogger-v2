@@ -287,18 +287,6 @@ def post_share_by_email(request,year,month,day,post_slug):
 
 
 
-
-
-
-
-
-
-#  https://search.google.com/search-console
-def google_verification_view(request):
-    return TemplateView.as_view(template_name='google7a03622cb96e4f8f.html')(request)
-
-
-
 def categories(request):
     categories = Category.objects.all()
     context={
@@ -335,3 +323,35 @@ def tag_detail(request,tag_slug):
         'tag'  : tag,
     }
     return render(request,'blog/tag_detail.html',context)
+
+
+
+
+
+
+
+
+
+
+
+
+############################# GOOGLE CONSOLE #############################3333333333
+#  https://search.google.com/search-console
+def google_verification_view(request):
+    return TemplateView.as_view(template_name='google7a03622cb96e4f8f.html')(request)
+
+
+
+
+############################# GOOGLE ADS #############################3333333333
+# ads.txt
+# https://simpleit.rocks/python/django/how-to-add-ads-txt-to-django/
+from django.http import HttpResponse
+from django.views import View
+
+class AdsView(View):
+    """Replace pub-0000000000000000 with your own publisher ID"""
+    line  =  "google.com, pub-5194083914322957, DIRECT, f08c47fec0942fa0"
+    
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(self.line)
