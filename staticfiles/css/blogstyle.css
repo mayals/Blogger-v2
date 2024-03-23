@@ -95,11 +95,12 @@
 
 
 pre{
-  background-color: #c8bbbb;
+  background-color: #000000;
   border: 1px solid #999;
 }
 pre code{
+          text-align: left;
           display: block;
           padding: 20px;
-          color:black
+          color:#ffffff
 }
