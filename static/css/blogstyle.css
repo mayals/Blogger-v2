@@ -93,13 +93,12 @@
 }
 
 
-
-#therapist-display
-        {
-            border-style:none;
-            background: rgb(0, 0, 0);
-            /* height:230px;
-            width: 650px; */
-            margin: auto;
-            color: white;
-        }
+pre{
+  background-color: #eee;
+  border: 1px solid #999;
+}
+pre code {
+          display: block;
+          padding: 20px;
+          color:black
+}
