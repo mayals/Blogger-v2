@@ -94,9 +94,11 @@
 
 
 
-pre code {
-  background-color: #eee;
-  border: 1px solid #999;
-  display: block;
-  padding: 20px;
-}
+#therapist-display
+        {
+            border-style: solid;
+            background: white;
+            height:230px;
+            width: 650px;
+            margin: auto;
+        }
