@@ -96,9 +96,10 @@
 
 #therapist-display
         {
-            border-style: solid;
-            background: white;
-            height:230px;
-            width: 650px;
+            border-style:none;
+            background: rgb(0, 0, 0);
+            /* height:230px;
+            width: 650px; */
             margin: auto;
+            color: white;
         }
