@@ -226,8 +226,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')                            # default
 
 DEFAULT_FILE_STORAGE ='cloudinary_storage.storage.MediaCloudinaryStorage' # default storage of media in production
 
-
-
 # https://pypi.org/project/django-cloudinary-storage/
 # https://console.cloudinary.com/pm/c-afee3441808c64b2b27ef8b52a557c/developer-dashboard
 from environ import Env
