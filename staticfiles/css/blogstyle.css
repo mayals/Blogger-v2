@@ -93,10 +93,12 @@
 }
 
 
-
-pre code {
+/* pre{
   background-color: #eee;
   border: 1px solid #999;
-  display: block;
-  padding: 20px;
 }
+pre code {
+          display: block;
+          padding: 20px;
+          color:black
+} */
