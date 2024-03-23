@@ -12,13 +12,14 @@ class PostForm(forms.ModelForm):
                               )
    
    #  content = forms.CharField(widget=CKEditorWidget())
-    
-    
-    widgets = {
-            "content": CKEditor5Widget(
-                attrs={"class": "django_ckeditor_5"}, config_name="extends"
-            )
-        }
+    class Meta:
+            model   = Post
+            fields  = ['title', 'content', 'category', 'tags','photo']    
+            widgets = {
+                    "content": CKEditor5Widget(
+                        attrs={"class": "django_ckeditor_5"}, config_name="post"    
+                    )
+            }
    
    
     # content = forms.CharField(label='Content',
@@ -37,9 +38,7 @@ class PostForm(forms.ModelForm):
         #     )
         # }
     
-    class Meta:
-            model   = Post
-            fields  = ['title', 'content', 'category', 'tags','photo']
+   
             
             
             
