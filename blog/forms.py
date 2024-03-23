@@ -17,7 +17,7 @@ class PostForm(forms.ModelForm):
             fields  = ['title', 'content', 'category', 'tags','photo']    
             widgets = {
                     "content": CKEditor5Widget(
-                        attrs={"class": "django_ckeditor_5"}, config_name="post"    
+                        attrs={"class": "django_ckeditor_5"}, config_name='extends'   
                     )
             }
    
