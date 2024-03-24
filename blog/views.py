@@ -331,16 +331,7 @@ def tag_detail(request,tag_slug):
 
 
 
-
-
-
-
-############################# GOOGLE CONSOLE #############################3333333333
-#  https://search.google.com/search-console
-#def google_verification_view(request):
-#    return TemplateView.as_view(template_name='google7a03622cb96e4f8f.html')(request)
-
-
+################################################### Google Search Console #############################3333333333
 
 #  https://search.google.com/search-console  
 ############################# Google Search Console - google-site-verification  #############################
@@ -358,7 +349,7 @@ class GoogleSiteVerificationView(View):
 
 
 
-############################# GOOGLE ADS #############################3333333333
+############################################################ GOOGLE ADS ################################################
 # ads.txt
 # https://simpleit.rocks/python/django/how-to-add-ads-txt-to-django/
 from django.http import HttpResponse

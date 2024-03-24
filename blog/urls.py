@@ -32,10 +32,6 @@ urlpatterns = [
     path('google7a03622cb96e4f8f.html', views.GoogleSiteVerificationView.as_view()),
    
    
-    # google-site-verification: google7a03622cb96e4f8f.html
-    #path('google7a03622cb96e4f8f.html', views.google_verification_view, name="google-verification-view")
-   
-   
    
     # GOOGLE ADS -- ads.txt
     path('ads.txt', AdsView.as_view()),  
