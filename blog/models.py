@@ -70,8 +70,8 @@ class Post(models.Model):
         PUBLISHED = 'PB' , 'Published'
          
     id           = ShortUUIDField(primary_key=True, unique=True, length=6, max_length=6, editable=False)
-    title        = models.CharField(max_length=200, unique=True)
-    slug         = models.SlugField(max_length=120, blank=True, null=True)
+    title        = models.CharField(max_length=800, unique=True)
+    slug         = models.SlugField(max_length=800, blank=True, null=True)
     content      = CKEditor5Field('Text', config_name='extends')
     # photo        = models.ImageField(verbose_name='Post Image', upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)
     photo        = ResizedImageField(size=[600, 600], quality=85,verbose_name='Post Image', upload_to='blog/post-img/%Y/%m/%d/', null=True, blank=True)

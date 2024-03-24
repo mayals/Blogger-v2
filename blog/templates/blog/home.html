@@ -138,6 +138,8 @@
                                             </span>
                                         </div>
                                     </div>
+
+
                                     <div class='row' >
                                         <p>{{  post.content| truncatewords:100 |safe }}<a href="{{ post.get_absolute_url }}" class='btn-light'>Read more</a> </p>
                                     </div>
@@ -152,9 +154,9 @@
                                 <p>No Post!</p> 
                             </div>
                        {% endfor %}
-                       <div class="d-flex justify-content-center">
-                        {% include 'blog/includes/pagination.html' with page=posts %}
-                       </div>             
+                            <div class="d-flex justify-content-center">
+                                {% include 'blog/includes/pagination.html' with page=posts %}
+                            </div>             
             
                        
             </div>
