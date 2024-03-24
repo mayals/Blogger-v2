@@ -337,8 +337,23 @@ def tag_detail(request,tag_slug):
 
 ############################# GOOGLE CONSOLE #############################3333333333
 #  https://search.google.com/search-console
-def google_verification_view(request):
-    return TemplateView.as_view(template_name='google7a03622cb96e4f8f.html')(request)
+#def google_verification_view(request):
+#    return TemplateView.as_view(template_name='google7a03622cb96e4f8f.html')(request)
+
+
+
+#  https://search.google.com/search-console  
+############################# Google Search Console - google-site-verification  #############################
+from django.http import HttpResponse
+from django.views import View
+
+class GoogleSiteVerificationView(View):
+    line  =  "google-site-verification: google7a03622cb96e4f8f.html"
+    
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(self.line)
+
+
 
 
 
@@ -355,3 +370,5 @@ class AdsView(View):
     
     def get(self, request, *args, **kwargs):
         return HttpResponse(self.line)
+    
+    

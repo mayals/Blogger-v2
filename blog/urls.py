@@ -6,6 +6,7 @@ from .views import AdsView
 app_name = 'blog'
 
 urlpatterns = [
+    # home
     path('', views.home_view, name='home'),
     path('cat/<slug:catslug>/', views.home_view, name='home-filter-category'),
     path('tag/<slug:tagslug>/', views.home_view, name='home-filter-tag'),
@@ -25,6 +26,17 @@ urlpatterns = [
     path('tags/', views.tags, name='tags'),
     path('tag-detail/<slug:tag_slug>/', views.tag_detail, name='tag-detail'),
     
+   
+    # https://oxfordmosaic.web.ox.ac.uk/documentation/verify-ownership-google-search-console
+    # google-site-verification: google7a03622cb96e4f8f.html
+    path('google7a03622cb96e4f8f.html', views.GoogleSiteVerificationView.as_view()),
+   
+   
+    # google-site-verification: google7a03622cb96e4f8f.html
+    #path('google7a03622cb96e4f8f.html', views.google_verification_view, name="google-verification-view")
+   
+   
+   
     # GOOGLE ADS -- ads.txt
-    path('ads.txt', AdsView.as_view()),
+    path('ads.txt', AdsView.as_view()),  
 ]
