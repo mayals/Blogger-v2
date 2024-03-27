@@ -31,7 +31,7 @@ def home_view(request,catslug=None,tagslug=None):
  
     
     #--- paginator -- belong show all posts--------
-    paginator = Paginator(posts, 2)
+    paginator = Paginator(posts, 10)
     page_number = request.GET.get('page') #Get the requested page number from the URL
     try:
         posts = paginator.page(page_number)
