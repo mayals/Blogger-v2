@@ -459,7 +459,7 @@ MESSAGE_TAGS = {
 
 # 1) to send confirmation links in console:
 # -----------------------------------------
-EMAIL_BACKEND      = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND      = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'noreply@CodesCity'
 
 
@@ -473,6 +473,26 @@ DEFAULT_FROM_EMAIL = 'noreply@CodesCity'
 # EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
 # DEFAULT_FROM_EMAIL = 'noreply@yourwebsitename'
+
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')        #Note: get 'yourpassword' from  #https://myaccount.google.com/apppasswords
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+
+
+
+
+
+
+
+
+
+
+
 
 
 # EMAIL_BACKEND = 'django_email_utils.backends.HTMLEmailBackend'
