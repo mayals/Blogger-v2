@@ -43,7 +43,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY'),
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 
@@ -477,7 +477,7 @@ DEFAULT_FROM_EMAIL = 'noreply@CodesCity'
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')        #Note: get 'yourpassword' from  #https://myaccount.google.com/apppasswords
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
@@ -485,6 +485,7 @@ DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 
 print("EMAIL_BACKEND",EMAIL_BACKEND)
 print("EMAIL_HOST",EMAIL_HOST)
+print("EMAIL_HOST_USER",EMAIL_HOST_USER)
 print("EMAIL_HOST_PASSWORD",EMAIL_HOST_PASSWORD)
 
 

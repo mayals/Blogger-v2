@@ -253,7 +253,7 @@ def post_share_by_email(request,year,month,day,post_slug):
         # print("form"+ str(form))
         if form.is_valid():
             cd = form.cleaned_data
-            print("cd="+ str(cd))
+            #print("cd="+ str(cd))
             sender_name = cd.get('sender_name')
             sender_email = cd.get('sender_email')
             recipient_email = cd.get('recipient_email')
@@ -267,7 +267,7 @@ def post_share_by_email(request,year,month,day,post_slug):
             from_email =  sender_email
             recipient_list = [recipient_email]
             send_mail(subject,message,from_email,recipient_list,fail_silently=False)
-            print("send_mail=",send_mail(subject,message,from_email,recipient_list))
+            # print("send_mail=",send_mail(subject,message,from_email,recipient_list))
             messages.success(request,f'Thanks ( {sender_name} ), for sharing the post ({post.title}).')
             return redirect('blog:post-detail',year=year,month=month,day=day,post_slug=post_slug)
     
