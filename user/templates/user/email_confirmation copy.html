@@ -5,18 +5,16 @@
         <title>Confirm Your Email Address</title>
     </head>
     <body>
-        
-        Hello {{ user.first_name|safe }},
-        Welcome to CodesCity! Please confirm your email address by clicking on the following link:
+        <h2>Hello {{ user.first_name|safe }},</h2>
+        <p>Welcome to CodesCity! Please confirm your email address by clicking on the following link:</p>
         
         <a href="http://{{ domain }}/user/confirm-email/{{ uid }}/{{ token }}">Confirm Email</a>
         
         
-       If you didn't sign up for our site, please ignore this email.
+        <p>If you didn't sign up for our site, please ignore this email.</p>
         
         
-       Best regards,
-       CodesCity blog team
-    
+        <p>Best regards,</p>
+        <p>The CodesCity Team</p>
     </body>
 </html>
